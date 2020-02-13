@@ -9,6 +9,7 @@ namespace Hiragana.Battle.UI
 	{
 		public MenuOption parent;
 		public Selectable firstSelection;
+		public bool keyListening = true;
 
 		private void Start()
 		{
@@ -17,6 +18,7 @@ namespace Hiragana.Battle.UI
 
 		private void Update()
 		{
+			if (!keyListening) return;
 			if (Input.GetKeyDown(KeyCode.Return))
 			{
 				OnEnter();

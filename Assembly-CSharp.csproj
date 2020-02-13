@@ -63,7 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Scripts\Battle\Battle.cs" />
+    <Compile Include="Assets\_Scripts\Battle\BattleScript.cs" />
     <Compile Include="Assets\_Scripts\Battle\Enemy.cs" />
+    <Compile Include="Assets\_Scripts\Battle\EnemyList.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\AttackMenu.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\ButtonFocus.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\InventoryListItem.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="Assets\_Scripts\Battle\UI\StandardMenu.cs" />
     <Compile Include="Assets\_Scripts\Puzzle\Puzzle.cs" />
     <Compile Include="Assets\_Scripts\Puzzle\PuzzleCreator.cs" />
+    <Compile Include="Assets\_Scripts\ScriptTemplateKeywordReplacer.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
