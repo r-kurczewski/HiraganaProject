@@ -39,8 +39,28 @@ namespace Hiragana.Battle.UI
 		IEnumerator PickEnemy()
 		{
 			yield return new WaitForEndOfFrame();
-			yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
-			Enemy selected = EventSystem.current.currentSelectedGameObject.GetComponent<Enemy>();
+			while (true)
+			{
+				if (Input.GetKeyDown(KeyCode.Mouse0))
+				{
+					Debug.Log("raycast");
+					RaycastHit hit;
+					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+					if (Physics.Raycast(ray, out hit))
+					{
+						Debug.Log(hit.transform.name);
+					}
+				}
+				else if (Input.GetKeyDown(KeyCode.Return))
+				{
+					break;
+				}
+				Debug.Log("a");
+				yield return new WaitForEndOfFrame();
+			}
+			//yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Mouse0));
+			Enemy selected = FindObjectOfType<EnemyList>().Selected;
 			Debug.Log($"Attacked {selected.name} with {textField.text}");
 			textField.text = "";
 			keyListening = true;

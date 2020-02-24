@@ -8,14 +8,37 @@ namespace Hiragana.Battle
 	{
 		[SerializeField]
 		private List<Enemy> enemies = new List<Enemy>();
-		Enemy selected;
+
+		[SerializeField]
+		public Enemy Selected { get; private set; }
 
 		void Start()
 		{
 			Refresh();
 		}
 
-		public Enemy getEnemy(int index) 
+		public void SelectEnemy(Enemy enemy)
+		{
+			foreach (var en in enemies)
+			{
+				if (en != enemy)
+				{
+					en.Sprite.color = new Color(1, 1, 1, 0.5f);
+				}
+				else
+				{
+					en.Sprite.color = Color.white;
+				}
+			}
+			Selected = enemy;
+		}
+
+		public void SelectEnemy(int index)
+		{
+			SelectEnemy(enemies[index]);
+		}
+
+		public Enemy GetEnemy(int index)
 		{
 			return enemies[index];
 		}
@@ -34,5 +57,5 @@ namespace Hiragana.Battle
 				enemies.Add(enemy);
 			}
 		}
-	} 
+	}
 }

@@ -25,7 +25,7 @@ public class BattleScript : MonoBehaviour
 
 	public void FocusEnemy()
 	{
-		FindObjectOfType<EnemyList>().getEnemy(0).Select();
+		FindObjectOfType<EnemyList>().SelectEnemy(0);
 	}
 
 	public void FocusInterface()
