@@ -22,7 +22,7 @@ namespace Hiragana.World
 			try
 			{
 				Rename();
-				Debug.Log(name);
+				//Debug.Log(name);
 			}
 			catch(Exception)
 			{

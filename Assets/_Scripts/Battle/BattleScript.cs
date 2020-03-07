@@ -12,6 +12,7 @@ public class BattleScript : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Tab))
 		{
+			Debug.Log("TAB");
 			if (EventSystem.current.currentSelectedGameObject.GetComponent<Enemy>())
 			{
 				FocusInterface();

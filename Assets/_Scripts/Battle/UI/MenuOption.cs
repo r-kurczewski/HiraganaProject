@@ -11,15 +11,10 @@ namespace Hiragana.Battle.UI
 		public Selectable firstSelection;
 		public bool keyListening = true;
 
-		private void Start()
-		{
-			OnVisible();
-		}
-
-		private void Update()
+		protected void Update()
 		{
 			if (!keyListening) return;
-			if (Input.GetKeyDown(KeyCode.Return))
+			if (Input.GetButtonDown("Submit"))
 			{
 				OnEnter();
 			}
@@ -31,36 +26,18 @@ namespace Hiragana.Battle.UI
 
 		public void Show()
 		{
-			FindObjectOfType<MenuOption>()?.Hide();
+			FindObjectOfType<MenuOption>()?.gameObject.SetActive(false);
 			gameObject.SetActive(true);
-			OnVisible();
 		}
 
-		private void Hide()
-		{
-			gameObject.SetActive(false);
-		}
-
-		protected virtual void OnEscape()
+		public virtual void OnEscape()
 		{
 			parent?.Show();
 		}
 
-		protected virtual void OnEnter()
+		public virtual void OnEnter()
 		{
 			EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
 		}
-
-		private void OnRightClick()
-		{
-			throw new NotImplementedException();
-		}
-
-		protected virtual void OnVisible()
-		{
-			firstSelection?.Select();
-		}
-
-
 	}
 }

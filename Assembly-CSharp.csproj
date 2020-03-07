@@ -68,8 +68,11 @@
     <Compile Include="Assets\_Scripts\Battle\EnemyList.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\AttackMenu.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\ButtonFocus.cs" />
+    <Compile Include="Assets\_Scripts\Battle\UI\IChooseAttackTarget.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\InventoryListItem.cs" />
+    <Compile Include="Assets\_Scripts\Battle\UI\KeyboardAttack.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\MenuOption.cs" />
+    <Compile Include="Assets\_Scripts\Battle\UI\MouseAttack.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\SelectOnHover.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\StandardMenu.cs" />
     <Compile Include="Assets\_Scripts\Puzzle\Puzzle.cs" />

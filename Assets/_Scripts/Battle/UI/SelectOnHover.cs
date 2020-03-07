@@ -8,6 +8,11 @@ using UnityEngine.UI;
 
 public class SelectOnHover : MonoBehaviour, IPointerEnterHandler
 {
+	private void Start()
+	{
+		return;
+	}
+
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		GetComponent<Selectable>().Select();
