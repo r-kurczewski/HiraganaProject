@@ -28,6 +28,7 @@ namespace Hiragana.Battle.UI
 		{
 			FindObjectOfType<MenuOption>()?.gameObject.SetActive(false);
 			gameObject.SetActive(true);
+			firstSelection?.Select();
 		}
 
 		public virtual void OnEscape()

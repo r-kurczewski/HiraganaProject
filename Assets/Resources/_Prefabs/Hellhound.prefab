@@ -245,7 +245,6 @@ GameObject:
   - component: {fileID: 6492496567587840544}
   - component: {fileID: 6492496567587840547}
   - component: {fileID: 6492496567587840557}
-  - component: {fileID: 6170887472055268705}
   m_Layer: 5
   m_Name: Hellhound
   m_TagString: Untagged
@@ -312,7 +311,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 0, b: 0, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -326,8 +325,9 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 6492496568054727315}
+  keepSelectTint: 0
 --- !u!222 &6492496567587840557
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -336,18 +336,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6492496567587840559}
   m_CullTransparentMesh: 0
---- !u!114 &6170887472055268705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6492496567587840559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c234a1b0cf6fdc4d8b9d35df8dc9af4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6492496568054727325
 GameObject:
   m_ObjectHideFlags: 0

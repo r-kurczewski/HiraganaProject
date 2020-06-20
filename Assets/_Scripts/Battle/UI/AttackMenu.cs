@@ -30,7 +30,7 @@ namespace Hiragana.Battle.UI
 
 		private void OnDisable()
 		{
-			enemies.DisableSelection(true);
+			enemies.DisableSelection();
 		}
 
 		public override void OnEnter()

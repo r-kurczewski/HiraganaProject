@@ -1,10 +1,6 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using static UnityEngine.UI.Selectable;
 
 namespace Hiragana.Battle
 {
@@ -19,43 +15,34 @@ namespace Hiragana.Battle
 
 		void Start()
 		{
-			Refresh();
+			UpdateList();
 		}
 
-		public void SelectEnemy(Enemy enemy, bool refresh = true)
+		public void SelectEnemy(Enemy enemy)
 		{
-			if (refresh) Refresh();
 			selected = enemy;
 			enemy.Select();
 		}
 
 		public void SelectEnemy(int index)
 		{
-			Refresh();
-			SelectEnemy(enemies[index], false);
+			SelectEnemy(enemies[index]);
 		}
 
-		public void DisableSelection(bool clearSelection)
+		public void DisableSelection(bool keepState = false)
 		{
-			Refresh();
-			if (!clearSelection) selected.keepSelectTint = true;
 			foreach (var en in enemies)
 			{
-				if (!clearSelection)
-				{
-					en.transition = Transition.None;
-				}
+				en.keepState = keepState;
 				en.interactable = false;
 			}
 		}
 
 		public void EnableSelection()
 		{
-			Refresh();
 			foreach (var en in enemies)
 			{
-				//en.keepSelectTint = false;
-				en.transition = Transition.ColorTint;
+				en.keepState = false;
 				en.interactable = true;
 			}
 		}
@@ -67,11 +54,19 @@ namespace Hiragana.Battle
 
 		public List<Enemy> GetEnemies()
 		{
-			Refresh();
+			UpdateList();
 			return enemies;
 		}
 
-		private void Refresh()
+		public void RefreshSprites()
+		{
+			foreach(var en in enemies)
+			{
+				en.RefreshState();
+			}
+		}
+
+		private void UpdateList()
 		{
 			enemies.Clear();
 			foreach (var enemy in GetComponentsInChildren<Enemy>())

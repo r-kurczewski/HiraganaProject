@@ -14,6 +14,8 @@ namespace Hiragana.Battle.UI
 		{
 			menu.keyListening = false;
 			enemies.EnableSelection();
+			menu.textField.interactable = true;
+			menu.submitButton.interactable = true;
 			if (enemies.selected == null)
 				enemies.SelectEnemy(0);
 			else
@@ -31,30 +33,30 @@ namespace Hiragana.Battle.UI
 			}
 			else
 			{
-				enemies.selected.keepSelectTint = true;
+				enemies.DisableSelection(keepState: true);
 				StartCoroutine(menu.input.TypeHiragana());
 			}
 		}
 
 		public IEnumerator TypeHiragana()
-		{
-			menu.textField.interactable = true;
-			menu.submitButton.interactable = true;
+		{ 
 			menu.textField.Select();
 			yield return new WaitForEndOfFrame();
 			yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Escape));
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				enemies.selected.keepSelectTint = false;
 				enemies.EnableSelection();
+
 				menu.textField.text = "";
 				StartCoroutine(menu.input.ChooseEnemy());
 			}
 			else
 			{
-				menu.OnEscape();
-				menu.keyListening = true;
 				Debug.Log($"Attacked {enemies.selected.name} with {menu.textField.text}");
+				menu.OnEscape();
+				enemies.RefreshSprites();
+				menu.textField.text = "";
+				menu.keyListening = true;
 			}
 		}
 

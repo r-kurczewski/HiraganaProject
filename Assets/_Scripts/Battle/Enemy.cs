@@ -8,13 +8,12 @@ using UnityEngine.UI;
 namespace Hiragana.Battle
 {
 	[SelectionBase]
-	public class Enemy : Selectable, IPointerDownHandler
+	public class Enemy : Selectable
 	{
-		public Image Sprite { get => GetComponentInChildren<Image>(); }
 		public TMP_Text NameLabel { get => GetComponentInChildren<TMP_Text>(); }
+		public bool keepState = false;
 
 		static EnemyList list;
-		public bool keepSelectTint = false;
 
 		protected override void Awake()
 		{
@@ -24,26 +23,43 @@ namespace Hiragana.Battle
 		public override void OnSelect(BaseEventData eventData)
 		{
 			base.OnSelect(eventData);
-			FindObjectOfType<EnemyList>().SelectEnemy(this);
+			list.selected = this;
 		}
 
 		public override void OnDeselect(BaseEventData eventData)
 		{
-			if (!keepSelectTint)
+			base.OnDeselect(eventData);
+		}
+
+		public void RefreshState()
+		{
+			Start();
+		}
+
+		protected override void DoStateTransition(SelectionState state, bool instant)
+		{
+			if (keepState) return;
+
+			if (state == SelectionState.Disabled)
 			{
-				base.OnDeselect(eventData);
+				targetGraphic.color = colors.disabledColor;
+			}
+			else if (state == SelectionState.Pressed)
+			{
+
+			}
+			else if (state == SelectionState.Highlighted)
+			{
+
+			}
+			else if (state == SelectionState.Selected)
+			{
+				targetGraphic.color = colors.selectedColor;
+			}
+			else if (state == SelectionState.Normal)
+			{
+				targetGraphic.color = colors.normalColor;
 			}
 		}
-
-		public void SetAsDefault()
-		{
-			DoStateTransition(SelectionState.Normal, true);
-		}
-
-		public void SetAsSelected()
-		{
-			DoStateTransition(SelectionState.Selected, true);
-		}
-
 	}
 }
