@@ -7,9 +7,9 @@ namespace Hiragana.Battle.UI
 	public class MouseAttack : IChooseAttackTarget
 	{
 		public AttackMenu Menu { get; set; }
-		public EnemyList Enemies { get; set; }
+		public EnemyScreen Enemies { get; set; }
 
-		public MouseAttack(AttackMenu menu, EnemyList enemies)
+		public MouseAttack(AttackMenu menu, EnemyScreen enemies)
 		{
 			Menu = menu;
 			Enemies = enemies;

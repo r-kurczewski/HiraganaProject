@@ -62,6 +62,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\_Scripts\Editor\Battle\AttackEditor.cs" />
+    <Compile Include="Assets\_Scripts\Editor\Battle\EnemyEditor.cs" />
+    <Compile Include="Assets\_Scripts\Editor\Battle\EnemyPositionDrawer.cs" />
+    <Compile Include="Assets\_Scripts\Editor\TemplateParser.cs" />
     <Compile Include="Assets\Tilemap\Brushes\Coordinate Brush\Scripts\Editor\CoordinateBrush.cs" />
     <Compile Include="Assets\Tilemap\Brushes\GameObject Brush\Scripts\Editor\GameObjectBrush.cs" />
     <Compile Include="Assets\Tilemap\Brushes\Group Brush\Scripts\Editor\GroupBrush.cs" />

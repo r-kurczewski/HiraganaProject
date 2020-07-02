@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ddc11c1e665da44588c90ec3e463294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letter: nu
+  letter: i
   size: 5
 --- !u!224 &1652942149
 RectTransform:

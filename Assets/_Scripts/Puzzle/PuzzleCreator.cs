@@ -26,7 +26,7 @@ namespace Hiragana.Puzzle
 
 		public void Create(string sign, int gridSize, Transform parent)
 		{
-			Sprite puzzleBackground = Resources.Load<Sprite>(sign);
+			Sprite puzzleBackground = Resources.Load<Sprite>("PuzzleSprites/" + sign);
 			if (!puzzleBackground) throw new NullReferenceException("No sprite for " + sign + ".");
 
 			for (int i = 1; i <= gridSize * gridSize; i++)

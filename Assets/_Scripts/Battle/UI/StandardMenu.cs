@@ -10,11 +10,11 @@ namespace Hiragana.Battle.UI
 {
 	public class StandardMenu : MenuOption
 	{
-		EnemyList enemies;
+		EnemyScreen enemies;
 
 		private void Awake()
 		{
-			enemies = FindObjectOfType<EnemyList>();
+			enemies = FindObjectOfType<EnemyScreen>();
 		}
 
 		private void OnEnable()

@@ -7,7 +7,7 @@ namespace Hiragana.Battle.UI
 	public class KeyboardAttack : MonoBehaviour, IChooseAttackTarget
 	{
 		public AttackMenu menu;
-		public EnemyList enemies;
+		public EnemyScreen enemies;
 		public Button testButton;
 
 		public IEnumerator ChooseEnemy()
@@ -15,7 +15,6 @@ namespace Hiragana.Battle.UI
 			menu.keyListening = false;
 			enemies.EnableSelection();
 			menu.textField.interactable = true;
-			menu.submitButton.interactable = true;
 			if (enemies.selected == null)
 				enemies.SelectEnemy(0);
 			else
@@ -27,7 +26,8 @@ namespace Hiragana.Battle.UI
 				);
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-
+				enemies.selected = null;
+				enemies.DisableSelection(false);
 				menu.OnEscape();
 				menu.keyListening = true;
 			}
@@ -53,9 +53,9 @@ namespace Hiragana.Battle.UI
 			else
 			{
 				Debug.Log($"Attacked {enemies.selected.name} with {menu.textField.text}");
-				menu.OnEscape();
 				enemies.RefreshSprites();
 				menu.textField.text = "";
+				menu.OnEscape();
 				menu.keyListening = true;
 			}
 		}

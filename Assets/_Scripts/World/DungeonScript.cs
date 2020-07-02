@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 using Random = UnityEngine.Random;
+using Hiragana.Battle;
 
 namespace Hiragana.World
 {
@@ -12,7 +13,7 @@ namespace Hiragana.World
 		private Player player;
 		private Vector2 oldPlayerPos;
 		public int encounterChance;
-		public List<EncounterWrapper> encounters;
+		public List<EncounterChances> encounters;
 		private int encounterClock = 0;
 
 		void Start()
@@ -59,7 +60,7 @@ namespace Hiragana.World
 			}
 		}
 		[Serializable]
-		public class EncounterWrapper
+		public class EncounterChances
 		{
 			public Encounter encounter;
 			public int chances;

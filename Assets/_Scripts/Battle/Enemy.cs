@@ -1,65 +1,98 @@
-﻿using System.Collections;
+﻿using Hiragana.Battle.UI;
 using System.Collections.Generic;
-using TMPro;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
+using static Hiragana.Battle.Enemy.Romaji;
+using static Hiragana.Battle.Enemy.Hiragana;
+using Random = UnityEngine.Random;
 
 namespace Hiragana.Battle
 {
-	[SelectionBase]
-	public class Enemy : Selectable
+	public class Enemy : MonoBehaviour
 	{
-		public TMP_Text NameLabel { get => GetComponentInChildren<TMP_Text>(); }
-		public bool keepState = false;
+		public HashSet<Romaji> health = new HashSet<Romaji>();
+		public HashSet<Romaji> currentHealth = new HashSet<Romaji>();
+		public EnemyType type;
+		[SerializeField] private int _speed;
 
-		static EnemyList list;
+		public int Speed { get => _speed; private set => _speed = value; }
+		public EnemySprite Sprite { get; private set; }
 
-		protected override void Awake()
+		void Start()
 		{
-			list = FindObjectOfType<EnemyList>();
+			Sprite = GetComponent<EnemySprite>();
+
+			List<Romaji> knownLetters = new List<Romaji> { A, I, U, E, O, N, };
+			for (int i = 0; i < type.baseHealth; i++)
+			{
+				Romaji letter = knownLetters[Random.Range(0, knownLetters.Count)];
+				health.Add(letter);
+				knownLetters.Remove(letter);
+			}
+			currentHealth = new HashSet<Romaji>(health);
+			currentHealth.Remove(currentHealth.First());
+			currentHealth.Remove(currentHealth.Last());
+			UpdateLife();
+
+			Speed = type.baseSpeed;
 		}
 
-		public override void OnSelect(BaseEventData eventData)
+		public void UpdateLife()
 		{
-			base.OnSelect(eventData);
-			list.selected = this;
+			Sprite.NameLabel.text = string.Empty;
+			foreach (var letter in health)
+			{
+				if (currentHealth.Contains(letter))
+				{
+					Sprite.NameLabel.text += (Hiragana)letter;
+				}
+				else
+				{
+					Sprite.NameLabel.text += $"<color=#7774>{(Hiragana)letter}</color>";
+				}
+			}
 		}
 
-		public override void OnDeselect(BaseEventData eventData)
+		//readonly Dictionary<Romaji, List<Hiragana>> translate = new Dictionary<Romaji, List<Hiragana>>
+		//{
+		//	{ JI, new List<Hiragana>{ じ, ぢ} },
+		//};
+
+		public enum Romaji
 		{
-			base.OnDeselect(eventData);
+			A, I, U, E, O, N,
+			KA, KI, KU, KE, KO,
+			GA, GI, GU, GE, GO,
+			SA, SHI, SU, SE, SO,
+			ZA, JI, ZU, ZE, ZO,
+			TA, CHI, TSU, TE, TO,
+			DA, ji, zu, DE, DO,
+			NA, NI, NU, NE, NO,
+			HA, HI, FU, HE, HO,
+			BA, BI, BU, BE, BO,
+			PA, PI, PU, PE, PO,
+			MA, MI, MU, ME, MO,
+			RA, RI, RU, RE, RO,
+			YA, YU, YO, WA, WO,
 		}
 
-		public void RefreshState()
+		public enum Hiragana
 		{
-			Start();
-		}
-
-		protected override void DoStateTransition(SelectionState state, bool instant)
-		{
-			if (keepState) return;
-
-			if (state == SelectionState.Disabled)
-			{
-				targetGraphic.color = colors.disabledColor;
-			}
-			else if (state == SelectionState.Pressed)
-			{
-
-			}
-			else if (state == SelectionState.Highlighted)
-			{
-
-			}
-			else if (state == SelectionState.Selected)
-			{
-				targetGraphic.color = colors.selectedColor;
-			}
-			else if (state == SelectionState.Normal)
-			{
-				targetGraphic.color = colors.normalColor;
-			}
+			あ, い, う, え, お, ん,
+			か, き, く, け, こ,
+			が, ぎ, ぐ, げ, ご,
+			さ, し, す, せ, そ,
+			ざ, じ, ず, ぜ, ぞ,
+			た, ち, つ, て, と,
+			だ, ぢ, づ, で, ど,
+			な, に, ぬ, ね, の,
+			は, ひ, ふ, へ, ほ,
+			ば, び, ぶ, べ, ぼ,
+			ぱ, ぴ, ぷ, ぺ, ぽ,
+			ま, み, む, め, も,
+			ら, り, る, れ, ろ,
+			や, ゆ, よ, わ, を,
 		}
 	}
+
 }

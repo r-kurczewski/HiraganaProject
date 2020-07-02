@@ -11,7 +11,7 @@ namespace Hiragana.Battle.UI
 	{
 		public Button submitButton;
 		public TMP_InputField textField;
-		public EnemyList enemies;
+		public EnemyScreen enemies;
 
 		public KeyboardAttack keyboard;
 		public MouseAttack mouse;

@@ -15,6 +15,7 @@ public class SelectOnHover : MonoBehaviour, IPointerEnterHandler
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
-		GetComponent<Selectable>().Select();
+		if (GetComponent<Selectable>().interactable)
+			GetComponent<Selectable>().Select();
 	}
 }
