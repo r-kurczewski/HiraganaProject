@@ -1,41 +1,75 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Hiragana.Battle.Effects;
 using UnityEngine;
 
 namespace Hiragana.Battle
 {
-	public class PlayerData : MonoBehaviour, ITurn
+	public class PlayerData : MonoBehaviour, IBattleTarget
 	{
+		[SerializeField] private int _health;
+		[SerializeField] private int _maxHealth;
 		[SerializeField] private int _speed;
-		[SerializeField] private uint _health;
+		public bool haveTurn;
 
-		public uint Health { get => _health; private set => _health = value; }
+		public PoisonState poison;
+
+		public int Health { get => _health; private set => _health = Mathf.Clamp(value, 0, MaxHealth); }
+		public int MaxHealth { get => _maxHealth; private set => _maxHealth = value; }
 		public int Speed { get => _speed; private set => _speed = value; }
 
-		public void Execute()
+		void Start()
 		{
-			Wait();
+			poison = new PoisonState(this);
 		}
 
-		public int GetSpeed()
+		public bool AddStatus(IStatus status)
 		{
-			return Speed;
+			throw new NotImplementedException();
 		}
 
-		public bool IsAlive()
+		public void RemoveStatus(IStatus status)
 		{
-			return Health > 0;
+			throw new NotImplementedException();
 		}
 
-		void Wait()
+		public bool ApplyDamage(int value)
 		{
-			Debug.Log("Twoja tura");
-			for (int i = 0; i < 1000; i++)
+			throw new NotImplementedException();
+		}
+
+		[Serializable]
+		public class PoisonState : IBattleStatus
+		{
+			public int damage;
+			PlayerData data;
+
+			public PoisonState(PlayerData data)
 			{
-				Debug.Log(1);
+				this.data = data;
 			}
-			Debug.Log("Koniec tury");
+
+			public void Add(int i)
+			{
+				damage += i;
+			}
+
+			public bool Apply()
+			{
+				if (damage > 0)
+				{
+					data.Health -= damage--;
+					return true;
+				}
+				else return false;
+			}
+
+			public void Remove()
+			{
+				damage = 0;
+			}
 		}
 	}
 }

@@ -36,6 +36,11 @@ namespace Hiragana.Battle.UI
 			parent?.Show();
 		}
 
+		public void Hide()
+		{
+			gameObject.SetActive(false);
+		}
+
 		public virtual void OnEnter()
 		{
 			EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();

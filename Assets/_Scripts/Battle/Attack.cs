@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hiragana.Battle.Effects;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,8 +15,10 @@ namespace Hiragana.Battle
 	public class Attack : ScriptableObject
 	{
 		public string displayName;
-		public List<BattleEffect> effects;
+		[SerializeReference]
+		public List<Effect> effects;
 
+		
 
 		public void UpdateDisplayName()
 		{
@@ -24,6 +27,11 @@ namespace Hiragana.Battle
 				Debug.Log($"Set visible name to '{name}'", this);
 				displayName = name;
 			}
+		}
+
+		public override string ToString()
+		{
+			return name;
 		}
 	}
 }

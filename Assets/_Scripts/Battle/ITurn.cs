@@ -1,14 +1,15 @@
-﻿
 using System.Collections;
 
 namespace Hiragana.Battle
 {
 	public interface ITurn
 	{
-		void Execute();
+		IEnumerator Execute();
 
 		int GetSpeed();
 
 		bool IsAlive();
+
+		string GetName();
 	}
 }

@@ -3,24 +3,40 @@ using UnityEngine;
 
 namespace Hiragana.Battle
 {
-	public class PlayerTurn : MonoBehaviour, ITurn
+	public class PlayerTurn : ITurn
 	{
-		private PlayerData data;
+		private PlayerData player;
+		private BattleScript Script { get; set; }
 
+		public PlayerTurn(PlayerData player, BattleScript script)
+		{
+			this.player = player;
+			Script = script;
+		}
+
+		public IEnumerator Execute()
+		{
+			Debug.Log("Your turn.");
+			while (player.haveTurn)
+			{
+				yield return null;
+			}
+			Debug.Log("End of your turn.");
+		}
 
 		public int GetSpeed()
 		{
-			return data.Speed;
+			return player.Speed;
 		}
 
 		public bool IsAlive()
 		{
-			return data.Health > 0;
+			return player.Health > 0;
 		}
 
-		public void Execute()
+		public string GetName()
 		{
-			
+			return "Player";
 		}
 	}
 }

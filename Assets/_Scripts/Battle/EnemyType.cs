@@ -21,6 +21,11 @@ namespace Hiragana.Battle
 	public class Move
 	{
 		public Attack attack;
-		public uint chances;
+		public uint priority;
+
+		public override string ToString()
+		{
+			return $"{attack.name} ({priority})";
+		}
 	}
 }

@@ -63,12 +63,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Scripts\Battle\Attack.cs" />
-    <Compile Include="Assets\_Scripts\Battle\BattleEffect.cs" />
+    <Compile Include="Assets\_Scripts\Battle\BattleLog.cs" />
     <Compile Include="Assets\_Scripts\Battle\BattleScript.cs" />
+    <Compile Include="Assets\_Scripts\Battle\BattleStatusException.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Effects\IEffect.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Effects\Poison.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Effects\Status.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Effects\TestingSth.cs" />
     <Compile Include="Assets\_Scripts\Battle\Encounter.cs" />
     <Compile Include="Assets\_Scripts\Battle\Enemy.cs" />
     <Compile Include="Assets\_Scripts\Battle\EnemyTurn.cs" />
     <Compile Include="Assets\_Scripts\Battle\EnemyType.cs" />
+    <Compile Include="Assets\_Scripts\Battle\IBattleStatus.cs" />
+    <Compile Include="Assets\_Scripts\Battle\IBattleTarget.cs" />
     <Compile Include="Assets\_Scripts\Battle\ITurn.cs" />
     <Compile Include="Assets\_Scripts\Battle\PlayerData.cs" />
     <Compile Include="Assets\_Scripts\Battle\PlayerTurn.cs" />
@@ -77,11 +84,12 @@
     <Compile Include="Assets\_Scripts\Battle\UI\EnemyScreen.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\EnemySprite.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\HiraganaTextField.cs" />
-    <Compile Include="Assets\_Scripts\Battle\UI\IChooseAttackTarget.cs" />
+    <Compile Include="Assets\_Scripts\Battle\UI\IAttackInput.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\InventoryListItem.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\KeyboardAttack.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\MenuOption.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\MouseAttack.cs" />
+    <Compile Include="Assets\_Scripts\Battle\UI\PlayerPanel.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\SelectOnHover.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\StandardMenu.cs" />
     <Compile Include="Assets\_Scripts\Other\SelectionBase.cs" />
@@ -123,22 +131,22 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/UnityProjects/Hiragana/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/UnityProjects/Hiragana/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/UnityProjects/Hiragana/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/UnityProjects/Hiragana/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/UnityProjects/Hiragana/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/UnityProjects/Hiragana/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/UnityProjects/Hiragana/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/UnityProjects/Hiragana/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/UnityProjects/Hiragana/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/UnityProjects/Hiragana/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>D:/UnityProjects/Hiragana/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>C:/UnityProjects/Hiragana/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -324,13 +332,13 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.14f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>D:/UnityProjects/Hiragana/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/UnityProjects/Hiragana/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>D:/UnityProjects/Hiragana/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/UnityProjects/Hiragana/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>D:/UnityProjects/Hiragana/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/UnityProjects/Hiragana/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.14f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

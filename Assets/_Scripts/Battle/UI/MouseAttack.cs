@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Hiragana.Battle.UI
 {
-	public class MouseAttack : IChooseAttackTarget
+	public class MouseAttack : IAttackInput
 	{
 		public AttackMenu Menu { get; set; }
 		public EnemyScreen Enemies { get; set; }

@@ -16,7 +16,7 @@ namespace Hiragana.Battle.UI
 		public KeyboardAttack keyboard;
 		public MouseAttack mouse;
 
-		public IChooseAttackTarget input;
+		public IAttackInput input;
 
 		private void Awake()
 		{

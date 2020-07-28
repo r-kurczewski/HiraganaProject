@@ -8,11 +8,10 @@ namespace Hiragana
 	public class DebugBattle : MonoBehaviour
 	{
 		public Encounter enc;
-		public BattleScript battleScript;
 
 		void Start()
 		{
-			battleScript.LoadBattle(enc);
+			GetComponent<BattleScript>().LoadBattle(enc);
 		}
 	}
 }

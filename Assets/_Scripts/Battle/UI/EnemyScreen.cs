@@ -69,9 +69,10 @@ namespace Hiragana.Battle.UI
 			{
 				EnemySprite sprite = Instantiate(enPos.enemy.spritePrefab, transform).GetComponent<EnemySprite>();
 				sprite.interactable = false;
+				sprite.name = sprite.name.Substring(0, sprite.name.Length - 7);
 				Enemy enemy = sprite.gameObject.AddComponent<Enemy>();
-				result.Add(enemy);
 				enemy.type = enPos.enemy;
+				result.Add(enemy);
 				sprite.transform.localPosition = enPos.pos;
 			}
 			return result;
@@ -97,6 +98,14 @@ namespace Hiragana.Battle.UI
 			foreach (var enemy in GetComponentsInChildren<EnemySprite>())
 			{
 				enemies.Add(enemy);
+			}
+		}
+
+		public void UpdateGUI()
+		{
+			foreach(var enemy in enemies)
+			{
+				enemy.UpdateLife();
 			}
 		}
 	}

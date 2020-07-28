@@ -31,7 +31,7 @@ namespace Hiragana.Puzzle
 
 			for (int i = 1; i <= gridSize * gridSize; i++)
 			{
-				var puzzle = Instantiate(Resources.Load<GameObject>("_Prefabs/Puzzle"), transform);
+				var puzzle = Instantiate(Resources.Load<GameObject>("_Prefabs/UI/Puzzle"), transform);
 				puzzle.GetComponent<SpriteRenderer>().sprite = GetPuzzleSprite(puzzleBackground, gridSize, i);
 				Vector3 pos = new Vector2((Random.value - 0.5f) * 8, (Random.value - 0.5f) * 4);
 				puzzle.transform.position += pos;

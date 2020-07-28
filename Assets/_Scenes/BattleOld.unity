@@ -2112,6 +2112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc941b51d317434ab019da01cf1e984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
+  playerGUI: {fileID: 0}
+  enemyGUI: {fileID: 0}
+  enemies: []
 --- !u!224 &854180172 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3503903187578035268, guid: ff37a41791383ed4cb64a9f0b7a5476f,

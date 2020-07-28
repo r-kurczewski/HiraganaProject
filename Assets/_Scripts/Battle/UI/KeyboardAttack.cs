@@ -1,14 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static Hiragana.Battle.Enemy;
 
 namespace Hiragana.Battle.UI
 {
-	public class KeyboardAttack : MonoBehaviour, IChooseAttackTarget
+	public class KeyboardAttack : MonoBehaviour, IAttackInput
 	{
 		public AttackMenu menu;
 		public EnemyScreen enemies;
-		public Button testButton;
+		public BattleLog log;
 
 		public IEnumerator ChooseEnemy()
 		{
@@ -53,10 +55,15 @@ namespace Hiragana.Battle.UI
 			else
 			{
 				Debug.Log($"Attacked {enemies.selected.name} with {menu.textField.text}");
+				Enum.TryParse(menu.textField.text.ToUpper(), out Romaji romaji);
+				enemies.selected.GetComponent<IBattleTarget>().ApplyDamage((int)romaji);
 				enemies.RefreshSprites();
 				menu.textField.text = "";
 				menu.OnEscape();
+				FindObjectOfType<MenuOption>().Hide();
+				log.gameObject.SetActive(true);
 				menu.keyListening = true;
+				FindObjectOfType<PlayerData>().haveTurn = false;
 			}
 		}
 

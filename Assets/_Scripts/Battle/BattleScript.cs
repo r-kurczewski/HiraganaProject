@@ -1,47 +1,99 @@
 ﻿using Assets._Scripts.Battle;
 using Hiragana.Battle;
 using Hiragana.Battle.UI;
-using Hiragana.World;
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
+using System;
+using static Hiragana.Battle.Effects.Effect.EffectType;
 
 public class BattleScript : MonoBehaviour
 {
-	[SerializeField] private PlayerData playerTurn;
+#pragma warning disable IDE0044, 0649
+	[SerializeField] private PlayerData playerData;
+	[SerializeField] private PlayerPanel playerGUI;
+	[SerializeField] private EnemyScreen enemyGUI;
+	[SerializeField] private StandardMenu battleMenu;
+	[SerializeField] private BattleLog log;
+	[SerializeField] private List<Enemy> enemies;
+	private ITurn currentTurn;
+	private IEnumerator<ITurn> turns;
+#pragma warning restore IDE0044, 0649
+
+	public PlayerData Player { get => playerData; }
+	public List<Enemy> Enemies { get => enemies; }
+	public BattleLog Log { get => log; private set => log = value; }
 
 	public void LoadBattle(Encounter encounter)
 	{
-		var turns = TurnEnumerable(EnemyScreen.context.LoadEncounter(encounter));
-		foreach (var turn in turns)
+		enemies = EnemyScreen.context.LoadEncounter(encounter);
+		turns = TurnQueue(enemies).GetEnumerator();
+		UpdateGUI();
+		StartCoroutine(ExecuteTurns());
+	}
+
+	IEnumerator ExecuteTurns()
+	{
+		yield return new WaitForEndOfFrame(); // wait to assign all enemy data like life and speed.
+		while (turns.MoveNext()) // for each turn
 		{
-			Debug.Log($"Now {turn.GetType().Name} turn");
-			turn.Execute();
+			if (turns.Current.GetType() == typeof(PlayerTurn))
+			{
+				playerData.haveTurn = true;
+				ShowBattleMenu();
+			}
+
+			var turnEnum = turns.Current.Execute();
+
+			while (turnEnum.MoveNext()) // wait till turn executed
+			{
+				yield return new WaitForEndOfFrame();
+			}
+
+			if (playerData.Health <= 0) // game over
+			{
+				Debug.LogError("Game Over");
+				yield break;
+			}
+			else if (enemies.Where(e => e.CurrentHealth.Count > 0).Count() == 0) // you win
+			{
+				Debug.LogError("You win");
+				yield break;
+			}
+			UpdateGUI();
+			yield return new WaitForSeconds(1); // delay between turns
 		}
 	}
 
-	public void EndTurn()
+	private void ShowBattleMenu()
 	{
-		return;
+		log.gameObject.SetActive(false);
+		battleMenu.gameObject.SetActive(true);
 	}
 
-	IEnumerable<ITurn> TurnEnumerable(List<Enemy> enemies)
+	private void UpdateGUI()
 	{
-		List<ITurn> allTurns = new List<ITurn>() { playerTurn };
+		playerGUI.UpdateGUI();
+		enemyGUI.UpdateGUI();
+	}
+
+	IEnumerable<ITurn> TurnQueue(List<Enemy> enemies)
+	{
+		var playerTurn = new PlayerTurn(playerData, this);
+		List<ITurn> turns = new List<ITurn>() { playerTurn };
 		foreach (var enemy in enemies)
 		{
-			allTurns.Add(new EnemyTurn(enemy));
+			turns.Add(new EnemyTurn(enemy, this));
 		}
 
-		for (int i = 0; i < 1; i++) // do konca walki
+		while (turns.Count > 0)
 		{
-			allTurns.Where(e => e.IsAlive()).OrderBy(e => e.GetSpeed()).Reverse();
-			foreach (var turn in allTurns)
+			turns = turns.Where(e=> e.IsAlive()).OrderByDescending(e => e.GetSpeed()).ToList();
+			foreach (var turn in turns)
 			{
-				yield return turn;
+				if (turn.IsAlive()) yield return turn;
+				else continue;
 			}
 		}
 	}

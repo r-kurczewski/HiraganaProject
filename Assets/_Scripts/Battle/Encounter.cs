@@ -11,7 +11,6 @@ using Hiragana.Battle.UI;
 
 namespace Hiragana.Battle
 {
-	[InitializeOnLoad]
 	[CreateAssetMenu(fileName = "Encounter", menuName = "Battle/Encounter", order = 1)]
 	[Serializable]
 	public class Encounter : ScriptableObject

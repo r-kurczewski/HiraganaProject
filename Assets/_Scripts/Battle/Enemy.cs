@@ -5,58 +5,81 @@ using UnityEngine;
 using static Hiragana.Battle.Enemy.Romaji;
 using static Hiragana.Battle.Enemy.Hiragana;
 using Random = UnityEngine.Random;
+using System;
+using Hiragana.Battle.Effects;
 
 namespace Hiragana.Battle
 {
-	public class Enemy : MonoBehaviour
+	public class Enemy : MonoBehaviour, IBattleTarget
 	{
-		public HashSet<Romaji> health = new HashSet<Romaji>();
-		public HashSet<Romaji> currentHealth = new HashSet<Romaji>();
+
 		public EnemyType type;
+		[SerializeField] private List<LifeSegment> _health = new List<LifeSegment>();
 		[SerializeField] private int _speed;
 
+		public List<LifeSegment> Health { get => _health; set => _health = value; }
+		public List<LifeSegment> CurrentHealth { get => Health.Where(e => !e.damaged).ToList(); }
 		public int Speed { get => _speed; private set => _speed = value; }
 		public EnemySprite Sprite { get; private set; }
 
 		void Start()
 		{
+			Speed = type.baseSpeed;
+
 			Sprite = GetComponent<EnemySprite>();
 
 			List<Romaji> knownLetters = new List<Romaji> { A, I, U, E, O, N, };
 			for (int i = 0; i < type.baseHealth; i++)
 			{
 				Romaji letter = knownLetters[Random.Range(0, knownLetters.Count)];
-				health.Add(letter);
+				Health.Add(new LifeSegment(letter));
 				knownLetters.Remove(letter);
 			}
-			currentHealth = new HashSet<Romaji>(health);
-			currentHealth.Remove(currentHealth.First());
-			currentHealth.Remove(currentHealth.Last());
-			UpdateLife();
-
-			Speed = type.baseSpeed;
+			Sprite.UpdateLife();
 		}
 
-		public void UpdateLife()
+		public bool ApplyDamage(int value)
 		{
-			Sprite.NameLabel.text = string.Empty;
-			foreach (var letter in health)
+			throw new NotImplementedException();
+		}
+
+		public bool AddStatus(IStatus status)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void RemoveStatus(IStatus status)
+		{
+			throw new NotImplementedException();
+		}
+
+		[Serializable]
+		public class LifeSegment
+		{
+#pragma warning disable IDE0044
+			[SerializeField] private Romaji letter;
+#pragma warning restore IDE0044
+
+			public bool damaged = false;
+
+			public Hiragana Hiragana { get => (Hiragana)letter; }
+			public Romaji Romaji { get => letter; }
+
+			public LifeSegment(Romaji letter)
 			{
-				if (currentHealth.Contains(letter))
-				{
-					Sprite.NameLabel.text += (Hiragana)letter;
-				}
-				else
-				{
-					Sprite.NameLabel.text += $"<color=#7774>{(Hiragana)letter}</color>";
-				}
+				this.letter = letter;
+			}
+
+			public LifeSegment(Hiragana letter)
+			{
+				this.letter = (Romaji)letter;
+			}
+
+			public override string ToString()
+			{
+				return $"{Romaji} ({Hiragana}) [{(damaged ? "X" : " ")}]";
 			}
 		}
-
-		//readonly Dictionary<Romaji, List<Hiragana>> translate = new Dictionary<Romaji, List<Hiragana>>
-		//{
-		//	{ JI, new List<Hiragana>{ じ, ぢ} },
-		//};
 
 		public enum Romaji
 		{

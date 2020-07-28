@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5c1fe2bab1a4bc48b31fbf61d88abbc, type: 3}
-  m_Name: Recovery
+  m_Name: Strike I
   m_EditorClassIdentifier: 
-  displayName: Recovery
+  displayName: Strike
   effects:
-  - status: 1
-    target: 1
-    value: 2
+  - type: 0
+    target: 0
+    value: 3

@@ -36,5 +36,21 @@ namespace Hiragana.Battle.UI
 			if (keepState) return;
 			base.DoStateTransition(state, instant);
 		}
+
+		public void UpdateLife()
+		{
+			NameLabel.text = string.Empty;
+			foreach (var segment in GetComponent<Enemy>().Health)
+			{
+				if (segment.damaged)
+				{
+					NameLabel.text += $"<color=#7774>{segment.Hiragana}</color>";
+				}
+				else
+				{
+					NameLabel.text += segment.Hiragana;
+				}
+			}
+		}
 	}
 }

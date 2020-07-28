@@ -18,8 +18,8 @@ MonoBehaviour:
   baseSpeed: 3
   moves:
   - attack: {fileID: 11400000, guid: abbded3740002c645bf829c3fd5a3b56, type: 2}
-    chances: 30
+    priority: 1
   - attack: {fileID: 11400000, guid: 6b51582d594cd0b4599825a6e25b1c93, type: 2}
-    chances: 20
+    priority: 1
   - attack: {fileID: 11400000, guid: 8b1676824960c1f4dbcdcb9ddfd7911e, type: 2}
-    chances: 50
+    priority: 5
