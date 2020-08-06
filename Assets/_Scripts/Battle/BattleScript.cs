@@ -6,12 +6,11 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using System;
-using static Hiragana.Battle.Effects.Effect.EffectType;
 
 public class BattleScript : MonoBehaviour
 {
 #pragma warning disable IDE0044, 0649
-	[SerializeField] private PlayerData playerData;
+	[SerializeField] private Player playerData;
 	[SerializeField] private PlayerPanel playerGUI;
 	[SerializeField] private EnemyScreen enemyGUI;
 	[SerializeField] private StandardMenu battleMenu;
@@ -21,7 +20,7 @@ public class BattleScript : MonoBehaviour
 	private IEnumerator<ITurn> turns;
 #pragma warning restore IDE0044, 0649
 
-	public PlayerData Player { get => playerData; }
+	public Player Player { get => playerData; }
 	public List<Enemy> Enemies { get => enemies; }
 	public BattleLog Log { get => log; private set => log = value; }
 
@@ -53,11 +52,13 @@ public class BattleScript : MonoBehaviour
 
 			if (playerData.Health <= 0) // game over
 			{
+				UpdateGUI();
 				Debug.LogError("Game Over");
 				yield break;
 			}
 			else if (enemies.Where(e => e.CurrentHealth.Count > 0).Count() == 0) // you win
 			{
+				UpdateGUI();
 				Debug.LogError("You win");
 				yield break;
 			}

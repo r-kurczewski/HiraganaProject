@@ -14,6 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Vampirism
   effects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - target: 1
+    effect:
+      id: 0
+  - target: 0
+    effect:
+      id: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: Damage, ns: Hiragana.Battle.Effects, asm: Assembly-CSharp}
+      data:
+        type: Damage
+        value: 3
+    00000001:
+      type: {class: Heal, ns: Hiragana.Battle.Effects, asm: Assembly-CSharp}
+      data:
+        type: Heal
+        value: 1

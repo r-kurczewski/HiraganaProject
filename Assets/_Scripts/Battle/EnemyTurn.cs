@@ -1,18 +1,20 @@
 ﻿using Hiragana.Battle;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using static Hiragana.Battle.Attack;
 using Random = UnityEngine.Random;
-//using static Hiragana.Battle.Effects.Effect.Target;
-using Hiragana.Battle.Effects;
+using UnityEngine;
+using static Hiragana.Other.MyExtensions;
 
 namespace Assets._Scripts.Battle
 {
 	public class EnemyTurn : ITurn
 	{
 		private Enemy self;
-		protected BattleScript Script { get; set; }
+		private BattleScript Script { get; set; }
+		private string EnemyName { get => self.type.name; }
 
 		public EnemyTurn(Enemy self, BattleScript script)
 		{
@@ -22,56 +24,82 @@ namespace Assets._Scripts.Battle
 
 		public IEnumerator Execute()
 		{
-			List<Move> moves = self.type.moves;
-			int totalPriority = (int)moves.Sum(e => e.priority);
-			int rand = Random.Range(0, totalPriority);
-			Attack chosen = default;
-
-			uint current = 0;
-			foreach (var move in moves)
+			Attack picked = PickAttack(self.type.moves);
+			string msg = $"{EnemyName} uses {picked.name}.";
+			Script.Log.Write(msg);
+			Debug.Log(msg);
+			foreach (var tarEffect in picked.effects)
 			{
-				if (current + move.priority > rand)
+				foreach (var target in PickTargets(tarEffect))
 				{
-					chosen = move.attack;
-					break;
+					tarEffect.effect.Apply(target);
 				}
-				else
-				{
-					current += move.priority;
-				}
-			}
-			Script.Log.Write($"{self.type.name} uses {chosen.name}.");
-			foreach(var effect in chosen.effects)
-			{
-				//var targets = SetTargets(effect);
-				//Script.ApplyEffect(effect, targets);
-				
 			}
 			yield return null;
 		}
 
-		//private List<IBattleTarget> SetTargets(Effect effect)
-		//{
-		//	var targets = new List<IBattleTarget>();
-		//	if (effect.target == Player)
-		//	{
-		//		targets.Add(Script.Player);
-		//	}
-		//	else if (effect.target == Self)
-		//	{
-		//		targets.Add(self);
-		//	}
-		//	else if (effect.target == Allies)
-		//	{
-		//		targets.AddRange(Script.Enemies.Where(e => e != self));
-		//	}
-		//	else if (effect.target == Ally)
-		//	{
-		//		// TODO improve chosing target based on effect type
-		//		targets.Add(Script.Enemies[Random.Range(0, Script.Enemies.Count)]);
-		//	}
-		//	return targets;
-		//}
+		private Attack PickAttack(List<Move> moves)
+		{
+			Attack chosen = null;
+			int totalPriority = (int)moves.Sum(e => e.priority);
+			int rand = Random.Range(0, totalPriority);
+			uint currentPriority = 0;
+			for (int i = 0; i < moves.Count; i++)
+			{
+				if (currentPriority + moves[i].priority > rand)
+				{
+					chosen = moves[i].attack;
+					break;
+				}
+				else
+				{
+					currentPriority += moves[i].priority;
+				}
+			}
+			if(chosen == null) throw new InvalidOperationException($"{EnemyName} could not pick an attack.");
+			return chosen;
+		}
+
+
+		private List<IBattleTarget> PickTargets(TargetedEffect effect)
+		{
+			var targets = new List<IBattleTarget>();
+			if (effect.target == TargetType.Self)
+			{
+				targets.Add(self);
+			}
+			else if (effect.target == TargetType.Player)
+			{
+				targets.Add(Script.Player);
+			}
+			else if (effect.target == TargetType.Ally)
+			{
+				// TODO improve chosing target based on effect type
+				targets.Add(Script.Enemies.Where(x => x != self).ToList().GetRandom());
+			}
+			else if (effect.target == TargetType.Allies)
+			{
+				targets.AddRange(Script.Enemies.Where(e => e != self));
+			}
+			else if (effect.target == TargetType.AllyAndSelf)
+			{
+				targets.AddRange(Script.Enemies);
+			}
+			else if (effect.target == TargetType.AllEnemies)
+			{
+				targets.AddRange(Script.Enemies);
+			}
+			else if (effect.target == TargetType.All)
+			{
+				targets.Add(Script.Player);
+				targets.AddRange(Script.Enemies);
+			}
+			else
+			{
+				throw new NotImplementedException("Unsupported TargetType.");
+			}
+			return targets;
+		}
 
 		public int GetSpeed()
 		{

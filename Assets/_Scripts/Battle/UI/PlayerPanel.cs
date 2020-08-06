@@ -9,7 +9,7 @@ namespace Hiragana.Battle.UI
 	{
 		public Slider lifeBar;
 		public Slider focusBar;
-		public PlayerData player;
+		public Player player;
 
 		public void UpdateGUI()
 		{

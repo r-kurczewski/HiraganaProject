@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hiragana.Battle.Effects;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,14 +57,14 @@ namespace Hiragana.Battle.UI
 			{
 				Debug.Log($"Attacked {enemies.selected.name} with {menu.textField.text}");
 				Enum.TryParse(menu.textField.text.ToUpper(), out Romaji romaji);
-				enemies.selected.GetComponent<IBattleTarget>().ApplyDamage((int)romaji);
+				enemies.selected.GetComponent<IBattleTarget>().ApplyEffect(new Damage(romaji));
 				enemies.RefreshSprites();
 				menu.textField.text = "";
 				menu.OnEscape();
 				FindObjectOfType<MenuOption>().Hide();
 				log.gameObject.SetActive(true);
 				menu.keyListening = true;
-				FindObjectOfType<PlayerData>().haveTurn = false;
+				FindObjectOfType<Player>().haveTurn = false;
 			}
 		}
 

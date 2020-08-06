@@ -5,10 +5,10 @@ namespace Hiragana.Battle
 {
 	public class PlayerTurn : ITurn
 	{
-		private PlayerData player;
+		private Player player;
 		private BattleScript Script { get; set; }
 
-		public PlayerTurn(PlayerData player, BattleScript script)
+		public PlayerTurn(Player player, BattleScript script)
 		{
 			this.player = player;
 			Script = script;

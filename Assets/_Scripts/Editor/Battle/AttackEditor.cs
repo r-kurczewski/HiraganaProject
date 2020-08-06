@@ -1,21 +1,62 @@
-﻿using Hiragana.Battle;
+using Hiragana.Battle;
+using Hiragana.Battle.Effects;
 using UnityEditor;
+using UnityEngine;
+using static Hiragana.Battle.Attack;
+using static Hiragana.Battle.Attack.TargetType;
 
-namespace Hiragana.Editors
+namespace Hiragana.Battle
 {
 	[CustomEditor(typeof(Attack))]
 	public class AttackEditor : Editor
 	{
-		void OnEnable()
+		public override void OnInspectorGUI()
 		{
-			var displayName = serializedObject.FindProperty("displayName");
+			EditorGUILayout.BeginHorizontal();
 
-			if (displayName.stringValue == "")
+			if (GUILayout.Button("Damage"))
 			{
-				var name = serializedObject.FindProperty("m_Name");
-				serializedObject.FindProperty("displayName").stringValue = name.stringValue;
-				serializedObject.ApplyModifiedProperties();
+				AddEffect(TargetType.Player, new Damage());
 			}
+
+			if (GUILayout.Button("Heal"))
+			{
+				AddEffect(Self, new Heal());
+			}
+
+			if (GUILayout.Button("Poison"))
+			{
+				AddEffect(TargetType.Player, new Poison());
+			}
+
+			EditorGUILayout.EndHorizontal();
+			EditorGUILayout.BeginHorizontal();
+
+			if (GUILayout.Button("Slowness"))
+			{
+				AddEffect(TargetType.Player, new Slowness());
+			}
+
+			if (GUILayout.Button("Stun"))
+			{
+				AddEffect(TargetType.Player, new Stun());
+			}
+
+			if (GUILayout.Button("Thorns"))
+			{
+				AddEffect(Self, new Thorns());
+			}
+
+			EditorGUILayout.EndHorizontal();
+			base.OnInspectorGUI();
+			
+		}
+
+		public void AddEffect<T>(TargetType targetType, T effect) where T : Effect
+		{
+			var attack = (Attack)target;
+			attack.effects.Add(new TargetedEffect(targetType, effect));
+			serializedObject.ApplyModifiedProperties();
 		}
 	}
 }

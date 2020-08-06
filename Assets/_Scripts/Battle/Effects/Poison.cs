@@ -1,35 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 namespace Hiragana.Battle.Effects
 {
 	[Serializable]
-	public class Poison : IStatus
+	public class Poison : PlayerStatus
 	{
-		private IBattleTarget target;
-		private int value;
-		private int turns;
+		[SerializeField] private int value = 5;
+		[SerializeField] private int turns = 3;
 
-		public Poison(IBattleTarget target, int value, int turns)
+		public Poison()
 		{
-			this.target = target;
+
+		}
+
+		public Poison(int value, int turns)
+		{
 			this.value = value;
 			this.turns = turns;
 		}
 
-		public void Execute()
+		public override bool Execute(IBattleTarget target)
 		{
-			if (turns > 0)
-			{
-				target.ApplyDamage(value);
-				turns--;
-			}
-			else
-			{
-				target.RemoveStatus(this);
-			}
+			throw new NotImplementedException();
 		}
 	}
 }

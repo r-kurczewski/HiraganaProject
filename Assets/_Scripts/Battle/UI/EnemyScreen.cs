@@ -105,7 +105,7 @@ namespace Hiragana.Battle.UI
 		{
 			foreach(var enemy in enemies)
 			{
-				enemy.UpdateLife();
+				enemy.UpdateLifeString();
 			}
 		}
 	}

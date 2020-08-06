@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -37,20 +38,14 @@ namespace Hiragana.Battle.UI
 			base.DoStateTransition(state, instant);
 		}
 
-		public void UpdateLife()
+		public void UpdateLifeString()
 		{
-			NameLabel.text = string.Empty;
+			var sb = new StringBuilder();
 			foreach (var segment in GetComponent<Enemy>().Health)
 			{
-				if (segment.damaged)
-				{
-					NameLabel.text += $"<color=#7774>{segment.Hiragana}</color>";
-				}
-				else
-				{
-					NameLabel.text += segment.Hiragana;
-				}
+				sb.Append(segment.GetFormatingString());
 			}
+			NameLabel.text = sb.ToString();
 		}
 	}
 }

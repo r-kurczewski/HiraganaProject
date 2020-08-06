@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Hiragana.Battle
 {
@@ -15,10 +16,7 @@ namespace Hiragana.Battle
 	public class Attack : ScriptableObject
 	{
 		public string displayName;
-		[SerializeReference]
-		public List<Effect> effects;
-
-		
+		public List<TargetedEffect> effects = new List<TargetedEffect>();
 
 		public void UpdateDisplayName()
 		{
@@ -29,9 +27,31 @@ namespace Hiragana.Battle
 			}
 		}
 
+		private void OnEnable()
+		{
+			UpdateDisplayName();
+		}
+
 		public override string ToString()
 		{
 			return name;
 		}
+
+		public enum TargetType { Self, Player, Ally, Allies, AllyAndSelf, AllEnemies, All,  }
+
+		[Serializable]
+		public class TargetedEffect
+		{
+			private string name;
+			public TargetType target;
+			[SerializeReference] public Effect effect;
+
+			public TargetedEffect(TargetType target, Effect effect)
+			{
+				this.target = target;
+				this.effect = effect;
+			}
+		}
+
 	}
 }

@@ -14,6 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Strike
   effects:
-  - type: 0
-    target: 0
-    value: 3
+  - target: 1
+    effect:
+      id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: Damage, ns: Hiragana.Battle.Effects, asm: Assembly-CSharp}
+      data:
+        type: Damage
+        value: 5
