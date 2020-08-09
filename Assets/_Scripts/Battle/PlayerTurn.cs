@@ -8,6 +8,8 @@ namespace Hiragana.Battle
 		private Player player;
 		private BattleScript Script { get; set; }
 
+		public IBattleTarget Target => player;
+
 		public PlayerTurn(Player player, BattleScript script)
 		{
 			this.player = player;
@@ -16,11 +18,20 @@ namespace Hiragana.Battle
 
 		public IEnumerator Execute()
 		{
+			if (player.SkipTurn)
+			{
+				player.SkipTurn = false;
+				BattleScript.script.log.Write($"{player.Name} skips a turn.");
+				yield break;
+			}
+			BattleScript.script.log.Hide();
+			player.haveTurn = true;
 			Debug.Log("Your turn.");
 			while (player.haveTurn)
 			{
 				yield return null;
 			}
+			BattleScript.script.log.Show();
 			Debug.Log("End of your turn.");
 		}
 

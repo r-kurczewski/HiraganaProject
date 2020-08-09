@@ -12,7 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c1fe2bab1a4bc48b31fbf61d88abbc, type: 3}
   m_Name: Poisonous Bite
   m_EditorClassIdentifier: 
-  displayName: 
-  effects: []
+  displayName: Poisonous Bite
+  effects:
+  - target: 1
+    effect:
+      id: 0
+  - target: 1
+    effect:
+      id: 1
   references:
     version: 1
+    00000000:
+      type: {class: Damage, ns: Hiragana.Battle.Effects, asm: Assembly-CSharp}
+      data:
+        type: Damage
+        value: 5
+    00000001:
+      type: {class: Poison, ns: Hiragana.Battle.Effects, asm: Assembly-CSharp}
+      data:
+        type: Poison
+        poison: 3

@@ -11,49 +11,38 @@ namespace Hiragana.Battle.Effects
 	[Serializable]
 	public class Heal : Effect
 	{
-		[SerializeField] private int value;
+		[SerializeField] private int value = 50;
 
 		public Heal()
 		{
 
 		}
 
-		public Heal(int value)
+		private Heal(Heal org)
 		{
-			this.value = value;
+			value = org.value;
 		}
 
-		public Heal(Romaji romaji)
-		{
-			value = (int)romaji;
-		}
-
-		public override bool Apply(IBattleTarget target)
+		public override void Apply(IBattleTarget target)
 		{
 			if (target is Player player)
 			{
 				player.Health += value;
-				return true;
 			}
 			else
 			{
 				var enemy = target as Enemy;
-				bool hit = false;
 				for (int i = 0; i < value; i++)
 				{
 					LifeSegment life = enemy.Health.FirstOrDefault(l => l.damaged);
-					if (life != null)
-					{
-						hit = true;
-						life.damaged = false;
-					}
-					else
-					{
-						return hit;
-					}
+					if (life != null) life.damaged = false;
 				}
-				return hit;
 			}
+		}
+
+		public override Effect Clone()
+		{
+			return new Heal(this);
 		}
 	}
 }

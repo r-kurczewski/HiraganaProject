@@ -4,12 +4,9 @@ namespace Hiragana.Battle
 {
 	public interface ITurn
 	{
+		IBattleTarget Target { get; }
+
 		IEnumerator Execute();
 
-		int GetSpeed();
-
-		bool IsAlive();
-
-		string GetName();
 	}
 }

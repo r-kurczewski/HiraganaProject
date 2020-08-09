@@ -17,7 +17,7 @@ MonoBehaviour:
   baseHealth: 5
   baseSpeed: 1
   moves:
-  - attack: {fileID: 11400000, guid: 9f4f7a08b3f871c46878499cab37c00c, type: 2}
-    priority: 2
   - attack: {fileID: 11400000, guid: 8b1676824960c1f4dbcdcb9ddfd7911e, type: 2}
+    priority: 3
+  - attack: {fileID: 11400000, guid: 9f4f7a08b3f871c46878499cab37c00c, type: 2}
     priority: 1

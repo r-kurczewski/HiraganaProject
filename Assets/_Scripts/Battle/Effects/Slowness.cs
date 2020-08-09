@@ -5,9 +5,29 @@ using System;
 
 namespace Hiragana.Battle.Effects
 {
-	public class Slowness : PlayerStatus
+	public class Slowness : Status, PlayerStatus
 	{
-		public override bool Execute(IBattleTarget target)
+		public Slowness()
+		{
+
+		}
+
+		public Slowness(Slowness org)
+		{
+
+		}
+
+		public override Effect Clone()
+		{
+			return new Slowness(this);
+		}
+
+		public override void Execute(IBattleTarget target)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void Merge(Status newStatus)
 		{
 			throw new NotImplementedException();
 		}

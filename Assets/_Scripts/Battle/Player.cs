@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Hiragana.Battle.Effects;
 using UnityEngine;
+using System.Linq;
 
 namespace Hiragana.Battle
 {
@@ -12,49 +13,57 @@ namespace Hiragana.Battle
 		[SerializeField] private int _health;
 		[SerializeField] private int _maxHealth;
 		[SerializeField] private int _speed;
+		[SerializeField] private bool _skipTurn;
 		public bool haveTurn;
 
 		[SerializeReference] private List<PlayerStatus> statuses = new List<PlayerStatus>();
 
-		public int Health { get => _health;  set => _health = Mathf.Clamp(value, 0, MaxHealth); }
-		public int MaxHealth { get => _maxHealth; private set => _maxHealth = value; }
-		public int Speed { get => _speed; private set => _speed = value; }
+		public int Health { get => _health; set => _health = Mathf.Clamp(value, 0, MaxHealth); }
+		public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
+		public int Speed { get => _speed; set => _speed = value; }
+		public bool SkipTurn { get => _skipTurn; set => _skipTurn = value; }
+		public bool Alive => Health > 0;
+		public string Name => "Player";
 
 		public bool AddStatus(Status status)
 		{
-			var st = TryCastStatus(status);
-			statuses.Add(st);
+			var enStatus = status as PlayerStatus;
+			var oldStatus = statuses.FirstOrDefault(x => x.GetType() == enStatus.GetType());
+			if (oldStatus is null)
+			{
+				statuses.Add(enStatus);
+			}
+			else
+			{
+				oldStatus.Merge(status);
+			}
 			return true;
 		}
 
 		public bool RemoveStatus(Status status)
 		{
-			var st = TryCastStatus(status);
+			var st = status as PlayerStatus;
 			return statuses.Remove(st);
-
 		}
 
-		public bool ApplyEffect(Effect effect)
+		public void ApplyEffect(Effect effect)
 		{
-			return effect.Apply(this);
+			effect.Apply(this);
 		}
 
 		public bool HaveStatus(Status status)
 		{
-			var st = TryCastStatus(status);
+			var st = status as PlayerStatus;
 			return statuses.Contains(st);
 		}
 
-		private PlayerStatus TryCastStatus(Status status)
+		public void ExecuteStatuses()
 		{
-			if (status is PlayerStatus)
+			foreach (var status in statuses)
 			{
-				return status as PlayerStatus;
+				status.Execute(this);
 			}
-			else
-			{
-				throw new InvalidOperationException("This target is not compatible with this type of status.");
-			}
+			statuses = statuses.Where(s => s.Keep).ToList();
 		}
 	}
 }

@@ -5,9 +5,21 @@ using System;
 
 namespace Hiragana.Battle.Effects
 {
-	public class Blindness : PlayerStatus
+	public class Blindness : Status, PlayerStatus
 	{
-		public override bool Execute(IBattleTarget target)
+		[SerializeField] private int turns;
+
+		public override Effect Clone()
+		{
+			return new Blindness();
+		}
+
+		public override void Execute(IBattleTarget target)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void Merge(Status newStatus)
 		{
 			throw new NotImplementedException();
 		}

@@ -1,32 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Hiragana.Battle.Enemy;
 
 namespace Hiragana.Battle.Effects
 {
 	public class Thorns : HiraganaStatus
 	{
-		[SerializeField] private int damage;
+		[SerializeField] private int thornsDamage = 20;
 
 		public Thorns()
 		{
 
 		}
 
-		public Thorns(LifeSegment life, int damage) : base(life)
+		public Thorns(Thorns org) : base(org)
 		{
-			this.damage = damage;
+			thornsDamage = org.thornsDamage;
 		}
 
-		public override bool Execute(IBattleTarget target)
+		public override Effect Clone()
 		{
-			throw new System.NotImplementedException();
+			return new Thorns(this);
+		}
+
+		public override void Execute(IBattleTarget target)
+		{
+			return;
 		}
 
 		public override string GetStatusFormating(string str)
 		{
 			return $"<color=#0bb36a><b>{str}</b></color>";
+		}
+
+		public override void OnHit()
+		{
+			BattleScript.script.Player.ApplyEffect(new Damage(thornsDamage));
+			
 		}
 	}
 }

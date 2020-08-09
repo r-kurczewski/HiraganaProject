@@ -9,32 +9,42 @@ namespace Hiragana.Battle
 	public abstract class HiraganaStatus : Status
 	{
 		protected LifeSegment life;
+		[SerializeField] protected int amount = 1;
 
 		protected HiraganaStatus()
 		{
 
 		}
 
-		public HiraganaStatus(LifeSegment life)
+		public HiraganaStatus(HiraganaStatus org)
 		{
-			this.life = life;
+			amount = org.amount;
 		}
 
 		public abstract string GetStatusFormating(string str);
 
-		public override bool Apply(IBattleTarget target)
+		public abstract void OnHit();
+
+		public override void Merge(Status newStatus)
 		{
-			var enemy = target as Enemy;
-			LifeSegment life = enemy.Health.GetRandom();
-			if(life != null)
+			Debug.LogWarning(GetType().Name + " skips merging.");
+			return;
+		}
+
+		public override void Apply(IBattleTarget target)
+		{
+			for (int i = 0; i < amount; i++)
 			{
-				life.status = this;
-				return true;
+				var enemy = target as Enemy;
+				LifeSegment life = enemy.Health.Where(x => x.damaged is false && x.status is null).ToList().TryGetRandom();
+				if (life != null)
+				{
+					var statusCopy = Clone() as HiraganaStatus;
+					life.status = statusCopy;
+					statusCopy.life = life;
+				}
 			}
-			else
-			{
-				return false;
-			}
+
 		}
 	}
 }

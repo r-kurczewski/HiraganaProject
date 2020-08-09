@@ -5,9 +5,13 @@ namespace Hiragana.Other
 {
 	public static class MyExtensions
 	{
-		public static T GetRandom<T>(this List<T> list)
+		public static T TryGetRandom<T>(this List<T> list)
 		{
-			return list[Random.Range(0, list.Count)];
+			try
+			{
+				return list[Random.Range(0, list.Count)];
+			}
+			catch { return default; }
 		}
 	}
 }

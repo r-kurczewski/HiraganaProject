@@ -8,12 +8,36 @@ using UnityEngine;
 namespace Hiragana.Battle.Effects
 {
 	[Serializable]
-	public class Stun : Status
+	public class Stun : Status, PlayerStatus, EnemyStatus
 	{
+		[SerializeField] private int turns = 1;
 
-		public override bool Execute(IBattleTarget target)
+		public Stun()
 		{
-			throw new NotImplementedException();
+
+		}
+
+		private Stun(Stun org)
+		{
+			turns = org.turns;
+		}
+
+		public override Effect Clone()
+		{
+			return new Stun(this);
+		}
+
+		public override void Execute(IBattleTarget target)
+		{
+			turns--;
+			target.SkipTurn = true;
+			if (turns <= 0) Keep = false;
+		}
+
+		public override void Merge(Status newStatus)
+		{
+			var merged = newStatus as Stun;
+			turns += merged.turns;
 		}
 	}
 }

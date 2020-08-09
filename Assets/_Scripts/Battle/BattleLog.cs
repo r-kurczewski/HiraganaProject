@@ -11,7 +11,7 @@ namespace Hiragana.Battle
 
 		void Awake()
 		{
-			text = GetComponentInChildren<TMP_Text>();	
+			text = GetComponentInChildren<TMP_Text>();
 		}
 
 		void OnEnable()
@@ -19,9 +19,25 @@ namespace Hiragana.Battle
 			text.text = string.Empty;
 		}
 
+		void Start()
+		{
+			
+
+		}
+
 		public void Write(string message)
 		{
 			text.text = message;
+		}
+
+		public void Hide()
+		{
+			gameObject.SetActive(false);
+		}
+
+		public void Show()
+		{
+			gameObject.SetActive(true);
 		}
 	}
 }

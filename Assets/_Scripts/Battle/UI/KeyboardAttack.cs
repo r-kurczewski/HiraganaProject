@@ -42,7 +42,7 @@ namespace Hiragana.Battle.UI
 		}
 
 		public IEnumerator TypeHiragana()
-		{ 
+		{
 			menu.textField.Select();
 			yield return new WaitForEndOfFrame();
 			yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Escape));
@@ -56,15 +56,17 @@ namespace Hiragana.Battle.UI
 			else
 			{
 				Debug.Log($"Attacked {enemies.selected.name} with {menu.textField.text}");
-				Enum.TryParse(menu.textField.text.ToUpper(), out Romaji romaji);
-				enemies.selected.GetComponent<IBattleTarget>().ApplyEffect(new Damage(romaji));
+				var enemy = enemies.selected.GetComponent<Enemy>();
+				if (Enum.TryParse(menu.textField.text.ToUpper(), false, out Romaji romaji)) // if parsing ok hit
+				{
+					enemy.ApplyEffect(new Damage(romaji));
+				}
 				enemies.RefreshSprites();
+				BattleScript.script.log.Show();
 				menu.textField.text = "";
 				menu.OnEscape();
-				FindObjectOfType<MenuOption>().Hide();
-				log.gameObject.SetActive(true);
 				menu.keyListening = true;
-				FindObjectOfType<Player>().haveTurn = false;
+				BattleScript.script.Player.haveTurn = false;
 			}
 		}
 

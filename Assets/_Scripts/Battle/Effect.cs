@@ -16,6 +16,8 @@ namespace Hiragana.Battle
 			type = GetType().Name;
 		}
 
-		public abstract bool Apply(IBattleTarget target);
+		public abstract Effect Clone();
+
+		public abstract void Apply(IBattleTarget target);
 	} 
 }

@@ -9,68 +9,68 @@ using System;
 
 public class BattleScript : MonoBehaviour
 {
-#pragma warning disable IDE0044, 0649
+	public static BattleScript script;
+
+	#pragma warning disable IDE0044, 0649
 	[SerializeField] private Player playerData;
 	[SerializeField] private PlayerPanel playerGUI;
 	[SerializeField] private EnemyScreen enemyGUI;
-	[SerializeField] private StandardMenu battleMenu;
-	[SerializeField] private BattleLog log;
+	public BattleLog log;
 	[SerializeField] private List<Enemy> enemies;
-	private ITurn currentTurn;
-	private IEnumerator<ITurn> turns;
-#pragma warning restore IDE0044, 0649
+	#pragma warning restore IDE0044, 0649
+
+	private IEnumerator turnManager;
 
 	public Player Player { get => playerData; }
 	public List<Enemy> Enemies { get => enemies; }
-	public BattleLog Log { get => log; private set => log = value; }
+
+	void Start()
+	{
+		script = this;
+	}
 
 	public void LoadBattle(Encounter encounter)
 	{
 		enemies = EnemyScreen.context.LoadEncounter(encounter);
-		turns = TurnQueue(enemies).GetEnumerator();
+		var turns = TurnQueue(enemies).GetEnumerator();
 		UpdateGUI();
-		StartCoroutine(ExecuteTurns());
+		turnManager = TurnManager(turns);
+		StartCoroutine(turnManager);
 	}
 
-	IEnumerator ExecuteTurns()
+	IEnumerator TurnManager(IEnumerator<ITurn> turns)
 	{
 		yield return new WaitForEndOfFrame(); // wait to assign all enemy data like life and speed.
 		while (turns.MoveNext()) // for each turn
 		{
-			if (turns.Current.GetType() == typeof(PlayerTurn))
-			{
-				playerData.haveTurn = true;
-				ShowBattleMenu();
-			}
-
-			var turnEnum = turns.Current.Execute();
+			ITurn turn = turns.Current;
+			turn.Target.ExecuteStatuses();
+			CheckWinLoseConditions();
+			var turnEnum = turn.Execute();
 
 			while (turnEnum.MoveNext()) // wait till turn executed
 			{
 				yield return new WaitForEndOfFrame();
 			}
 
-			if (playerData.Health <= 0) // game over
-			{
-				UpdateGUI();
-				Debug.LogError("Game Over");
-				yield break;
-			}
-			else if (enemies.Where(e => e.CurrentHealth.Count > 0).Count() == 0) // you win
-			{
-				UpdateGUI();
-				Debug.LogError("You win");
-				yield break;
-			}
 			UpdateGUI();
+			CheckWinLoseConditions();
 			yield return new WaitForSeconds(1); // delay between turns
 		}
 	}
 
-	private void ShowBattleMenu()
+	private void CheckWinLoseConditions()
 	{
-		log.gameObject.SetActive(false);
-		battleMenu.gameObject.SetActive(true);
+		if (playerData.Health <= 0) // you lose
+		{
+			StopCoroutine(turnManager);
+			script.log.Write("You lose");
+		}
+		else if (enemies.Where(e => e.CurrentHealth.Count > 0).Count() == 0) // you win
+		{
+			StopCoroutine(turnManager);
+			script.log.Write("You win");
+		}
 	}
 
 	private void UpdateGUI()
@@ -85,15 +85,15 @@ public class BattleScript : MonoBehaviour
 		List<ITurn> turns = new List<ITurn>() { playerTurn };
 		foreach (var enemy in enemies)
 		{
-			turns.Add(new EnemyTurn(enemy, this));
+			turns.Add(new EnemyTurn(enemy));
 		}
 
 		while (turns.Count > 0)
 		{
-			turns = turns.Where(e=> e.IsAlive()).OrderByDescending(e => e.GetSpeed()).ToList();
+			turns = turns.Where(e => e.Target.Alive).OrderByDescending(e => e.Target.Speed).ToList();
 			foreach (var turn in turns)
 			{
-				if (turn.IsAlive()) yield return turn;
+				if (turn.Target.Alive) yield return turn;
 				else continue;
 			}
 		}

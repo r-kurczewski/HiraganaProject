@@ -9,11 +9,15 @@ namespace Hiragana.Battle
 	[Serializable]
 	public abstract class Status : Effect
 	{
-		public override bool Apply(IBattleTarget target)
+		public bool Keep { get; set; } = true;
+
+		public override void Apply(IBattleTarget target)
 		{
-			return target.AddStatus(this);
+			target.AddStatus(Clone() as Status);
 		}
 
-		public abstract bool Execute(IBattleTarget target);
+		public abstract void Execute(IBattleTarget target);
+
+		public abstract void Merge(Status newStatus);
 	}
 }

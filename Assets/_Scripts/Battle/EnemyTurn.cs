@@ -13,20 +13,18 @@ namespace Assets._Scripts.Battle
 	public class EnemyTurn : ITurn
 	{
 		private Enemy self;
-		private BattleScript Script { get; set; }
-		private string EnemyName { get => self.type.name; }
+		public IBattleTarget Target { get => self; }
 
-		public EnemyTurn(Enemy self, BattleScript script)
+		public EnemyTurn(Enemy self)
 		{
 			this.self = self;
-			Script = script;
 		}
 
 		public IEnumerator Execute()
 		{
 			Attack picked = PickAttack(self.type.moves);
-			string msg = $"{EnemyName} uses {picked.name}.";
-			Script.Log.Write(msg);
+			string msg = $"{self.Name} uses {picked.name}.";
+			BattleScript.script.log.Write(msg);
 			Debug.Log(msg);
 			foreach (var tarEffect in picked.effects)
 			{
@@ -56,10 +54,9 @@ namespace Assets._Scripts.Battle
 					currentPriority += moves[i].priority;
 				}
 			}
-			if(chosen == null) throw new InvalidOperationException($"{EnemyName} could not pick an attack.");
+			if(chosen == null) throw new InvalidOperationException($"{self.Name} could not pick an attack.");
 			return chosen;
 		}
-
 
 		private List<IBattleTarget> PickTargets(TargetedEffect effect)
 		{
@@ -70,29 +67,28 @@ namespace Assets._Scripts.Battle
 			}
 			else if (effect.target == TargetType.Player)
 			{
-				targets.Add(Script.Player);
+				targets.Add(BattleScript.script.Player);
 			}
 			else if (effect.target == TargetType.Ally)
 			{
-				// TODO improve chosing target based on effect type
-				targets.Add(Script.Enemies.Where(x => x != self).ToList().GetRandom());
+				targets.Add(BattleScript.script.Enemies.Where(x => x != self).ToList().TryGetRandom());
 			}
 			else if (effect.target == TargetType.Allies)
 			{
-				targets.AddRange(Script.Enemies.Where(e => e != self));
+				targets.AddRange(BattleScript.script.Enemies.Where(e => e != self));
 			}
 			else if (effect.target == TargetType.AllyAndSelf)
 			{
-				targets.AddRange(Script.Enemies);
+				targets.AddRange(BattleScript.script.Enemies);
 			}
 			else if (effect.target == TargetType.AllEnemies)
 			{
-				targets.AddRange(Script.Enemies);
+				targets.AddRange(BattleScript.script.Enemies);
 			}
 			else if (effect.target == TargetType.All)
 			{
-				targets.Add(Script.Player);
-				targets.AddRange(Script.Enemies);
+				targets.Add(BattleScript.script.Player);
+				targets.AddRange(BattleScript.script.Enemies);
 			}
 			else
 			{
@@ -101,19 +97,5 @@ namespace Assets._Scripts.Battle
 			return targets;
 		}
 
-		public int GetSpeed()
-		{
-			return self.Speed;
-		}
-
-		public bool IsAlive()
-		{
-			return self.CurrentHealth.Count > 0;
-		}
-
-		public string GetName()
-		{
-			return self.type.name;
-		}
 	}
 }

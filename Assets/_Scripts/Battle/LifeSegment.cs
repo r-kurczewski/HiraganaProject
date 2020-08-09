@@ -51,7 +51,7 @@ namespace Hiragana.Battle
 			SA, SHI, SU, SE, SO,
 			ZA, JI, ZU, ZE, ZO,
 			TA, CHI, TSU, TE, TO,
-			DA, ji, zu, DE, DO,
+			DA, DJI, DZU, DE, DO,
 			NA, NI, NU, NE, NO,
 			HA, HI, FU, HE, HO,
 			BA, BI, BU, BE, BO,

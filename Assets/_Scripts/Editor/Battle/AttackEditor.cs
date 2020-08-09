@@ -48,6 +48,14 @@ namespace Hiragana.Battle
 			}
 
 			EditorGUILayout.EndHorizontal();
+			EditorGUILayout.BeginHorizontal();
+
+			if (GUILayout.Button("Invincibility"))
+			{
+				AddEffect(Self, new Invincibility());
+			}
+
+			EditorGUILayout.EndHorizontal();
 			base.OnInspectorGUI();
 			
 		}

@@ -12,7 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c1fe2bab1a4bc48b31fbf61d88abbc, type: 3}
   m_Name: Spike Shield
   m_EditorClassIdentifier: 
-  displayName: 
-  effects: []
+  displayName: Spike Shield
+  effects:
+  - target: 0
+    effect:
+      id: 0
+  - target: 0
+    effect:
+      id: 1
   references:
     version: 1
+    00000000:
+      type: {class: Thorns, ns: Hiragana.Battle.Effects, asm: Assembly-CSharp}
+      data:
+        type: Thorns
+        amount: 1
+        thornsDamage: 10
+    00000001:
+      type: {class: Invincibility, ns: Hiragana.Battle.Effects, asm: Assembly-CSharp}
+      data:
+        type: Invincibility
+        amount: 3
+        turns: 1

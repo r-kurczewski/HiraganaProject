@@ -1,8 +1,12 @@
 
 namespace Hiragana.Battle
 {
-	public abstract class EnemyStatus : Status
+	public interface EnemyStatus
 	{
+		bool Keep { get; set; }
 
+		void Execute(IBattleTarget target);
+
+		void Merge(Status newStatus);
 	}
 }
