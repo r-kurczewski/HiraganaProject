@@ -44,7 +44,11 @@ namespace Hiragana.Battle
 					statusCopy.life = life;
 				}
 			}
+		}
 
+		public override void OnRemove()
+		{
+			life.status = null;
 		}
 	}
 }

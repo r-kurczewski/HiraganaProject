@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static Hiragana.Battle.Encounter;
 
@@ -103,9 +104,10 @@ namespace Hiragana.Battle.UI
 
 		public void UpdateGUI()
 		{
+			enemies = enemies.Where(x=> x != null).ToList();
 			foreach(var enemy in enemies)
 			{
-				enemy.UpdateLifeString();
+				enemy.UpdateGUI();
 			}
 		}
 	}

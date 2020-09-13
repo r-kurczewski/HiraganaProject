@@ -9,19 +9,40 @@ namespace Hiragana.Battle.Effects
 	{
 		[SerializeField] private int turns;
 
+		public Blindness()
+		{
+
+		}
+
+		public Blindness(Blindness org)
+		{
+			turns = org.turns;
+		}
+
+		public override void Apply(IBattleTarget target)
+		{
+			base.Apply(target);
+		}
+
 		public override Effect Clone()
 		{
-			return new Blindness();
+			return new Blindness(this);
 		}
 
 		public override void Execute(IBattleTarget target)
 		{
-			throw new NotImplementedException();
+			if (--turns <= 0) OnRemove();
 		}
 
 		public override void Merge(Status newStatus)
 		{
-			throw new NotImplementedException();
+			var merged = newStatus as Blindness;
+			turns += merged.turns;
+		}
+
+		public static string GetFormatingString(string str)
+		{
+			return $"<color=#fff>? </color>";
 		}
 	}
 }

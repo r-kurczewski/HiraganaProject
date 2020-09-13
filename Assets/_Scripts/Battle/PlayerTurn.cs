@@ -1,14 +1,16 @@
-﻿using System.Collections;
+﻿using Hiragana.Battle.Effects;
+using Hiragana.Battle.UI;
+using System.Collections;
 using UnityEngine;
 
 namespace Hiragana.Battle
 {
-	public class PlayerTurn : ITurn
+	public class PlayerTurn : Turn
 	{
 		private Player player;
 		private BattleScript Script { get; set; }
 
-		public IBattleTarget Target => player;
+		public override IBattleTarget Target => player;
 
 		public PlayerTurn(Player player, BattleScript script)
 		{
@@ -16,22 +18,24 @@ namespace Hiragana.Battle
 			Script = script;
 		}
 
-		public IEnumerator Execute()
+		public override IEnumerator Execute()
 		{
-			if (player.SkipTurn)
+			if (Target.SkipTurn)
 			{
-				player.SkipTurn = false;
-				BattleScript.script.log.Write($"{player.Name} skips a turn.");
+				BattleLog.log.Write($"{player.Name} skips a turn.");
+				Target.SkipTurn = false;
 				yield break;
 			}
-			BattleScript.script.log.Hide();
+
+			BattleLog.log.SetVisibility(false);
+			GameObject.FindObjectOfType<MainMenu>(true).Show();
 			player.haveTurn = true;
 			Debug.Log("Your turn.");
 			while (player.haveTurn)
 			{
 				yield return null;
 			}
-			BattleScript.script.log.Show();
+			BattleLog.log.SetVisibility(true);
 			Debug.Log("End of your turn.");
 		}
 

@@ -7,13 +7,17 @@ namespace Hiragana.Battle.UI
 {
 	public class PlayerPanel : MonoBehaviour
 	{
-		public Slider lifeBar;
-		public Slider focusBar;
-		public Player player;
+		#pragma warning disable 0649
+		[SerializeField] private HealthBar healthBar;
+		[SerializeField] private FocusBar focusBar;
+		[SerializeField] private StatusList statusList;
+		#pragma warning restore 0649
 
 		public void UpdateGUI()
 		{
-			lifeBar.value = (float)player.Health / player.MaxHealth;
+			healthBar.UpdateGUI();
+			statusList.UpdateGUI();
+			focusBar.UpdateGUI();
 		}
 	}
 }

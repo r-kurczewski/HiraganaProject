@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9820cd671cf739d4aba90b7147fff3d2, type: 3}
+  m_Name: Eye drops
+  m_EditorClassIdentifier: 
+  displayName: 
+  effects:
+  - target: 1
+    effect:
+      id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: ClearStatus, ns: Hiragana.Battle.Effects, asm: Assembly-CSharp}
+      data:
+        type:
+          id: 1
+    00000001:
+      type: {class: Blindness, ns: Hiragana.Battle.Effects, asm: Assembly-CSharp}
+      data:
+        turns: 0

@@ -18,6 +18,11 @@ namespace Hiragana.Battle.Effects
 
 		}
 
+		public Heal(int value)
+		{
+			this.value = value;
+		}
+
 		private Heal(Heal org)
 		{
 			value = org.value;

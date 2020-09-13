@@ -1,3 +1,4 @@
+using Hiragana.Battle.Effects;
 using System;
 using System.Text;
 using UnityEngine;
@@ -32,6 +33,8 @@ namespace Hiragana.Battle
 
 			public string GetFormatingString()
 			{
+				if (Player.player.HaveStatus<Blindness>()) return Blindness.GetFormatingString(Hiragana.ToString());
+
 				string str = damaged ? $"<alpha=#44>{Hiragana.ToString()}<alpha=#ff>" : Hiragana.ToString();
 				if(status != null) str = status.GetStatusFormating(str);
 				return str;
@@ -39,7 +42,7 @@ namespace Hiragana.Battle
 
 			public override string ToString()
 			{
-				return $"{Romaji} ({Hiragana}) [{(damaged ? "X" : " ")}]";
+				return $"{Hiragana} ({Romaji})";
 			}
 
 		}

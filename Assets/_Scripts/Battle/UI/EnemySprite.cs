@@ -38,8 +38,13 @@ namespace Hiragana.Battle.UI
 			base.DoStateTransition(state, instant);
 		}
 
-		public void UpdateLifeString()
+		public void UpdateGUI()
 		{
+			if (GetComponent<Enemy>().Alive == false)
+			{
+				Destroy(gameObject);
+				return;
+			}
 			var sb = new StringBuilder();
 			foreach (var segment in GetComponent<Enemy>().Health)
 			{

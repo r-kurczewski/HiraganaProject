@@ -18,7 +18,7 @@ namespace Hiragana.Battle.UI
 				}
 				else
 				{
-					EventSystem.current.firstSelectedGameObject.GetComponent<Selectable>().Select();
+					EventSystem.current.firstSelectedGameObject?.GetComponent<Selectable>().Select();
 				}
 			}
 			else

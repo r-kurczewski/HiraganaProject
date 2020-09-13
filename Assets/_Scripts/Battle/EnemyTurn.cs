@@ -1,5 +1,4 @@
-﻿using Hiragana.Battle;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,23 +7,30 @@ using Random = UnityEngine.Random;
 using UnityEngine;
 using static Hiragana.Other.MyExtensions;
 
-namespace Assets._Scripts.Battle
+namespace Hiragana.Battle
 {
-	public class EnemyTurn : ITurn
+	public class EnemyTurn : Turn
 	{
 		private Enemy self;
-		public IBattleTarget Target { get => self; }
+		public override IBattleTarget Target { get => self; }
 
 		public EnemyTurn(Enemy self)
 		{
 			this.self = self;
 		}
 
-		public IEnumerator Execute()
+		public override IEnumerator Execute()
 		{
+			if (Target.SkipTurn)
+			{
+				BattleLog.log.Write($"{self.Name} skips a turn.");
+				Target.SkipTurn = false;
+				yield break;
+			}
+
 			Attack picked = PickAttack(self.type.moves);
 			string msg = $"{self.Name} uses {picked.name}.";
-			BattleScript.script.log.Write(msg);
+			BattleLog.log.Write(msg);
 			Debug.Log(msg);
 			foreach (var tarEffect in picked.effects)
 			{
@@ -67,7 +73,7 @@ namespace Assets._Scripts.Battle
 			}
 			else if (effect.target == TargetType.Player)
 			{
-				targets.Add(BattleScript.script.Player);
+				targets.Add(Player.player);
 			}
 			else if (effect.target == TargetType.Ally)
 			{
@@ -87,7 +93,7 @@ namespace Assets._Scripts.Battle
 			}
 			else if (effect.target == TargetType.All)
 			{
-				targets.Add(BattleScript.script.Player);
+				targets.Add(Player.player);
 				targets.AddRange(BattleScript.script.Enemies);
 			}
 			else

@@ -7,11 +7,14 @@ namespace Hiragana.Battle
 {
 	public class BattleLog : MonoBehaviour
 	{
-		TMP_Text text;
+		public static BattleLog log;
+		public TMP_Text text;
+
+		private bool visible = false;
 
 		void Awake()
 		{
-			text = GetComponentInChildren<TMP_Text>();
+			log = this;
 		}
 
 		void OnEnable()
@@ -19,25 +22,19 @@ namespace Hiragana.Battle
 			text.text = string.Empty;
 		}
 
-		void Start()
-		{
-			
-
-		}
-
 		public void Write(string message)
 		{
+			if (!visible) SetVisibility(true);
 			text.text = message;
 		}
 
-		public void Hide()
+		public void SetVisibility(bool visible)
 		{
-			gameObject.SetActive(false);
-		}
-
-		public void Show()
-		{
-			gameObject.SetActive(true);
+			foreach(Transform child in gameObject.transform)
+			{
+				child.gameObject.SetActive(visible);
+				this.visible = visible;
+			}
 		}
 	}
 }

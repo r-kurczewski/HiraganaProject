@@ -1,41 +1,88 @@
-﻿using System.Collections;
+﻿using Hiragana.Battle.Effects;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static Hiragana.Battle.Enemy;
 
 namespace Hiragana.Battle.UI
 {
 	public class AttackMenu : MenuOption
 	{
-		public Button submitButton;
-		public TMP_InputField textField;
+		public TMP_InputField romajiText;
 		public EnemyScreen enemies;
 
-		public KeyboardAttack keyboard;
-		public MouseAttack mouse;
-
-		public IAttackInput input;
-
-		private void Awake()
+		new private void OnDisable()
 		{
-			input = keyboard;
+			keyListening = true;
+			romajiText.interactable = false;
+			romajiText.text = "";
 		}
 
-		protected void OnEnable()
+		public void StartAttack()
 		{
-			StartCoroutine(input.ChooseEnemy());
+			Show();
+			StartCoroutine(ChooseEnemy());
 		}
 
-		private void OnDisable()
+		public IEnumerator ChooseEnemy()
 		{
-			enemies.DisableSelection();
+			keyListening = false;
+			enemies.EnableSelection();
+			if (enemies.selected == null)
+				enemies.SelectEnemy(0);
+			else
+				enemies.SelectEnemy(enemies.selected);
+			yield return new WaitForEndOfFrame();
+			yield return new WaitUntil(()
+				=> Input.GetKeyDown(KeyCode.Return)
+				|| Input.GetKeyDown(KeyCode.Escape)
+				);
+			if (Input.GetKeyDown(KeyCode.Return))
+			{
+				enemies.DisableSelection(keepState: true);
+				StartCoroutine(ChooseHiragana());
+			}
+			else
+			{
+				enemies.selected = null;
+				enemies.DisableSelection(false);
+				OnEscape();
+			}
 		}
 
-		public override void OnEnter()
+		public IEnumerator ChooseHiragana()
 		{
-			return;
+			romajiText.interactable = true;
+			romajiText.Select();
+			yield return new WaitForEndOfFrame();
+			yield return new WaitUntil(()
+			=> Input.GetKeyDown(KeyCode.Return)
+			|| Input.GetKeyDown(KeyCode.Escape));
+
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				enemies.EnableSelection();
+
+				romajiText.text = "";
+				StartCoroutine(ChooseEnemy());
+			}
+			else
+			{
+				Debug.Log($"Attacked {enemies.selected.name} with {romajiText.text}");
+				var enemy = enemies.selected.GetComponent<Enemy>();
+				if (Enum.TryParse(romajiText.text.ToUpper(), false, out Romaji romaji)) // if parsing ok hit
+				{
+					enemy.ApplyEffect(new Damage(romaji));
+				}
+				keyListening = true;
+				enemies.EnableSelection(); //bug workaround
+				enemies.DisableSelection();
+				Player.player.haveTurn = false;
+			}
 		}
 	}
 }

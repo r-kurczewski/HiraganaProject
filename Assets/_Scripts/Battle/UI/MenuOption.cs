@@ -1,34 +1,55 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Hiragana.Battle.UI
 {
-	public abstract class MenuOption : MonoBehaviour
+	public class MenuOption : MonoBehaviour
 	{
 		public MenuOption parent;
 		public Selectable firstSelection;
 		public bool keyListening = true;
 
+		protected void OnEnable()
+		{
+			if(EventSystem.current.currentSelectedGameObject != firstSelection) firstSelection?.Select();
+		}
+
+		protected void OnDisable()
+		{
+			keyListening = true;
+			EventSystem.current.SetSelectedGameObject(null);
+		}
+
+		protected IEnumerator SelectButtton()
+		{
+			yield return null;
+			firstSelection.Select();
+		}
+
 		protected void Update()
 		{
 			if (!keyListening) return;
-			if (Input.GetButtonDown("Submit"))
-			{
-				OnEnter();
-			}
-			else if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Mouse1))
+			if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Mouse1))
 			{
 				OnEscape();
 			}
+			else if (Input.GetKeyDown(KeyCode.Return))
+			{
+				OnEnter();
+			}
 		}
 
-		public void Show()
+		public virtual void Show()
 		{
-			FindObjectOfType<MenuOption>()?.gameObject.SetActive(false);
-			gameObject.SetActive(true);
-			firstSelection?.Select();
+			if (!gameObject.activeSelf)
+			{
+				FindObjectOfType<MenuOption>()?.gameObject.SetActive(false);
+				gameObject.SetActive(true);
+			}
+			if(EventSystem.current.currentSelectedGameObject != firstSelection) firstSelection?.Select();
 		}
 
 		public virtual void OnEscape()
@@ -36,14 +57,9 @@ namespace Hiragana.Battle.UI
 			parent?.Show();
 		}
 
-		public void Hide()
-		{
-			gameObject.SetActive(false);
-		}
-
 		public virtual void OnEnter()
 		{
-			EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+
 		}
 	}
 }

@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEditor;
 using UnityEngine;
 using System.Reflection;
 using Hiragana.Battle.UI;
+using UnityEditor;
 
 namespace Hiragana.Battle
 {
@@ -19,6 +19,7 @@ namespace Hiragana.Battle
 
 		private void OnAwake()
 		{
+			#if UNITY_EDITOR
 			try
 			{
 				Rename();
@@ -27,8 +28,18 @@ namespace Hiragana.Battle
 			{
 				Debug.LogError($"Couldn't reload {name} name");
 			}
+			#endif
 		}
 
+		[Serializable]
+		public class EnemyPosition
+		{
+			public EnemyType enemy;
+			public Vector2 pos;
+		}
+
+		#region editor
+#if UNITY_EDITOR
 		private void Rename()
 		{
 			var monsters = new Dictionary<EnemyType, int>();
@@ -57,12 +68,8 @@ namespace Hiragana.Battle
 			AssetDatabase.RenameAsset(assetPath, newName);
 			AssetDatabase.SaveAssets();
 		}
+#endif
+		#endregion
 
-		[Serializable]
-		public class EnemyPosition
-		{
-			public EnemyType enemy;
-			public Vector2 pos;
-		}
 	}
 }

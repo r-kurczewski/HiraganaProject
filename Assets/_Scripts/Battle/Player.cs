@@ -5,25 +5,43 @@ using System.Threading;
 using Hiragana.Battle.Effects;
 using UnityEngine;
 using System.Linq;
+using static Hiragana.Battle.Item;
 
 namespace Hiragana.Battle
 {
+
 	public class Player : MonoBehaviour, IBattleTarget
 	{
+		public static Player player;
+
 		[SerializeField] private int _health;
 		[SerializeField] private int _maxHealth;
+		[SerializeField] private int _focus;
+		[SerializeField] private int _maxFocus;
 		[SerializeField] private int _speed;
-		[SerializeField] private bool _skipTurn;
+		[SerializeField] private int _turnProgress;
+		[SerializeField] public float damageResistance;
 		public bool haveTurn;
 
-		[SerializeReference] private List<PlayerStatus> statuses = new List<PlayerStatus>();
+		[SerializeReference] public List<Skill> skills;
+		[SerializeReference] public List<PlayerStatus> statuses = new List<PlayerStatus>();
+		public List<ItemQuantity> items = new List<ItemQuantity>();
 
 		public int Health { get => _health; set => _health = Mathf.Clamp(value, 0, MaxHealth); }
 		public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
+		public int Focus { get => _focus; set => _focus = Mathf.Clamp(value, 0, MaxFocus); }
+		public int MaxFocus { get => _maxFocus; set => _maxFocus = value; }
 		public int Speed { get => _speed; set => _speed = value; }
-		public bool SkipTurn { get => _skipTurn; set => _skipTurn = value; }
+		public int TurnProgress { get => _turnProgress; set => _turnProgress = value; }
+
 		public bool Alive => Health > 0;
 		public string Name => "Player";
+		public bool SkipTurn { get; set; }
+
+		void Awake()
+		{
+			player = this;
+		}
 
 		public bool AddStatus(Status status)
 		{
@@ -40,10 +58,9 @@ namespace Hiragana.Battle
 			return true;
 		}
 
-		public bool RemoveStatus(Status status)
+		public bool RemoveStatus<T>() where T: Status 
 		{
-			var st = status as PlayerStatus;
-			return statuses.Remove(st);
+			return statuses.Remove(statuses.FirstOrDefault(x=> x.GetType() == typeof(T)));
 		}
 
 		public void ApplyEffect(Effect effect)
@@ -51,10 +68,14 @@ namespace Hiragana.Battle
 			effect.Apply(this);
 		}
 
-		public bool HaveStatus(Status status)
+		public bool HaveStatus<T>() where T : Status
 		{
-			var st = status as PlayerStatus;
-			return statuses.Contains(st);
+			return statuses.Any(x => x.GetType() == typeof(T));
+		}
+
+		internal void RefreshItems()
+		{
+			items = items.Where(x => x.quantity > 0).ToList();
 		}
 
 		public void ExecuteStatuses()

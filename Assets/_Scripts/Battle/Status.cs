@@ -19,5 +19,10 @@ namespace Hiragana.Battle
 		public abstract void Execute(IBattleTarget target);
 
 		public abstract void Merge(Status newStatus);
+
+		public virtual void OnRemove()
+		{
+			Keep = false;
+		}
 	}
 }

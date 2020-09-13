@@ -25,7 +25,7 @@ namespace Hiragana.Battle.Effects
 
 		public override void Execute(IBattleTarget target)
 		{
-			if (--turns == 0) life.status = null;
+			if (--turns <= 0) OnRemove();
 		}
 
 		public override string GetStatusFormating(string str)

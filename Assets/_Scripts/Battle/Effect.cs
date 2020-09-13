@@ -9,11 +9,11 @@ namespace Hiragana.Battle
 	[Serializable]
 	public abstract class Effect
 	{
-		[ReadOnly] public string type = "ERROR";
+		//[ReadOnly][SerializeField] private string type;
 
 		public Effect()
 		{
-			type = GetType().Name;
+			//type = GetType().Name;
 		}
 
 		public abstract Effect Clone();

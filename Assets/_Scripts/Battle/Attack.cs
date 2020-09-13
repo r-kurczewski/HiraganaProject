@@ -44,7 +44,7 @@ namespace Hiragana.Battle
 		{
 			private string name;
 			public TargetType target;
-			[SerializeReference] public Effect effect;
+			[SerializeReference][SerializeReferenceButton] public Effect effect;
 
 			public TargetedEffect(TargetType target, Effect effect)
 			{
@@ -52,6 +52,5 @@ namespace Hiragana.Battle
 				this.effect = effect;
 			}
 		}
-
 	}
 }
