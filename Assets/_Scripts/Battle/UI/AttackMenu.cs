@@ -17,7 +17,7 @@ namespace Hiragana.Battle.UI
 
 		new private void OnDisable()
 		{
-			keyListening = true;
+			base.OnDisable();
 			romajiText.interactable = false;
 			romajiText.text = "";
 		}
@@ -78,8 +78,7 @@ namespace Hiragana.Battle.UI
 				{
 					enemy.ApplyEffect(new Damage(romaji));
 				}
-				keyListening = true;
-				enemies.EnableSelection(); //bug workaround
+				enemies.EnableSelection(); // bug workaround
 				enemies.DisableSelection();
 				Player.player.haveTurn = false;
 			}

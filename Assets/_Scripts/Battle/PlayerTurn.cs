@@ -8,14 +8,12 @@ namespace Hiragana.Battle
 	public class PlayerTurn : Turn
 	{
 		private Player player;
-		private BattleScript Script { get; set; }
 
 		public override IBattleTarget Target => player;
 
-		public PlayerTurn(Player player, BattleScript script)
+		public PlayerTurn(Player player)
 		{
 			this.player = player;
-			Script = script;
 		}
 
 		public override IEnumerator Execute()

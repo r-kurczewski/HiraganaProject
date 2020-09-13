@@ -63,7 +63,7 @@ public class BattleScript : MonoBehaviour
 
 	IEnumerable<Turn> TurnQueue(List<Enemy> enemies)
 	{
-		var playerTurn = new PlayerTurn(Player.player, this);
+		var playerTurn = new PlayerTurn(Player.player);
 		List<Turn> turns = new List<Turn>() { playerTurn };
 		foreach (var enemy in enemies)
 		{

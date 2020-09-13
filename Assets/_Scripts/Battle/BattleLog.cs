@@ -24,13 +24,17 @@ namespace Hiragana.Battle
 
 		public void Write(string message)
 		{
-			if (!visible) SetVisibility(true);
+			if (!visible)
+			{
+				Debug.LogWarning("BattleLog was hiiden!");
+				SetVisibility(true);
+			}
 			text.text = message;
 		}
 
 		public void SetVisibility(bool visible)
 		{
-			foreach(Transform child in gameObject.transform)
+			foreach (Transform child in gameObject.transform)
 			{
 				child.gameObject.SetActive(visible);
 				this.visible = visible;

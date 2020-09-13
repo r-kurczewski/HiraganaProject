@@ -14,13 +14,12 @@ namespace Hiragana.Battle.UI
 
 		protected void OnEnable()
 		{
-			if(EventSystem.current.currentSelectedGameObject != firstSelection) firstSelection?.Select();
+			if (EventSystem.current.currentSelectedGameObject != firstSelection) firstSelection?.Select();
 		}
 
 		protected void OnDisable()
 		{
 			keyListening = true;
-			EventSystem.current.SetSelectedGameObject(null);
 		}
 
 		protected IEnumerator SelectButtton()
@@ -49,7 +48,12 @@ namespace Hiragana.Battle.UI
 				FindObjectOfType<MenuOption>()?.gameObject.SetActive(false);
 				gameObject.SetActive(true);
 			}
-			if(EventSystem.current.currentSelectedGameObject != firstSelection) firstSelection?.Select();
+			if (firstSelection != null)
+			{
+				firstSelection.interactable = false; // bug workaround
+				firstSelection.interactable = true; // bug workaround
+				firstSelection?.Select();
+			}
 		}
 
 		public virtual void OnEscape()
