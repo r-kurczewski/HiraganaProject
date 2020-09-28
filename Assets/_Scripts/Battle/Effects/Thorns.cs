@@ -35,7 +35,7 @@ namespace Hiragana.Battle.Effects
 
 		public override void OnHit()
 		{
-			Player.player.ApplyEffect(new Damage(thornsDamage));
+			BattlePlayer.player.ApplyEffect(new Damage(thornsDamage));
 			
 		}
 	}

@@ -30,7 +30,7 @@ namespace Hiragana.Battle.Effects
 
 		public override void Apply(IBattleTarget target)
 		{
-			if (target is Player player)
+			if (target is BattlePlayer player)
 			{
 				player.Health += value;
 			}

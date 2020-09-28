@@ -10,7 +10,7 @@ namespace Hiragana.Battle.UI
 	public class GridManager : MonoBehaviour
 	{
 		private GridLayoutGroup grid;
-		[SerializeField] private RectTransform fillToRect;
+		public RectTransform fillToRect;
 
 		public Vector2Int gridSize;
 		public Vector2Int spacing;

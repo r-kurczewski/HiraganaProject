@@ -8,5 +8,7 @@ namespace Hiragana.Battle
 		void Execute(IBattleTarget target);
 
 		void Merge(Status newStatus);
+
+		void OnRemove();
 	}
 }

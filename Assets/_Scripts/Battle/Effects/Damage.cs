@@ -42,7 +42,7 @@ namespace Hiragana.Battle.Effects
 
 		public override void Apply(IBattleTarget target)
 		{
-			if (target is Player player)
+			if (target is BattlePlayer player)
 			{
 				player.Health -= (int)Mathf.Round((1 - player.damageResistance) * value);
 			}
@@ -55,7 +55,7 @@ namespace Hiragana.Battle.Effects
 				{
 					life.damaged = true;
 					life.status?.OnHit();
-					if(gainFocus) Player.player.Focus += 1;
+					if(gainFocus) BattlePlayer.player.Focus += 1;
 				}
 			}
 		}

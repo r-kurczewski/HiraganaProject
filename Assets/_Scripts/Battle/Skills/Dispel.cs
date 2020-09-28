@@ -12,16 +12,14 @@ namespace Hiragana.Battle.Skills
 	[Serializable]
 	public class Dispel : Skill
 	{
-		/*[SerializeField] */
-		private string _name = "Dispel";
-		public override string Name => _name;
+		public override string Name => "Dispel";
 		public override int FocusCost => 3;
 		public override SkillType Type => SkillType.Buff;
 
 		protected override IEnumerator Effect()
 		{
-			AttackMenu attackMenu = FindObjectOfType<AttackMenu>(true);
-			EnemyScreen enemies = FindObjectOfType<EnemyScreen>();
+			AttackMenu attackMenu = GameObject.FindObjectOfType<AttackMenu>(true);
+			EnemyScreen enemies = GameObject.FindObjectOfType<EnemyScreen>();
 
 			attackMenu.Show();
 			attackMenu.keyListening = false;
@@ -38,7 +36,7 @@ namespace Hiragana.Battle.Skills
 			if (Input.GetKeyDown(KeyCode.Return)) // ENTER
 			{
 				enemies.DisableSelection(keepState: true);
-				StartCoroutine(AttackLoop());
+				BattlePlayer.player.StartCoroutine(AttackLoop());
 				yield break;
 			}
 			else // ESCAPE
@@ -49,8 +47,8 @@ namespace Hiragana.Battle.Skills
 
 		private IEnumerator AttackLoop()
 		{
-			AttackMenu attackMenu = FindObjectOfType<AttackMenu>(true);
-			EnemyScreen enemies = FindObjectOfType<EnemyScreen>();
+			AttackMenu attackMenu = GameObject.FindObjectOfType<AttackMenu>(true);
+			EnemyScreen enemies = GameObject.FindObjectOfType<EnemyScreen>();
 
 			attackMenu.romajiText.interactable = false; // bug workaround
 			attackMenu.romajiText.interactable = true;
@@ -79,8 +77,8 @@ namespace Hiragana.Battle.Skills
 			enemies.selected = null;
 			enemies.EnableSelection(); // bug workaround
 			enemies.DisableSelection(false);
-			Player.player.Focus -= FocusCost;
-			Player.player.haveTurn = false;
+			BattlePlayer.player.Focus -= FocusCost;
+			BattlePlayer.player.haveTurn = false;
 		}
 	}
 }

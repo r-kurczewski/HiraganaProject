@@ -73,7 +73,7 @@ namespace Hiragana.Battle
 			}
 			else if (effect.target == TargetType.Player)
 			{
-				targets.Add(Player.player);
+				targets.Add(BattlePlayer.player);
 			}
 			else if (effect.target == TargetType.Ally)
 			{
@@ -93,7 +93,7 @@ namespace Hiragana.Battle
 			}
 			else if (effect.target == TargetType.All)
 			{
-				targets.Add(Player.player);
+				targets.Add(BattlePlayer.player);
 				targets.AddRange(BattleScript.script.Enemies);
 			}
 			else

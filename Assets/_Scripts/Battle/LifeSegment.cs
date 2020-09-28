@@ -33,7 +33,7 @@ namespace Hiragana.Battle
 
 			public string GetFormatingString()
 			{
-				if (Player.player.HaveStatus<Blindness>()) return Blindness.GetFormatingString(Hiragana.ToString());
+				if (BattlePlayer.player.HaveStatus<Blindness>()) return Blindness.GetFormatingString(Hiragana.ToString());
 
 				string str = damaged ? $"<alpha=#44>{Hiragana.ToString()}<alpha=#ff>" : Hiragana.ToString();
 				if(status != null) str = status.GetStatusFormating(str);

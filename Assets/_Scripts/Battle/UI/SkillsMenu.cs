@@ -12,7 +12,7 @@ namespace Hiragana.Battle.UI
 
 		void Start()
 		{
-			foreach (var skill in Player.player.skills)
+			foreach (var skill in BattlePlayer.player.skills)
 			{
 				SkillButton.Create(skill, skillsParent);
 			}
@@ -28,7 +28,7 @@ namespace Hiragana.Battle.UI
 			yield return new WaitUntil(() => skillsParent.childCount == 4);
 			foreach (var button in skillsParent.GetComponentsInChildren<SkillButton>())
 			{
-				button.interactable = (button.skill.FocusCost <= Player.player.Focus);
+				button.interactable = (button.skill.FocusCost <= BattlePlayer.player.Focus);
 			}
 			skillsParent.GetComponentsInChildren<SkillButton>().FirstOrDefault(x => x.interactable)?.Select();
 		}

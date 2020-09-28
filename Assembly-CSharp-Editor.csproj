@@ -64,13 +64,13 @@
     <Compile Include="Assets\Tilemap\Tiles\Rule Tile\Scripts\Editor\RuleTileEditor.cs" />
     <Compile Include="Assets\Tilemap\Tiles\Rule Tile\Scripts\Editor\CustomRuleTileMenu.cs" />
     <Compile Include="Assets\Tilemap\Tiles\Isometric Rule Tile\Editor\IsometricRuleTileEditor.cs" />
-    <Compile Include="Assets\_Scripts\Editor\Battle\PotionEditor.cs" />
     <Compile Include="Assets\_Scripts\Editor\Battle\EnemyPositionDrawer.cs" />
     <Compile Include="Assets\Tilemap\Tiles\Hexagonal Rule Tile\Editor\HexagonalRuleTileEditor.cs" />
+    <Compile Include="Assets\BayatGames\SaveGameFree\Editor\Tests\SaveGameTests.cs" />
     <Compile Include="Assets\Tilemap\Brushes\Line Brush\Scripts\Editor\LineBrush.cs" />
     <Compile Include="Assets\_Scripts\Editor\TemplateParser.cs" />
     <Compile Include="Assets\Tilemap\Brushes\Random Brush\Scripts\Editor\RandomBrush.cs" />
-    <Compile Include="Assets\_Scripts\Editor\Battle\AttackEditor.cs" />
+    <Compile Include="Assets\_Scripts\Editor\Battle\ItemQuantityDrawer.cs" />
     <Compile Include="Assets\_Scripts\Editor\ReadOnlyDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +280,9 @@
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\15.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    </Reference>
+    <Reference Include="FullSerializer">
+      <HintPath>Assets\BayatGames\SaveGameFree\Plugins\FullSerializer.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>Library\PackageCache\com.unity.analytics@3.3.5\Unity.Analytics.Editor.dll</HintPath>

@@ -28,7 +28,7 @@ namespace Hiragana.Battle.Effects
 
 		public override void Apply(IBattleTarget target)
 		{
-			Player.player.damageResistance += resistValue;
+			BattlePlayer.player.damageResistance += resistValue;
 			base.Apply(target);
 		}
 
@@ -39,7 +39,7 @@ namespace Hiragana.Battle.Effects
 
 		public override void Execute(IBattleTarget target)
 		{
-			if (--turns <= 0) OnRemove();
+			if (--turns <= 0) Keep = false;
 		}
 
 		public override void Merge(Status newStatus)
@@ -53,7 +53,7 @@ namespace Hiragana.Battle.Effects
 		public override void OnRemove()
 		{
 			base.OnRemove();
-			Player.player.damageResistance -= resistValue;
+			BattlePlayer.player.damageResistance -= resistValue;
 		}
 	}
 }

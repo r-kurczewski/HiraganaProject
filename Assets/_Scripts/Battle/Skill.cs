@@ -1,14 +1,13 @@
 using Hiragana.Battle.UI;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Hiragana.Battle
 {
 	[Serializable]
-	public abstract class Skill : MonoBehaviour
+	public abstract class Skill
 	{
 		public abstract string Name { get; }
 		public abstract int FocusCost { get; }
@@ -16,17 +15,22 @@ namespace Hiragana.Battle
 
 		protected abstract IEnumerator Effect();
 
+		protected void ReturnToSkillMenu()
+		{
+			var skillsMenu = GameObject.FindObjectOfType<SkillsMenu>(true);
+			var skillButtons = skillsMenu.gameObject.GetComponentsInChildren<SkillButton>();
+			skillsMenu.Show();
+			skillButtons.FirstOrDefault(x => x.skill == this).Select();
+		}
+
 		public void Use()
 		{
 			StartCoroutine(Effect());
 		}
 
-		protected void ReturnToSkillMenu()
+		protected Coroutine StartCoroutine(IEnumerator routine)
 		{
-			var skillsMenu = FindObjectOfType<SkillsMenu>(true);
-			var skillButtons = skillsMenu.gameObject.GetComponentsInChildren<SkillButton>();
-			skillsMenu.Show();
-			skillButtons.FirstOrDefault(x => x.skill == this).Select();
+			return BattlePlayer.player.StartCoroutine(routine);
 		}
 
 		public enum SkillType { Offensive, Defensive, Buff }

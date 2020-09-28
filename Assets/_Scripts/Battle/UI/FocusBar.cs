@@ -22,8 +22,8 @@ namespace Hiragana.Battle.UI
 			foreach (Transform point in transform)
 			{
 				counter++;
-				point.gameObject.SetActive(counter <= Player.player.MaxFocus);
-				point.GetComponent<Image>().color = counter <= Player.player.Focus ? enabledFocus : disabledFocus;
+				point.gameObject.SetActive(counter <= BattlePlayer.player.MaxFocus);
+				point.GetComponent<Image>().color = counter <= BattlePlayer.player.Focus ? enabledFocus : disabledFocus;
 			}
 		}
 	}

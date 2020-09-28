@@ -20,6 +20,6 @@ MonoBehaviour:
   - attack: {fileID: 11400000, guid: 45511483ceefc624199e1b992c88d891, type: 2}
     priority: 1
   - attack: {fileID: 11400000, guid: 6b51582d594cd0b4599825a6e25b1c93, type: 2}
-    priority: 1
+    priority: 3
   - attack: {fileID: 11400000, guid: 7850cd8050867724fa423d71519d7146, type: 2}
-    priority: 1
+    priority: 5

@@ -80,7 +80,7 @@ namespace Hiragana.Battle.UI
 				}
 				enemies.EnableSelection(); // bug workaround
 				enemies.DisableSelection();
-				Player.player.haveTurn = false;
+				BattlePlayer.player.haveTurn = false;
 			}
 		}
 	}

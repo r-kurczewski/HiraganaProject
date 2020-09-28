@@ -7,7 +7,7 @@ namespace Hiragana.Battle.Effects
 {
 	public class ClearStatus : Effect
 	{
-		[SerializeField][SerializeReference][SerializeReferenceButton] private Status type;
+		[SerializeReference][SerializeReferenceButton] private Status clearedType;
 
 		public ClearStatus()
 		{
@@ -16,13 +16,13 @@ namespace Hiragana.Battle.Effects
 
 		public ClearStatus(ClearStatus org)
 		{
-			type = org.type;
+			clearedType = org.clearedType;
 		}
 
 		public override void Apply(IBattleTarget target)
 		{
 			var method = typeof(IBattleTarget).GetMethod("RemoveStatus");
-			var generic = method.MakeGenericMethod(type.GetType());
+			var generic = method.MakeGenericMethod(clearedType.GetType());
 			generic.Invoke(target, null);
 		}
 

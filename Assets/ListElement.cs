@@ -10,7 +10,6 @@ namespace Hiragana
 	{
 		RectTransform window;
 		RectTransform rect;
-		int counter = 0;
 		int viewHeight = 4;
 		int scrollJump = 2;
 

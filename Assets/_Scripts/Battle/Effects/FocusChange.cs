@@ -22,7 +22,7 @@ namespace Hiragana.Battle.Effects
 
 		public override void Apply(IBattleTarget target)
 		{
-			if (target is Player) Player.player.Focus += value;
+			if (target is BattlePlayer) BattlePlayer.player.Focus += value;
 			else Debug.LogWarning("Change focus applied on enemy");
 		}
 

@@ -16,8 +16,11 @@ namespace Hiragana.Battle.UI
 		new Camera camera;
 		GridManager grid;
 		ItemQuantity item;
+
+		#pragma warning disable 0649
 		[SerializeField] TMP_Text label;
 		[SerializeField] TMP_Text quantity;
+		#pragma warning restore 0649
 
 		protected override void Awake()
 		{
@@ -69,17 +72,17 @@ namespace Hiragana.Battle.UI
 		{
 			if (item != null && item.quantity > 0)
 			{
-				foreach (var eff in item.potion.effects)
+				foreach (var eff in item.item.effects)
 				{
 					if (eff.target is TargetType.Player)
 					{
-						Player.player.ApplyEffect(eff.effect);
+						BattlePlayer.player.ApplyEffect(eff.effect);
 					}
 					else throw new NotImplementedException("Wrong item target");
 				}
 				item.quantity--;
-				Player.player.RefreshItems();
-				Player.player.haveTurn = false;
+				BattlePlayer.player.RefreshItems();
+				BattlePlayer.player.haveTurn = false;
 			}
 		}
 
@@ -87,7 +90,7 @@ namespace Hiragana.Battle.UI
 		{
 			if (item != null)
 			{
-				label.text = item.potion.name;
+				label.text = item.item.name;
 				quantity.text = $"{item.quantity}x";
 			}
 			else SetVisible(false);

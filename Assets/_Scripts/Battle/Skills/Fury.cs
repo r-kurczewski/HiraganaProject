@@ -12,15 +12,14 @@ namespace Hiragana.Battle.Skills
 	[Serializable]
 	public class Fury : Skill
 	{
-		/*[SerializeField] */private string _name = "Fury";
-		public override string Name => _name;
+		public override string Name => "Fury";
 		public override int FocusCost => 4;
 		public override SkillType Type => SkillType.Offensive;
 
 		protected override IEnumerator Effect()
 		{
-			AttackMenu attackMenu = FindObjectOfType<AttackMenu>(true);
-			EnemyScreen enemies = FindObjectOfType<EnemyScreen>();
+			AttackMenu attackMenu = GameObject.FindObjectOfType<AttackMenu>(true);
+			EnemyScreen enemies = GameObject.FindObjectOfType<EnemyScreen>();
 
 			attackMenu.Show();
 			attackMenu.keyListening = false;
@@ -48,8 +47,8 @@ namespace Hiragana.Battle.Skills
 
 		private IEnumerator AttackLoop(int times)
 		{
-			AttackMenu attackMenu = FindObjectOfType<AttackMenu>(true);
-			EnemyScreen enemies = FindObjectOfType<EnemyScreen>();
+			AttackMenu attackMenu = GameObject.FindObjectOfType<AttackMenu>(true);
+			EnemyScreen enemies = GameObject.FindObjectOfType<EnemyScreen>();
 
 			for (int i = 0; i < times; i++)
 			{
@@ -83,8 +82,8 @@ namespace Hiragana.Battle.Skills
 			enemies.selected = null;
 			enemies.EnableSelection(); // bug workaround
 			enemies.DisableSelection(false);
-			Player.player.Focus -= FocusCost;
-			Player.player.haveTurn = false;
+			BattlePlayer.player.Focus -= FocusCost;
+			BattlePlayer.player.haveTurn = false;
 		}
 	}
 }

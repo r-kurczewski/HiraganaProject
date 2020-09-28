@@ -27,7 +27,7 @@ namespace Hiragana.Battle.Effects
 			var slowness = Clone() as Slowness;
 			if (!target.HaveStatus<Slowness>())
 			{
-				Player.player.Speed -= value;
+				BattlePlayer.player.Speed -= value;
 				target.AddStatus(slowness);
 			}
 		}
@@ -39,7 +39,7 @@ namespace Hiragana.Battle.Effects
 
 		public override void Execute(IBattleTarget target)
 		{
-			if (--turns <= 0) OnRemove();
+			if (--turns <= 0) Keep = false;
 		}
 
 		public override void Merge(Status newStatus)
@@ -51,7 +51,7 @@ namespace Hiragana.Battle.Effects
 		public override void OnRemove()
 		{
 			base.OnRemove();
-			Player.player.Speed += value;
+			BattlePlayer.player.Speed += value;
 		}
 	}
 }

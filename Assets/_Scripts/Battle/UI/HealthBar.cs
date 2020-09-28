@@ -11,7 +11,7 @@ namespace Hiragana.Battle.UI
 
 		public void UpdateGUI()
 		{
-			health.value = (float)Player.player.Health / Player.player.MaxHealth;
+			health.value = (float)BattlePlayer.player.Health / BattlePlayer.player.MaxHealth;
 		}
 	}
 }

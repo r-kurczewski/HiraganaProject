@@ -9,16 +9,15 @@ namespace Hiragana.Battle.Skills
 	[Serializable]
 	public class Shield : Skill
 	{
-		/*[SerializeField]*/ private string _name = "Small Shield";
-		public override string Name => _name;
+		public override string Name => "Shield";
 		public override int FocusCost => 2;
 		public override SkillType Type => SkillType.Defensive;
 
 		protected override IEnumerator Effect()
 		{
-			Player.player.Focus -= FocusCost; 
-			Player.player.ApplyEffect(new Resistance(3, 0.50f));
-			Player.player.haveTurn = false;
+			BattlePlayer.player.Focus -= FocusCost; 
+			BattlePlayer.player.ApplyEffect(new Resistance(3, 0.50f));
+			BattlePlayer.player.haveTurn = false;
 			yield return null;
 		}
 	}

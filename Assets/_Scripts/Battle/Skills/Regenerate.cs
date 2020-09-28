@@ -8,16 +8,15 @@ namespace Hiragana.Battle.Skills
 	[Serializable]
 	public class Regenerate : Skill
 	{
-		/*[SerializeField]*/ private string _name = "Regenerate";
-		public override string Name => _name;
+		public override string Name => "Regenrate";
 		public override int FocusCost => 3;
 		public override SkillType Type => SkillType.Buff;
 
 		protected override IEnumerator Effect()
 		{
-			Player.player.Focus -= FocusCost;
-			Player.player.Health += 50;
-			Player.player.haveTurn = false;
+			BattlePlayer.player.Focus -= FocusCost;
+			BattlePlayer.player.Health += 50;
+			BattlePlayer.player.haveTurn = false;
 			yield return null;
 		}
 	}

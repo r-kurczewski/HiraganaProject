@@ -30,7 +30,7 @@ namespace Hiragana.Battle.Effects
 		public override void Execute(IBattleTarget target)
 		{
 			target.SkipTurn = true;
-			if (--turns <= 0) OnRemove();
+			if (--turns <= 0) Keep = false;
 		}
 
 		public override void Merge(Status newStatus)

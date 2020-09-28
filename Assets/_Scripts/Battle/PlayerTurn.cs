@@ -7,11 +7,11 @@ namespace Hiragana.Battle
 {
 	public class PlayerTurn : Turn
 	{
-		private Player player;
+		private BattlePlayer player;
 
 		public override IBattleTarget Target => player;
 
-		public PlayerTurn(Player player)
+		public PlayerTurn(BattlePlayer player)
 		{
 			this.player = player;
 		}

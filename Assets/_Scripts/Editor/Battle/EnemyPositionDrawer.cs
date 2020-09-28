@@ -10,7 +10,6 @@ namespace Hiragana.Editors
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
 			return 24f;
-			//return base.GetPropertyHeight(property, label);
 		}
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)

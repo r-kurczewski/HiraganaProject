@@ -1,33 +1,54 @@
 ScriptsOnlyBuild:
   usedScripts:
+    Assembly-CSharp-Editor.dll:
+    - UnityEditor.CoordinateBrush
+    - UnityEditor.GameObjectBrush
+    - UnityEditor.GroupBrush
+    - UnityEditor.LineBrush
+    - UnityEditor.RandomBrush
+    - UnityEditor.TintBrush
+    - UnityEditor.TintBrushSmooth
     Assembly-CSharp.dll:
     - BattleScript
     - Hiragana.Battle.Attack
     - Hiragana.Battle.BattleLog
+    - Hiragana.Battle.BattlePlayer
     - Hiragana.Battle.Encounter
     - Hiragana.Battle.EnemyType
-    - Hiragana.Battle.Player
+    - Hiragana.Battle.Item
     - Hiragana.Battle.UI.AttackMenu
     - Hiragana.Battle.UI.ButtonFocus
     - Hiragana.Battle.UI.EnemyScreen
     - Hiragana.Battle.UI.EnemySprite
+    - Hiragana.Battle.UI.FocusBar
+    - Hiragana.Battle.UI.GridManager
+    - Hiragana.Battle.UI.HealthBar
     - Hiragana.Battle.UI.InventoryListItem
-    - Hiragana.Battle.UI.KeyboardAttack
+    - Hiragana.Battle.UI.ItemButton
+    - Hiragana.Battle.UI.ItemsMenu
+    - Hiragana.Battle.UI.MainMenu
     - Hiragana.Battle.UI.PlayerPanel
-    - Hiragana.Battle.UI.StandardMenu
+    - Hiragana.Battle.UI.SkillButton
+    - Hiragana.Battle.UI.SkillsMenu
+    - Hiragana.Battle.UI.StatusList
     - Hiragana.DebugBattle
     - Hiragana.Other.SelectionBase
     - Hiragana.Puzzle.Puzzle
     - Hiragana.Puzzle.PuzzleCreator
-    - Hiragana.SpeedTest
+    - Hiragana.World.Chest
     - Hiragana.World.DungeonScript
-    - Hiragana.World.Player
+    - Hiragana.World.SnapToGrid
+    - Hiragana.World.WorldPlayer
     - SelectOnHover
     - UnityEngine.RuleTile
     Unity.2D.Tilemap.Editor.dll:
+    - UnityEditor.Tilemaps.GridBrush
+    - UnityEditor.Tilemaps.GridPaintPaletteClipboard
+    - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
     - UnityEditor.Tilemaps.GridPalettes
+    - UnityEditor.Tilemaps.PaintableSceneViewGrid
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.Rider.Editor.dll:
@@ -51,11 +72,16 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.AspectRatioFitter
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.GridLayoutGroup
     - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
+    - UnityEngine.UI.LayoutElement
     - UnityEngine.UI.Mask
     - UnityEngine.UI.RectMask2D
+    - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Slider
   sceneClasses:
     Assets/_Scenes/Battle.unity:
@@ -71,9 +97,177 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11782}
+    - Class: 114
+      Script: {instanceID: 11786}
+    - Class: 114
+      Script: {instanceID: 11788}
+    - Class: 114
+      Script: {instanceID: 11812}
+    - Class: 114
+      Script: {instanceID: 11832}
+    - Class: 114
+      Script: {instanceID: 12042}
+    - Class: 114
+      Script: {instanceID: 12118}
+    - Class: 114
+      Script: {instanceID: 12172}
+    - Class: 114
+      Script: {instanceID: 12230}
+    - Class: 114
+      Script: {instanceID: 12354}
+    - Class: 114
+      Script: {instanceID: 12394}
+    - Class: 114
+      Script: {instanceID: 12420}
+    - Class: 114
+      Script: {instanceID: 12454}
+    - Class: 114
+      Script: {instanceID: 12528}
+    - Class: 114
+      Script: {instanceID: 12606}
+    - Class: 114
+      Script: {instanceID: 12610}
+    - Class: 114
+      Script: {instanceID: 12672}
+    - Class: 114
+      Script: {instanceID: 12820}
+    - Class: 114
+      Script: {instanceID: 12836}
+    - Class: 114
+      Script: {instanceID: 12882}
+    - Class: 114
+      Script: {instanceID: 12970}
+    - Class: 114
+      Script: {instanceID: 13020}
+    - Class: 114
+      Script: {instanceID: 13068}
+    - Class: 114
+      Script: {instanceID: 13126}
+    - Class: 114
+      Script: {instanceID: 13136}
+    - Class: 114
+      Script: {instanceID: 13506}
+    - Class: 114
+      Script: {instanceID: 13532}
+    - Class: 114
+      Script: {instanceID: 13596}
+    - Class: 114
+      Script: {instanceID: 13602}
+    - Class: 114
+      Script: {instanceID: 13642}
+    - Class: 114
+      Script: {instanceID: 13730}
+    - Class: 114
+      Script: {instanceID: 13778}
+    - Class: 114
+      Script: {instanceID: 13902}
+    - Class: 114
+      Script: {instanceID: 13904}
+    - Class: 114
+      Script: {instanceID: 13990}
+    - Class: 114
+      Script: {instanceID: 14040}
+    - Class: 114
+      Script: {instanceID: 14140}
+    - Class: 114
+      Script: {instanceID: 14488}
+    - Class: 114
+      Script: {instanceID: 14518}
+    - Class: 114
+      Script: {instanceID: 14532}
+    - Class: 114
+      Script: {instanceID: 38026}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
+    - Class: 850595691
+      Script: {instanceID: 0}
+    Assets/_Scenes/Gate Puzzle.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11786}
+    - Class: 114
+      Script: {instanceID: 11812}
+    - Class: 114
+      Script: {instanceID: 12066}
+    - Class: 114
+      Script: {instanceID: 12354}
+    - Class: 114
+      Script: {instanceID: 12672}
+    - Class: 114
+      Script: {instanceID: 13990}
+    - Class: 114
+      Script: {instanceID: 14488}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 850595691
+      Script: {instanceID: 0}
+    Assets/_Scenes/World.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
     - Class: 49
       Script: {instanceID: 0}
+    - Class: 50
+      Script: {instanceID: 0}
+    - Class: 58
+      Script: {instanceID: 0}
     - Class: 61
+      Script: {instanceID: 0}
+    - Class: 66
       Script: {instanceID: 0}
     - Class: 74
       Script: {instanceID: 0}
@@ -81,90 +275,82 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
       Script: {instanceID: -582}
     - Class: 114
-      Script: {instanceID: 670}
+      Script: {instanceID: 672}
     - Class: 114
-      Script: {instanceID: 11780}
-    - Class: 114
-      Script: {instanceID: 11784}
+      Script: {instanceID: 11782}
     - Class: 114
       Script: {instanceID: 11786}
     - Class: 114
-      Script: {instanceID: 11808}
+      Script: {instanceID: 11788}
     - Class: 114
-      Script: {instanceID: 12104}
+      Script: {instanceID: 11790}
     - Class: 114
-      Script: {instanceID: 12292}
+      Script: {instanceID: 11812}
     - Class: 114
-      Script: {instanceID: 12330}
+      Script: {instanceID: 12218}
+    - Class: 114
+      Script: {instanceID: 12314}
+    - Class: 114
+      Script: {instanceID: 12348}
     - Class: 114
       Script: {instanceID: 12354}
     - Class: 114
-      Script: {instanceID: 12368}
+      Script: {instanceID: 12420}
     - Class: 114
-      Script: {instanceID: 12382}
+      Script: {instanceID: 12528}
     - Class: 114
-      Script: {instanceID: 12396}
+      Script: {instanceID: 12610}
     - Class: 114
-      Script: {instanceID: 12500}
+      Script: {instanceID: 12672}
     - Class: 114
-      Script: {instanceID: 12508}
+      Script: {instanceID: 12704}
     - Class: 114
-      Script: {instanceID: 12572}
+      Script: {instanceID: 12882}
     - Class: 114
-      Script: {instanceID: 12576}
+      Script: {instanceID: 13052}
     - Class: 114
-      Script: {instanceID: 12638}
+      Script: {instanceID: 13068}
     - Class: 114
-      Script: {instanceID: 12670}
+      Script: {instanceID: 13126}
     - Class: 114
-      Script: {instanceID: 12786}
+      Script: {instanceID: 13162}
     - Class: 114
-      Script: {instanceID: 12844}
+      Script: {instanceID: 13506}
     - Class: 114
-      Script: {instanceID: 13078}
+      Script: {instanceID: 13530}
     - Class: 114
-      Script: {instanceID: 13450}
+      Script: {instanceID: 13596}
     - Class: 114
-      Script: {instanceID: 13472}
+      Script: {instanceID: 13602}
     - Class: 114
-      Script: {instanceID: 13474}
+      Script: {instanceID: 13618}
     - Class: 114
-      Script: {instanceID: 13538}
+      Script: {instanceID: 13764}
     - Class: 114
-      Script: {instanceID: 13542}
+      Script: {instanceID: 13778}
     - Class: 114
-      Script: {instanceID: 13558}
+      Script: {instanceID: 13850}
     - Class: 114
-      Script: {instanceID: 13664}
+      Script: {instanceID: 13904}
     - Class: 114
-      Script: {instanceID: 13696}
+      Script: {instanceID: 13990}
     - Class: 114
-      Script: {instanceID: 13712}
+      Script: {instanceID: 14228}
     - Class: 114
-      Script: {instanceID: 13784}
+      Script: {instanceID: 14260}
     - Class: 114
-      Script: {instanceID: 13836}
+      Script: {instanceID: 14488}
     - Class: 114
-      Script: {instanceID: 13838}
+      Script: {instanceID: 38022}
     - Class: 114
-      Script: {instanceID: 13920}
-    - Class: 114
-      Script: {instanceID: 13968}
-    - Class: 114
-      Script: {instanceID: 14064}
-    - Class: 114
-      Script: {instanceID: 14150}
-    - Class: 114
-      Script: {instanceID: 14276}
-    - Class: 114
-      Script: {instanceID: 14402}
-    - Class: 114
-      Script: {instanceID: 14442}
+      Script: {instanceID: 38026}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -184,128 +370,6 @@ ScriptsOnlyBuild:
     - Class: 224
       Script: {instanceID: 0}
     - Class: 225
-      Script: {instanceID: 0}
-    - Class: 156049354
-      Script: {instanceID: 0}
-    - Class: 483693784
-      Script: {instanceID: 0}
-    - Class: 850595691
-      Script: {instanceID: 0}
-    - Class: 1839735485
-      Script: {instanceID: 0}
-    Assets/_Scenes/Gate Puzzle.unity:
-    - Class: 1
-      Script: {instanceID: 0}
-    - Class: 4
-      Script: {instanceID: 0}
-    - Class: 20
-      Script: {instanceID: 0}
-    - Class: 28
-      Script: {instanceID: 0}
-    - Class: 81
-      Script: {instanceID: 0}
-    - Class: 104
-      Script: {instanceID: 0}
-    - Class: 114
-      Script: {instanceID: 11786}
-    - Class: 114
-      Script: {instanceID: 11808}
-    - Class: 114
-      Script: {instanceID: 12052}
-    - Class: 114
-      Script: {instanceID: 12330}
-    - Class: 114
-      Script: {instanceID: 12638}
-    - Class: 114
-      Script: {instanceID: 13920}
-    - Class: 114
-      Script: {instanceID: 14402}
-    - Class: 115
-      Script: {instanceID: 0}
-    - Class: 157
-      Script: {instanceID: 0}
-    - Class: 196
-      Script: {instanceID: 0}
-    - Class: 213
-      Script: {instanceID: 0}
-    - Class: 222
-      Script: {instanceID: 0}
-    - Class: 223
-      Script: {instanceID: 0}
-    - Class: 224
-      Script: {instanceID: 0}
-    - Class: 850595691
-      Script: {instanceID: 0}
-    Assets/_Scenes/Tilemap.unity:
-    - Class: 1
-      Script: {instanceID: 0}
-    - Class: 4
-      Script: {instanceID: 0}
-    - Class: 20
-      Script: {instanceID: 0}
-    - Class: 21
-      Script: {instanceID: 0}
-    - Class: 28
-      Script: {instanceID: 0}
-    - Class: 48
-      Script: {instanceID: 0}
-    - Class: 50
-      Script: {instanceID: 0}
-    - Class: 61
-      Script: {instanceID: 0}
-    - Class: 66
-      Script: {instanceID: 0}
-    - Class: 74
-      Script: {instanceID: 0}
-    - Class: 81
-      Script: {instanceID: 0}
-    - Class: 91
-      Script: {instanceID: 0}
-    - Class: 95
-      Script: {instanceID: 0}
-    - Class: 104
-      Script: {instanceID: 0}
-    - Class: 114
-      Script: {instanceID: 670}
-    - Class: 114
-      Script: {instanceID: 11786}
-    - Class: 114
-      Script: {instanceID: 12330}
-    - Class: 114
-      Script: {instanceID: 12396}
-    - Class: 114
-      Script: {instanceID: 12576}
-    - Class: 114
-      Script: {instanceID: 12844}
-    - Class: 114
-      Script: {instanceID: 13006}
-    - Class: 114
-      Script: {instanceID: 13078}
-    - Class: 114
-      Script: {instanceID: 13450}
-    - Class: 114
-      Script: {instanceID: 13484}
-    - Class: 114
-      Script: {instanceID: 13542}
-    - Class: 114
-      Script: {instanceID: 13712}
-    - Class: 114
-      Script: {instanceID: 13838}
-    - Class: 115
-      Script: {instanceID: 0}
-    - Class: 128
-      Script: {instanceID: 0}
-    - Class: 157
-      Script: {instanceID: 0}
-    - Class: 196
-      Script: {instanceID: 0}
-    - Class: 212
-      Script: {instanceID: 0}
-    - Class: 213
-      Script: {instanceID: 0}
-    - Class: 222
-      Script: {instanceID: 0}
-    - Class: 224
       Script: {instanceID: 0}
     - Class: 19719996
       Script: {instanceID: 0}
@@ -332,22 +396,34 @@ ScriptsOnlyBuild:
     className: Text
   - hash:
       serializedVersion: 2
-      Hash: 134322c9293c1896357cce271b819ce4
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.EventSystems
-    className: EventTrigger
-  - hash:
-      serializedVersion: 2
       Hash: a6e561615949734e9f12f9b61661f43e
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Image
   - hash:
       serializedVersion: 2
+      Hash: 0dbc3be398b4869a5c8d0d8481ee402c
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: LayoutElement
+  - hash:
+      serializedVersion: 2
+      Hash: 134322c9293c1896357cce271b819ce4
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.EventSystems
+    className: EventTrigger
+  - hash:
+      serializedVersion: 2
       Hash: 4bc4346a71a8df53a6b106f68ef3a190
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: CanvasScaler
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.Battle.UI
+    className: StatusList
   - hash:
       serializedVersion: 2
       Hash: f40fedccd4adbc76605bea6d67537e4b
@@ -440,7 +516,7 @@ ScriptsOnlyBuild:
     className: TMP_InputField
   - hash:
       serializedVersion: 2
-      Hash: 32c583f3dea173d0b2f152c69ec1f559
+      Hash: 262e540b23434342dda2a91a7d312633
     assemblyName: Assembly-CSharp.dll
     namespaceName: Hiragana.Battle
     className: Enemy
@@ -458,6 +534,12 @@ ScriptsOnlyBuild:
     className: RandomTile
   - hash:
       serializedVersion: 2
+      Hash: 25e69bb1286d45ac3402c68e3b77b3ac
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.Battle.UI
+    className: ItemButton
+  - hash:
+      serializedVersion: 2
       Hash: 8aa3d6ccbcb54ee8db6c1229854adaaa
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -468,12 +550,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalAsset
-  - hash:
-      serializedVersion: 2
-      Hash: 0dbc3be398b4869a5c8d0d8481ee402c
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: LayoutElement
   - hash:
       serializedVersion: 2
       Hash: 18c222bef9ae745ce69ddde9b74337ca
@@ -494,6 +570,12 @@ ScriptsOnlyBuild:
     className: AnimationTrack
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.World
+    className: SnapToGrid
+  - hash:
+      serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -512,16 +594,16 @@ ScriptsOnlyBuild:
     className: RectMask2D
   - hash:
       serializedVersion: 2
-      Hash: 4242547b0efaef1691d11d9ffdf0542f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: Hiragana.Battle.UI
-    className: StandardMenu
-  - hash:
-      serializedVersion: 2
       Hash: 6980e81ddc615a861309d2d659cc3760
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SubMeshUI
+  - hash:
+      serializedVersion: 2
+      Hash: 4242547b0efaef1691d11d9ffdf0542f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.Battle.UI
+    className: MainMenu
   - hash:
       serializedVersion: 2
       Hash: 5ab533713adae59372fb3e10a585c186
@@ -536,19 +618,13 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
-      Hash: 647fa83cb4995c7ed2188e1abb919568
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: Hiragana.Battle
-    className: Player
-  - hash:
-      serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: e0766a0e8938b34dbdc572ce4b274d5c
     assemblyName: Assembly-CSharp.dll
     namespaceName: Hiragana.Battle
     className: BattleLog
@@ -608,10 +684,16 @@ ScriptsOnlyBuild:
     className: AnimatedTile
   - hash:
       serializedVersion: 2
-      Hash: 244557bb641e72086c7bd5d36cf6bce7
+      Hash: 7f0e765a2f69afe7318c5de4ccbfc6e8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BattleScript
+  - hash:
+      serializedVersion: 2
+      Hash: d74b943a72d8887a996fe74f112c79c8
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.Battle.UI
+    className: FocusBar
   - hash:
       serializedVersion: 2
       Hash: 5c7414db9bfcc75185148ef00060650f
@@ -626,16 +708,40 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
+      Hash: 14bbc659fc4e08de2e4d4a4ca770280a
+    assemblyName: SerializedReferenceExample.dll
+    namespaceName: 
+    className: Test
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalTrack
   - hash:
       serializedVersion: 2
+      Hash: 3521bff0d0baabfe456553cd1107c0c1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.Battle.UI
+    className: HealthBar
+  - hash:
+      serializedVersion: 2
+      Hash: 4242547b0efaef1691d11d9ffdf0542f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.Battle.UI
+    className: MenuOption
+  - hash:
+      serializedVersion: 2
       Hash: 4b44825e3bcd88855eb3a85bf02f5aa5
     assemblyName: Assembly-CSharp.dll
     namespaceName: Hiragana.World
     className: DungeonScript
+  - hash:
+      serializedVersion: 2
+      Hash: 2a650e1da452701b78a722ae849b7ef9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.Battle
+    className: Item
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -654,6 +760,18 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: Hiragana.Battle
     className: Encounter
+  - hash:
+      serializedVersion: 2
+      Hash: 02a6a0f57ea99f59fcd0566954646a3a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.Battle.UI
+    className: ItemsMenu
+  - hash:
+      serializedVersion: 2
+      Hash: 244c24d155933603535d9840a90ecd1b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.World
+    className: Chest
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -722,12 +840,6 @@ ScriptsOnlyBuild:
     className: EnemyScreen
   - hash:
       serializedVersion: 2
-      Hash: b8bb2bd4bd4cb23a09f5771a51d1c92b
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: Hiragana.World
-    className: Player
-  - hash:
-      serializedVersion: 2
       Hash: f7bb6096199e0cf058d5d69878184cf4
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -770,6 +882,12 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
+      Hash: 64aaa28a003d83b1d26263ca787b2452
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.Battle.UI
+    className: SkillsMenu
+  - hash:
+      serializedVersion: 2
       Hash: cdf089f6cdbdaf804990606672273b73
     assemblyName: Assembly-CSharp.dll
     namespaceName: UnityEngine.Tilemaps
@@ -786,6 +904,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: Hiragana
     className: DebugBattle
+  - hash:
+      serializedVersion: 2
+      Hash: f087c23fbfa15475a0d110af46fb0496
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana
+    className: ListElement
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -854,7 +978,7 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: 357a4a156807014ee11a60241391aacd
+      Hash: ad0495c762ed9604091a26d4675b4153
     assemblyName: Assembly-CSharp.dll
     namespaceName: Hiragana.Battle.UI
     className: AttackMenu
@@ -872,7 +996,7 @@ ScriptsOnlyBuild:
     className: TerrainTile
   - hash:
       serializedVersion: 2
-      Hash: 1f9b4bc2e112b641531d059f77906fd3
+      Hash: 9e8ef233659bda83393a69c36c9c3058
     assemblyName: Assembly-CSharp.dll
     namespaceName: Hiragana.Battle.UI
     className: PlayerPanel
@@ -896,6 +1020,12 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
+      Hash: 3153872212cef0a83282cc58d7214f2d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.Battle.UI
+    className: SkillButton
+  - hash:
+      serializedVersion: 2
       Hash: a2612813f45d0ced02c3e4bc9dbea8b4
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -906,12 +1036,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_ColorGradient
-  - hash:
-      serializedVersion: 2
-      Hash: 4eb49a041596dd00b926d618e428c5d8
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: Hiragana.Battle.UI
-    className: KeyboardAttack
   - hash:
       serializedVersion: 2
       Hash: 3a01bc12e3cd18b19c10a4184fb07a84
@@ -962,6 +1086,12 @@ ScriptsOnlyBuild:
     className: Dropdown
   - hash:
       serializedVersion: 2
+      Hash: 9c52683739ce9794081b9e804cd3204a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana
+    className: ButtonDebug
+  - hash:
+      serializedVersion: 2
       Hash: 748dd2a2a28da4e618912da5ac45684b
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -978,6 +1108,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalEmitter
+  - hash:
+      serializedVersion: 2
+      Hash: 97491361dd7ce9c8ffd72c60eab8e283
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.Battle.UI
+    className: GridManager
   - hash:
       serializedVersion: 2
       Hash: 0c05f2bfb402def3f0a85a62a2323c7f
@@ -1002,9 +1138,21 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: b8bb2bd4bd4cb23a09f5771a51d1c92b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.World
+    className: WorldPlayer
+  - hash:
+      serializedVersion: 2
+      Hash: 066032f6822002bd0af357abbaf74bd6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Hiragana.Battle
+    className: BattlePlayer
   platform: 19
   scenePathNames:
+  - Assets/_Scenes/World.unity
   - Assets/_Scenes/Battle.unity
   - Assets/_Scenes/Gate Puzzle.unity
-  - Assets/_Scenes/Tilemap.unity
   playerPath: C:/Users/Radek/Desktop/HiraganaBuild/Hiragana.exe

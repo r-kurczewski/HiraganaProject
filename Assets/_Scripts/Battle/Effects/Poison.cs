@@ -25,8 +25,8 @@ namespace Hiragana.Battle.Effects
 
 		public override void Execute(IBattleTarget target)
 		{
-			Player.player.ApplyEffect(new DirectDamage(poison));
-			if (--poison <= 0) OnRemove();
+			BattlePlayer.player.ApplyEffect(new DirectDamage(poison));
+			if (--poison <= 0) Keep = false;
 
 		}
 

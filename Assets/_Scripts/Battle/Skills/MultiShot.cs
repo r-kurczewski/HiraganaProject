@@ -12,14 +12,13 @@ namespace Hiragana.Battle.Skills
 	[Serializable]
 	public class MultiShot : Skill
 	{
-		/*[SerializeField]*/ private string _name = "Multi Shot";
-		public override string Name => _name;
+		public override string Name => "Multi Shot";
 		public override int FocusCost => 3;
 		public override SkillType Type => SkillType.Offensive;
 
 		protected override IEnumerator Effect()
 		{
-			AttackMenu attackMenu = FindObjectOfType<AttackMenu>(true);
+			AttackMenu attackMenu = GameObject.FindObjectOfType<AttackMenu>(true);
 
 			attackMenu.Show();
 			attackMenu.keyListening = false;
@@ -33,7 +32,7 @@ namespace Hiragana.Battle.Skills
 
 			if (Input.GetKeyDown(KeyCode.Return)) // ENTER
 			{
-				Player.player.Focus -= FocusCost;
+				BattlePlayer.player.Focus -= FocusCost;
 				foreach(var enemy in BattleScript.script.Enemies)
 				{
 					if (Enum.TryParse(attackMenu.romajiText.text.ToUpper(), false, out Romaji romaji))
@@ -41,7 +40,7 @@ namespace Hiragana.Battle.Skills
 						enemy.ApplyEffect(new Damage(romaji, false));
 					}
 				}
-				Player.player.haveTurn = false;
+				BattlePlayer.player.haveTurn = false;
 			}
 			else // ESCAPE
 			{

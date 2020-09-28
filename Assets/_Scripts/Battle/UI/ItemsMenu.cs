@@ -12,7 +12,7 @@ namespace Hiragana.Battle.UI
 
 		new void OnEnable()
 		{
-			foreach (var item in Player.player.items)
+			foreach (var item in BattlePlayer.player.items)
 			{
 				ItemButton.Create(item, grid.transform);
 			}

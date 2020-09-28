@@ -34,16 +34,14 @@ namespace Hiragana.Battle
 		[Serializable]
 		public class ItemQuantity
 		{
-			public Item potion;
+			public Item item;
 			public int quantity;
 
-			public ItemQuantity()
-			{
-			}
+			public ItemQuantity() { }
 
-			public ItemQuantity(Item potion, int quantity)
+			public ItemQuantity(Item item, int quantity)
 			{
-				this.potion = potion;
+				this.item = item;
 				this.quantity = quantity;
 			}
 		}

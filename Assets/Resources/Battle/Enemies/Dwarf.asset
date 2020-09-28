@@ -18,8 +18,8 @@ MonoBehaviour:
   baseSpeed: 105
   moves:
   - attack: {fileID: 11400000, guid: 8b1676824960c1f4dbcdcb9ddfd7911e, type: 2}
-    priority: 6
+    priority: 15
   - attack: {fileID: 11400000, guid: ec8ab491d86f3a44d82111d3bd10ebda, type: 2}
-    priority: 0
-  - attack: {fileID: 11400000, guid: ec2e7b2eb5f85eb46ad434e71d7ae244, type: 2}
     priority: 1
+  - attack: {fileID: 11400000, guid: ec2e7b2eb5f85eb46ad434e71d7ae244, type: 2}
+    priority: 2

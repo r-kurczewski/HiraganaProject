@@ -16,7 +16,7 @@ namespace Hiragana.Battle.UI
 		public void UpdateGUI()
 		{
 			Clear();
-			foreach(var status in Player.player.statuses)
+			foreach(var status in BattlePlayer.player.statuses)
 			{
 				GameObject prefab = Instantiate(Resources.Load<GameObject>("_Prefabs/UI/Status"), transform);
 				prefab.name = status.GetType().Name;
