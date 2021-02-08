@@ -1,3 +1,4 @@
+using Hiragana.Other;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace Hiragana.Battle.UI
 
 		new void OnEnable()
 		{
-			foreach (var item in BattlePlayer.player.items)
+			foreach (var item in Inventory.inventory.battleItems)
 			{
 				ItemButton.Create(item, grid.transform);
 			}

@@ -1,53 +1,41 @@
 using BayatGames.SaveGameFree;
+using Hiragana.Other;
 using Hiragana.World.UI;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static Hiragana.Battle.Item;
+using static Hiragana.Battle.BattleItem;
 
 namespace Hiragana.World
 {
-	public class Chest : MonoBehaviour
+	public class Chest : SaveObject
 	{
-		static int chestID;
+		#pragma warning disable 0649, IDE0044
 		[SerializeField] private Sprite openSprite;
 		[SerializeField] private Sprite closeSprite;
-		public List<ItemQuantity> loot = new List<ItemQuantity>();
+		#pragma warning restore 0649, IDE0044
 
-		private bool trigger;
+		public List<ItemQuantity<Item>> loot = new List<ItemQuantity<Item>>();
 
-		private bool Opened
-		{
-			get
-			{
-				if (SaveGame.Exists(ChestID))
-				{
-					return SaveGame.Load<bool>(ChestID);
-				}
-				else return false;
-			}
-			set
-			{
-				SaveGame.Save(ChestID, value);
-			}
-		}
+		[SerializeField] private bool trigger;
 
-		public string ChestID
+		[SerializeField] private bool opened = false;
+
+		private string ChestID
 		{
 			get
 			{
 				var sceneID = SceneManager.GetActiveScene().buildIndex;
-				var uniqueID = $"{sceneID}_{(int)transform.position.x}x{(int)transform.position.y}";
+				var uniqueID = $"C_{sceneID}_{(int)transform.position.x}x{(int)transform.position.y}";
 				return uniqueID;
 			}
 		}
 
 		private void Start()
 		{
-			if (Opened) GetComponent<SpriteRenderer>().sprite = openSprite;
+			Load();
+			if (opened) GetComponent<SpriteRenderer>().sprite = openSprite;
 		}
 
 		private void OnTriggerEnter2D(Collider2D collision)
@@ -60,23 +48,38 @@ namespace Hiragana.World
 			trigger = false;
 		}
 
+		private void OnDestroy()
+		{
+			Save();
+		}
+
+		public override void Save()
+		{
+			SaveGame.Save(ChestID, opened);
+		}
+
+		public override void Load()
+		{
+			if (SaveGame.Exists(ChestID)) opened = SaveGame.Load<bool>(ChestID);
+		}
+
 		private void Update()
 		{
 			#if UNITY_EDITOR
 			if (trigger && Input.GetKeyDown(KeyCode.R))
 			{
-				Opened = false;
+				opened = false;
 				GetComponent<SpriteRenderer>().sprite = closeSprite;
 			}
 			#endif
-			if (Input.GetKeyDown(KeyCode.Return) && trigger && !Opened)
+			if (Input.GetKeyDown(KeyCode.Return) && trigger && !opened)
 			{
-				Opened = true;
+				opened = true;
 				StringBuilder sb = new StringBuilder();
-				foreach (var item in loot)
+				foreach (var iQuantity in loot)
 				{
-					sb.Append($"{item.quantity}x {item.item.name}\n");
-					Battle.BattlePlayer.player.AddItem(item);
+					sb.Append($"{iQuantity.quantity}x {iQuantity.item.name}\n");
+					iQuantity.item.AddToInventory(iQuantity.quantity);
 				}
 				WorldLog.log.ShowMessage(sb.ToString());
 

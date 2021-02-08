@@ -1,10 +1,11 @@
+using Hiragana.Other;
 using UnityEditor;
 using UnityEngine;
-using static Hiragana.Battle.Item;
+using static Hiragana.Battle.BattleItem;
 
 namespace Hiragana.Editors
 {
-	[CustomPropertyDrawer(typeof(ItemQuantity))]
+	[CustomPropertyDrawer(typeof(ItemQuantity<Item>))]
 	public class ItemQuantityDrawer : PropertyDrawer
 	{
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)

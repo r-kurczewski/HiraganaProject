@@ -7,6 +7,7 @@ using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
 using Hiragana.World;
+using BayatGames.SaveGameFree;
 
 public class BattleScript : MonoBehaviour
 {
@@ -109,8 +110,7 @@ public class BattleScript : MonoBehaviour
 
 	public void ReturnToWorld()
 	{
-		SceneManager.LoadScene(WorldPlayer.locationId);
-		WorldPlayer.player.Activate();
+		SceneManager.LoadScene(SaveGame.Load<int>("currentLocation"));
 	}
 
 	private void UpdateGUI()

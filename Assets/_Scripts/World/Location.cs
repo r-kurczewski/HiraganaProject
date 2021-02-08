@@ -6,6 +6,7 @@ using System;
 using Random = UnityEngine.Random;
 using Hiragana.Battle;
 using UnityEngine.SceneManagement;
+using Hiragana.Other;
 
 namespace Hiragana.World
 {
@@ -67,18 +68,14 @@ namespace Hiragana.World
 		private void LoadBattle(Encounter encounter)
 		{
 			BattleScript.currentEncounter = encounter;
-			Debug.Log(player.transform.position);
-			WorldPlayer.player.Deactivate();
-			WorldPlayer.locationId = SceneManager.GetActiveScene().buildIndex;
 			SceneManager.LoadScene("Battle");
 		}
 
-	}
-
-	[Serializable]
-	public class EncounterChances
-	{
-		public Encounter encounter;
-		public int chances;
+		[Serializable]
+		public class EncounterChances
+		{
+			public Encounter encounter;
+			public int chances;
+		}
 	}
 }

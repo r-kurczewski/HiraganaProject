@@ -11,13 +11,13 @@ namespace Hiragana.Puzzles
 
 		public bool Correct => slotID == (Item?.GetComponent<Puzzle>().puzzleNumber ?? -1);
 
-		public GameObject Item
+		public Puzzle Item
 		{
 			get
 			{
 				if (transform.childCount == 1)
 				{
-					return transform.GetChild(0).gameObject;
+					return transform.GetChild(0).gameObject.GetComponent<Puzzle>();
 				}
 				else return null;
 			}
@@ -31,8 +31,15 @@ namespace Hiragana.Puzzles
 
 		public void OnDrop(PointerEventData eventData)
 		{
-			if (Puzzle.item)
+			if (Puzzle.item && Puzzle.item.draggable)
 			{
+				if (Item) // swap items
+				{
+					var oldPuzzle = Item.GetComponent<Puzzle>();
+					oldPuzzle.transform.SetParent(Puzzle.item.startParent);
+					oldPuzzle.transform.position = Puzzle.item.startPosition;
+				}
+
 				Puzzle.item.transform.SetParent(transform);
 				Puzzle.item.transform.localPosition = Vector3.zero;
 				FindObjectOfType<PuzzleCreator>().CheckPuzzle();

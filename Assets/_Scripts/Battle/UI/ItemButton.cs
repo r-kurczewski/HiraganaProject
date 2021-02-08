@@ -5,8 +5,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static Hiragana.Battle.Item;
+using static Hiragana.Battle.BattleItem;
 using static Hiragana.Battle.Attack;
+using Hiragana.Other;
 
 namespace Hiragana.Battle.UI
 {
@@ -15,7 +16,7 @@ namespace Hiragana.Battle.UI
 		ScrollRect scroll;
 		new Camera camera;
 		GridManager grid;
-		ItemQuantity item;
+		ItemQuantity<BattleItem> item;
 
 		#pragma warning disable 0649
 		[SerializeField] TMP_Text label;
@@ -61,7 +62,7 @@ namespace Hiragana.Battle.UI
 			}
 		}
 
-		public static ItemButton Create(ItemQuantity item, Transform parent)
+		public static ItemButton Create(ItemQuantity<BattleItem> item, Transform parent)
 		{
 			var button = Instantiate(Resources.Load<GameObject>("_Prefabs/UI/Item"), parent).GetComponent<ItemButton>();
 			button.item = item;
@@ -81,7 +82,7 @@ namespace Hiragana.Battle.UI
 					else throw new NotImplementedException("Wrong item target");
 				}
 				item.quantity--;
-				BattlePlayer.player.RefreshItems();
+				Inventory.inventory.Refresh();
 				BattlePlayer.player.haveTurn = false;
 			}
 		}

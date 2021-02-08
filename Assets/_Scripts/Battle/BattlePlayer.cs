@@ -5,7 +5,8 @@ using System.Threading;
 using Hiragana.Battle.Effects;
 using UnityEngine;
 using System.Linq;
-using static Hiragana.Battle.Item;
+using static Hiragana.Battle.BattleItem;
+using Hiragana.Other;
 
 namespace Hiragana.Battle
 {
@@ -24,8 +25,8 @@ namespace Hiragana.Battle
 		public bool haveTurn;
 
 		[SerializeReference][SerializeReferenceButton] public List<Skill> skills;
+
 		[SerializeReference] public List<PlayerStatus> statuses = new List<PlayerStatus>();
-		public List<ItemQuantity> items = new List<ItemQuantity>();
 
 		public int Health { get => _health; set => _health = Mathf.Clamp(value, 0, MaxHealth); }
 		public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
@@ -49,8 +50,6 @@ namespace Hiragana.Battle
 				player = this;
 				DontDestroyOnLoad(gameObject);
 			}
-			QualitySettings.vSyncCount = 0;
-			Application.targetFrameRate = 60;
 		}
 
 		public bool AddStatus(Status status)
@@ -83,25 +82,6 @@ namespace Hiragana.Battle
 		public bool HaveStatus<T>() where T : Status
 		{
 			return statuses.Any(x => x.GetType() == typeof(T));
-		}
-
-		public void RefreshItems()
-		{
-			items = items.Where(x => x.quantity > 0).ToList();
-		}
-
-		public void AddItem(ItemQuantity item)
-		{
-			ItemQuantity current;
-			current = items.FirstOrDefault(x => x.item == item.item);
-			if (current is null)
-			{
-				items.Add(item);
-			}
-			else
-			{
-				current.quantity += item.quantity;
-			}
 		}
 
 		public void ExecuteStatuses()

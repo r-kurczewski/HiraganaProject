@@ -9,22 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9820cd671cf739d4aba90b7147fff3d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 813911b722313a147b9c55ae62dda757, type: 3}
   m_Name: Eye drops
   m_EditorClassIdentifier: 
-  displayName: 
-  effects:
-  - target: 1
-    effect:
-      id: 0
+  displayName: Eye drops
+  description: 
+  effects: []
   references:
     version: 1
-    00000000:
-      type: {class: ClearStatus, ns: Hiragana.Battle.Effects, asm: Assembly-CSharp}
-      data:
-        type:
-          id: 1
-    00000001:
-      type: {class: Blindness, ns: Hiragana.Battle.Effects, asm: Assembly-CSharp}
-      data:
-        turns: 0

@@ -1,75 +1,93 @@
+using BayatGames.SaveGameFree;
+using Hiragana.Other;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
 
 namespace Hiragana.World
 {
 	[SelectionBase]
-	public class WorldPlayer : MonoBehaviour
+	public class WorldPlayer : SaveObject
 	{
 		public static WorldPlayer player;
-		public static int locationId;
-
 		public Rigidbody2D myRigidbody;
 		public Animator animator;
 		public float speed;
 		public bool IsMoving { get; private set; }
-		bool blocked;
+		public bool save = true;
 
-		void Awake()
+		private void Start()
 		{
-			if (player)
+			player = this;
+			animator.keepAnimatorControllerStateOnDisable = true;
+			Load();
+		}
+
+		private void Update()
+		{
+			#if UNITY_EDITOR
+			if (Input.GetKeyDown(KeyCode.LeftControl))
 			{
-				Destroy(gameObject);
+				GetComponent<Collider2D>().enabled = false;
 			}
-			else
+			else if (Input.GetKeyUp(KeyCode.LeftControl))
 			{
-				player = this;
-				DontDestroyOnLoad(gameObject);
+				GetComponent<Collider2D>().enabled = true;
 			}
+			#endif
+		}
+
+		public void OnDestroy()
+		{
+			if(save) Save();
 		}
 
 		void FixedUpdate()
 		{
-			if (!blocked)
+			Vector2 move = new Vector2
 			{
-				Vector2 move = new Vector2
-				{
-					x = Input.GetAxisRaw("Horizontal"),
-					y = Input.GetAxisRaw("Vertical")
-				};
-				move = move.normalized;
+				x = Input.GetAxisRaw("Horizontal"),
+				y = Input.GetAxisRaw("Vertical")
+			};
+			move = move.normalized;
 
-				if (move != Vector2.zero)
-				{
-					animator.SetBool("isMoving", true);
-					animator.SetFloat("moveX", move.x);
-					animator.SetFloat("moveY", move.y);
-					myRigidbody.MovePosition(myRigidbody.position + (move * Time.deltaTime * speed));
-					IsMoving = true;
-				}
-				else
-				{
-					animator.SetBool("isMoving", false);
-					IsMoving = false;
-				}
+			if (move != Vector2.zero)
+			{
+				animator.SetBool("isMoving", true);
+				animator.SetFloat("moveX", move.x);
+				animator.SetFloat("moveY", move.y);
+				myRigidbody.MovePosition(myRigidbody.position + (move * Time.deltaTime * speed));
+				IsMoving = true;
+			}
+			else
+			{
+				animator.SetBool("isMoving", false);
+				IsMoving = false;
 			}
 		}
 
-		public void Deactivate()
+		public override void Save()
 		{
-			FindObjectOfType<AudioListener>().enabled = false;
-			animator.SetBool("isMoving", false);
-			blocked = true;
+			SaveGame.Save<Vector2>("playerPos", transform.position);
+			SaveGame.Save("currentLocation", SceneManager.GetActiveScene().buildIndex);
+			SaveGame.Save("moveX", animator.GetFloat("moveX"));
+			SaveGame.Save("moveY", animator.GetFloat("moveY"));
 		}
 
-		public void Activate()
+		public override void Load()
 		{
-			FindObjectOfType<AudioListener>().enabled = true;
-			blocked = false;
+			if (SaveGame.Exists("playerPos")) transform.position = SaveGame.Load<Vector2>("playerPos");
+			if (SaveGame.Exists("moveX")) animator.SetFloat("moveX", SaveGame.Load<float>("moveX"));
+			if (SaveGame.Exists("moveY")) animator.SetFloat("moveY", SaveGame.Load<float>("moveY"));
+		}
+
+		public static void SetStartPosition(Vector2 pos, float moveX, float moveY)
+		{
+			SaveGame.Save("playerPos", pos);
+			SaveGame.Save("moveX", moveX);
+			SaveGame.Save("moveY", moveY);
 		}
 	}
-
 }
