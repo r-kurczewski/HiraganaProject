@@ -1,13 +1,7 @@
-﻿using Hiragana.Battle;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using System.Reflection;
-using Hiragana.Battle.UI;
 using UnityEditor;
+using UnityEngine;
 
 namespace Hiragana.Battle
 {
@@ -34,7 +28,7 @@ namespace Hiragana.Battle
 		[Serializable]
 		public class EnemyPosition
 		{
-			public EnemyType enemy;
+			public EnemyType enemyType;
 			public Vector2 pos;
 		}
 
@@ -45,13 +39,13 @@ namespace Hiragana.Battle
 			var monsters = new Dictionary<EnemyType, int>();
 			foreach (EnemyPosition enPos in enemies)
 			{
-				if (monsters.ContainsKey(enPos.enemy))
+				if (monsters.ContainsKey(enPos.enemyType))
 				{
-					monsters[enPos.enemy]++;
+					monsters[enPos.enemyType]++;
 				}
 				else
 				{
-					monsters.Add(enPos.enemy, 1);
+					monsters.Add(enPos.enemyType, 1);
 				}
 			}
 			var names = new List<string>();

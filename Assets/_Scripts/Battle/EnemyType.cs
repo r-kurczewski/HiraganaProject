@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEditor;
 using UnityEngine;
 
 namespace Hiragana.Battle
@@ -11,7 +12,9 @@ namespace Hiragana.Battle
 	[Serializable]
 	public class EnemyType : ScriptableObject
 	{
-		public GameObject spritePrefab;
+		public Sprite sprite;
+		public int size;
+
 		public uint baseHealth;
 		public int baseSpeed;
 		public List<Move> moves = new List<Move>();

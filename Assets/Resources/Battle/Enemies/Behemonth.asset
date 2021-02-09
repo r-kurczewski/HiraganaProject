@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc207a060bc024840866b56c7e6e6dee, type: 3}
   m_Name: Behemonth
   m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 8d68bf6b48ccb7a4e833f51e08feec5c, type: 3}
+  size: 500
   spritePrefab: {fileID: 4200654958174518579, guid: e399e992e7eaeb24e9bb9c1c4e30cea5,
     type: 3}
   baseHealth: 5

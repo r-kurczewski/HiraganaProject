@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc207a060bc024840866b56c7e6e6dee, type: 3}
   m_Name: Hellhound
   m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 8c7a13a35a86dc44ab40de9d93374d78, type: 3}
+  size: 400
   spritePrefab: {fileID: 6492496567587840559, guid: 633dd1a5d84ee4d4cb249071df9c82f4,
     type: 3}
   baseHealth: 4

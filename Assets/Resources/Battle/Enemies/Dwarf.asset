@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc207a060bc024840866b56c7e6e6dee, type: 3}
   m_Name: Dwarf
   m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: f34469d454278ad43868661ccd440325, type: 3}
+  size: 300
   spritePrefab: {fileID: 2500192470092716600, guid: c5c8439c21380e14d90be9213d47eaca,
     type: 3}
   baseHealth: 3

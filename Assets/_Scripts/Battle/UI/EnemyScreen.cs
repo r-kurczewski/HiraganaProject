@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using static Hiragana.Battle.Encounter;
 
 namespace Hiragana.Battle.UI
@@ -11,7 +12,7 @@ namespace Hiragana.Battle.UI
 		public EnemySprite selected;
 
 		[SerializeField]
-		private List<EnemySprite> enemies = new List<EnemySprite>();
+		private List<EnemySprite> enemySprites = new List<EnemySprite>();
 
 		private void Awake()
 		{
@@ -31,12 +32,12 @@ namespace Hiragana.Battle.UI
 
 		public void SelectEnemy(int index)
 		{
-			SelectEnemy(enemies[index]);
+			SelectEnemy(enemySprites[index]);
 		}
 
 		public void DisableSelection(bool keepState = false)
 		{
-			foreach (var en in enemies)
+			foreach (var en in enemySprites)
 			{
 				en.keepState = keepState;
 				en.interactable = false;
@@ -46,7 +47,7 @@ namespace Hiragana.Battle.UI
 
 		public void EnableSelection()
 		{
-			foreach (var en in enemies)
+			foreach (var en in enemySprites)
 			{
 				en.interactable = true;
 			}
@@ -54,40 +55,46 @@ namespace Hiragana.Battle.UI
 
 		public EnemySprite GetEnemy(int index)
 		{
-			return enemies[index];
+			return enemySprites[index];
 		}
 
 		public List<EnemySprite> GetEnemies()
 		{
 			UpdateList();
-			return enemies;
+			return enemySprites;
 		}
 
 		public List<Enemy> LoadEncounter(Encounter enc)
 		{
-			List<Enemy> result = new List<Enemy>();
+			var result = new List<Enemy>();
 			foreach (EnemyPosition enPos in enc.enemies)
 			{
-				EnemySprite sprite = Instantiate(enPos.enemy.spritePrefab, transform).GetComponent<EnemySprite>();
-				sprite.interactable = false;
-				sprite.name = sprite.name.Substring(0, sprite.name.Length - 7);
-				Enemy enemy = sprite.gameObject.AddComponent<Enemy>();
-				enemy.type = enPos.enemy;
-				result.Add(enemy);
-				sprite.transform.localPosition = enPos.pos;
+				var en = AddEnemy(enPos);
+				result.Add(en);
 			}
 			return result;
 		}
 
-		void AddEnemy(EnemyType enemy)
+		Enemy AddEnemy(EnemyPosition enPos)
 		{
-			var en = Instantiate(enemy.spritePrefab, transform).GetComponent<EnemySprite>();
-			en.interactable = false;
+			var enSprite = Instantiate(Resources.Load<GameObject>("_Prefabs/Enemy/Enemy"), transform).GetComponent<EnemySprite>();
+			var enemy = enSprite.GetComponent<Enemy>();
+			var image = enSprite.GetComponent<Image>();
+
+			image.sprite = enPos.enemyType.sprite;
+			image.GetComponent<EnemySprite>().interactable = false;
+			image.GetComponent<RectTransform>().sizeDelta = new Vector2(enPos.enemyType.size, enPos.enemyType.size);
+			image.GetComponent<AspectRatioFitter>().aspectRatio = image.sprite.rect.width / image.sprite.rect.height;
+			enemy.name = enemy.name.Substring(0, enemy.name.Length - 7);
+
+			enemy.type = enPos.enemyType;
+			enemy.transform.localPosition = enPos.pos;
+			return enemy;
 		}
 
 		public void RefreshSprites()
 		{
-			foreach(var en in enemies)
+			foreach (var en in enemySprites)
 			{
 				en.RefreshState(instant: true);
 			}
@@ -95,17 +102,17 @@ namespace Hiragana.Battle.UI
 
 		private void UpdateList()
 		{
-			enemies.Clear();
+			enemySprites.Clear();
 			foreach (var enemy in GetComponentsInChildren<EnemySprite>())
 			{
-				enemies.Add(enemy);
+				enemySprites.Add(enemy);
 			}
 		}
 
 		public void UpdateGUI()
 		{
-			enemies = enemies.Where(x=> x != null).ToList();
-			foreach(var enemy in enemies)
+			enemySprites = enemySprites.Where(x => x != null).ToList();
+			foreach (var enemy in enemySprites)
 			{
 				enemy.UpdateGUI();
 			}

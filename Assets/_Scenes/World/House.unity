@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 809251346}
   - component: {fileID: 809251345}
   m_Layer: 0
-  m_Name: Foreground
+  m_Name: Cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 1062926105}
   - component: {fileID: 1062926104}
   m_Layer: 0
-  m_Name: Midground
+  m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1052,7 +1052,7 @@ GameObject:
   - component: {fileID: 1118453051}
   - component: {fileID: 1118453050}
   m_Layer: 0
-  m_Name: Background
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

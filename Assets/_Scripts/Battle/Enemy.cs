@@ -10,7 +10,6 @@ namespace Hiragana.Battle
 {
 	public partial class Enemy : MonoBehaviour, IBattleTarget
 	{
-
 		public EnemyType type;
 		[SerializeField] private int _speed;
 		[SerializeField] private int _turnProgress;
@@ -28,6 +27,7 @@ namespace Hiragana.Battle
 
 		void Start()
 		{
+			Debug.Log(type);
 			Speed = type.baseSpeed;
 			Sprite = GetComponent<EnemySprite>();
 			List<Romaji> knownLetters = new List<Romaji> { A, I, U, O, E, N, ZU, DZU, DJI, JI };
