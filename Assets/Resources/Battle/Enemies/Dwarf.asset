@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: f34469d454278ad43868661ccd440325, type: 3}
   size: 300
-  spritePrefab: {fileID: 2500192470092716600, guid: c5c8439c21380e14d90be9213d47eaca,
-    type: 3}
+  lifeLabelOffset: {x: 0, y: 0}
   baseHealth: 3
   baseSpeed: 105
   moves:

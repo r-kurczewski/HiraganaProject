@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 2xHell
   m_EditorClassIdentifier: 
   enemies:
-  - enemy: {fileID: 11400000, guid: b8cd560ebecdb424c9ac344d9132ca78, type: 2}
+  - enemyType: {fileID: 11400000, guid: efbcef1c690f3734f98a40ba5ebe1f19, type: 2}
     pos: {x: -250, y: 40}
-  - enemy: {fileID: 11400000, guid: b8cd560ebecdb424c9ac344d9132ca78, type: 2}
+  - enemyType: {fileID: 11400000, guid: efbcef1c690f3734f98a40ba5ebe1f19, type: 2}
     pos: {x: 250, y: 40}

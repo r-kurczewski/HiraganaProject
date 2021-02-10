@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 1xHell 1xDwar 1xBehe
   m_EditorClassIdentifier: 
   enemies:
-  - enemy: {fileID: 11400000, guid: b8cd560ebecdb424c9ac344d9132ca78, type: 2}
+  - enemyType: {fileID: 11400000, guid: efbcef1c690f3734f98a40ba5ebe1f19, type: 2}
     pos: {x: -350, y: 20}
-  - enemy: {fileID: 11400000, guid: 740a7bda3dd9b2f4dba975919d37120c, type: 2}
-    pos: {x: -50, y: 80}
-  - enemy: {fileID: 11400000, guid: 619e74e82ba855b49a3912d8c46bb478, type: 2}
-    pos: {x: 350, y: 20}
+  - enemyType: {fileID: 11400000, guid: cb8db3b3f7aeee54ba5b884095bf00c8, type: 2}
+    pos: {x: -50, y: 20}
+  - enemyType: {fileID: 11400000, guid: 677e34c9087669f408c106efa425437d, type: 2}
+    pos: {x: 400, y: 20}

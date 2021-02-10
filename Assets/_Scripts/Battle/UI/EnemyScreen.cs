@@ -11,7 +11,7 @@ namespace Hiragana.Battle.UI
 		public static EnemyScreen context;
 		public EnemySprite selected;
 
-		[SerializeField]
+		//[SerializeField]
 		private List<EnemySprite> enemySprites = new List<EnemySprite>();
 
 		private void Awake()
@@ -69,15 +69,15 @@ namespace Hiragana.Battle.UI
 			var result = new List<Enemy>();
 			foreach (EnemyPosition enPos in enc.enemies)
 			{
-				var en = AddEnemy(enPos);
+				var en = LoadEnemy(enPos);
 				result.Add(en);
 			}
 			return result;
 		}
 
-		Enemy AddEnemy(EnemyPosition enPos)
+		Enemy LoadEnemy(EnemyPosition enPos)
 		{
-			var enSprite = Instantiate(Resources.Load<GameObject>("_Prefabs/Enemy/Enemy"), transform).GetComponent<EnemySprite>();
+			var enSprite = Instantiate(Resources.Load<GameObject>("_Prefabs/Battle/Enemy"), transform).GetComponent<EnemySprite>();
 			var enemy = enSprite.GetComponent<Enemy>();
 			var image = enSprite.GetComponent<Image>();
 
@@ -89,6 +89,8 @@ namespace Hiragana.Battle.UI
 
 			enemy.type = enPos.enemyType;
 			enemy.transform.localPosition = enPos.pos;
+
+			enSprite.NameLabel.transform.localPosition += (Vector3)enPos.enemyType.lifeLabelOffset;
 			return enemy;
 		}
 

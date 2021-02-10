@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -52,10 +52,8 @@
     <UnityVersion>2020.1.0f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Assets\BayatGames\SaveGameFree\Scripts\Types\ColorSave.cs" />
+    <Compile Include="Assets\_Scripts\Other\Example.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\StatusList.cs" />
     <Compile Include="Assets\BayatGames\SaveGameFree\Scripts\Encoders\ISaveGameEncoder.cs" />
     <Compile Include="Assets\_Scripts\World\Door.cs" />
@@ -99,7 +97,7 @@
     <Compile Include="Assets\_Scripts\Battle\BattleScript.cs" />
     <Compile Include="Assets\_Scripts\Battle\LifeSegment.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\FocusBar.cs" />
-    <Compile Include="Assets\_Scripts\Battle\EnemyType.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Scriptable\EnemyType.cs" />
     <Compile Include="Assets\BayatGames\SaveGameFree\Scripts\Types\QuaternionSave.cs" />
     <Compile Include="Assets\BayatGames\SaveGameFree\Scripts\Types\Vector2Save.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\HealthBar.cs" />
@@ -108,8 +106,8 @@
     <Compile Include="Assets\_Scripts\Battle\Turn.cs" />
     <Compile Include="Assets\_Scripts\Battle\BattlePlayer.cs" />
     <Compile Include="Assets\_Scripts\World\UI\WorldLog.cs" />
-    <Compile Include="Assets\_Scripts\Battle\BattleItem.cs" />
-    <Compile Include="Assets\_Scripts\Battle\Encounter.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Scriptable\BattleItem.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Scriptable\Encounter.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\ItemsMenu.cs" />
     <Compile Include="Assets\_Scripts\World\Chest.cs" />
     <Compile Include="Assets\Tilemap\Tiles\Pipeline Tile\Scripts\PipelineTile.cs" />
@@ -137,7 +135,7 @@
     <Compile Include="Assets\_Scripts\Other\ItemQuantity.cs" />
     <Compile Include="Assets\ListElement.cs" />
     <Compile Include="Assets\_Scripts\Battle\UI\SelectOnHover.cs" />
-    <Compile Include="Assets\_Scripts\Battle\Attack.cs" />
+    <Compile Include="Assets\_Scripts\Battle\Scriptable\Attack.cs" />
     <Compile Include="Assets\BayatGames\SaveGameFree\Scripts\Serializers\SaveGameBinarySerializer.cs" />
     <Compile Include="Assets\BayatGames\SaveGameFree\Examples\Save Custom\ExampleSaveCustom.cs" />
     <Compile Include="Assets\BayatGames\SaveGameFree\Examples\Save Scale\ExampleSaveScale.cs" />
@@ -183,7 +181,7 @@
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
-     <None Include="Assets\Aekashics Librarium - Megapack III\Terms of use.txt" />
+     <None Include="Assets\Aekashics Librarium\Terms of use.txt" />
      <None Include="Assets\BayatGames\SaveGameFree\Plugins\FullSerializer.dll" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
