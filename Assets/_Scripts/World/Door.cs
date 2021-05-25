@@ -1,65 +1,69 @@
 using UnityEngine;
 using Hiragana.Other;
+using System;
 
 namespace Hiragana.World
 {
-    public class Door : SaveObject
-    {
-        [SerializeField] private Sprite openedSprite = default;
+	public class Door : SaveObject
+	{
+		[SerializeField] private Sprite openedSprite = default;
 
-        public KeyItem key;
-        public bool opened;
-        public bool trigger;
-        public bool restoreState;
+		protected override string ObjectID => throw new NotImplementedException();
 
-        const int underOrder = 30;
-        const int aboveOrder = 60;
+		public KeyItem key;
+		public bool opened;
+		public bool trigger;
+		public bool restoreState;
 
-        private bool HaveKey => key == null || Inventory.inventory.keyItems.Contains(key);
+		const int underOrder = 30;
+		const int aboveOrder = 60;
 
-        void Start()
-        {
-            if (restoreState) Load();
-        }
+		private bool HaveKey => key == null || Inventory.inventory.keyItems.Contains(key);
 
-        private void OnTriggerEnter2D()
-        {
-            trigger = true;
-        }
 
-        private void OnTriggerStay2D()
-        {
-            bool isAbove = WorldPlayer.player.transform.localPosition.y > transform.localPosition.y;
-            GetComponent<SpriteRenderer>().sortingOrder = isAbove ? aboveOrder : underOrder;
-        }
+		void Start()
+		{
+			if (restoreState) Load();
+		}
 
-        private void OnTriggerExit2D()
-        {
-            trigger = false;
-        }
+		private void OnTriggerEnter2D()
+		{
+			trigger = true;
+		}
 
-        private void OnDestroy()
-        {
-            if (restoreState) Save();
-        }
+		private void OnTriggerStay2D()
+		{
+			bool isAbove = WorldPlayer.instance.transform.localPosition.y > transform.localPosition.y;
+			GetComponent<SpriteRenderer>().sortingOrder = isAbove ? aboveOrder : underOrder;
+		}
 
-        void Update()
-        {
-            if (trigger && HaveKey && Input.GetKeyDown(KeyCode.Return))
-            {
-                GetComponent<SpriteRenderer>().sprite = openedSprite;
-                GetComponent<BoxCollider2D>().enabled = false;
-            }
-        }
+		private void OnTriggerExit2D()
+		{
+			trigger = false;
+		}
 
-        public override void Load()
-        {
-            Debug.LogWarning("Not implemented.");
-        }
+		void Update()
+		{
+			if (trigger && HaveKey && Input.GetKeyDown(KeyCode.Return))
+			{
+				Open();
+			}
+		}
 
-        public override void Save()
-        {
-            Debug.LogWarning("Not implemented.");
-        }
-    }
+		private void Open()
+		{
+			GetComponent<SpriteRenderer>().sprite = openedSprite;
+			GetComponent<BoxCollider2D>().enabled = false;
+		}
+
+		public override void Save()
+		{
+			Debug.LogWarning("Not implemented");
+		}
+
+		public override void Load()
+		{
+			Debug.LogWarning("Not implemented");
+		}
+	}
 }

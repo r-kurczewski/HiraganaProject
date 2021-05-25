@@ -14,7 +14,9 @@ namespace Hiragana.World
 		[SerializeField] private bool completed;
 		[SerializeField] private bool trigger;
 
-		private string PuzzleID => GetPuzzleID(puzzleType);
+		public static string PuzzleID(string puzzle) => $"Puzzle_{puzzle.ToLower()}";
+
+		protected override string ObjectID => PuzzleID(puzzleType);
 
 		private void Start()
 		{
@@ -27,17 +29,12 @@ namespace Hiragana.World
 			if (Input.GetKeyDown(KeyCode.R))
 			{
 				completed = false;
-				SaveGame.Save(PuzzleID, completed);
 			}
 			#endif
 			if(Input.GetKeyDown(KeyCode.Return) && trigger)
 			{
 				LoadPuzzle();
 			}
-		}
-		private void OnDestroy()
-		{
-			Save();
 		}
 
 		private void OnTriggerEnter2D(Collider2D collision)
@@ -57,19 +54,14 @@ namespace Hiragana.World
 			SceneManager.LoadScene("Puzzle");
 		}
 
-		public static string GetPuzzleID(string puzzle)
-		{
-			return $"Puzzle_{puzzle.ToLower()}";
-		}
-
 		public override void Save()
 		{
-			return;
+			SaveGame.Save(SavePath, completed);
 		}
 
 		public override void Load()
 		{
-			if(SaveGame.Exists(PuzzleID)) completed = SaveGame.Load<bool>(PuzzleID);
+			if (SaveGame.Exists(SavePath)) completed = SaveGame.Load<bool>(SavePath);
 		}
 	}
 }

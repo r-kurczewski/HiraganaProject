@@ -8,20 +8,30 @@ namespace Hiragana.Battle.UI
 {
 	public class EnemyScreen : MonoBehaviour
 	{
-		public static EnemyScreen context;
+		public static EnemyScreen instance;
+
+		public static Sprite battleBackground;
+
 		public EnemySprite selected;
+		public Image background;
 
 		//[SerializeField]
 		private List<EnemySprite> enemySprites = new List<EnemySprite>();
 
 		private void Awake()
 		{
-			context = this;
+			instance = this;
 		}
 
 		void Start()
 		{
 			UpdateList();
+			if (battleBackground)
+			{
+				background.sprite = battleBackground;
+				background.GetComponent<AspectRatioFitter>().aspectRatio = battleBackground.rect.width / battleBackground.rect.height;
+			}
+
 		}
 
 		public void SelectEnemy(EnemySprite enemy)
@@ -37,6 +47,7 @@ namespace Hiragana.Battle.UI
 
 		public void DisableSelection(bool keepState = false)
 		{
+			Debug.Log("Disable: " + keepState + ", time: " + Time.frameCount);
 			foreach (var en in enemySprites)
 			{
 				en.keepState = keepState;
@@ -47,6 +58,7 @@ namespace Hiragana.Battle.UI
 
 		public void EnableSelection()
 		{
+			Debug.Log("Enable time: " + Time.frameCount);
 			foreach (var en in enemySprites)
 			{
 				en.interactable = true;

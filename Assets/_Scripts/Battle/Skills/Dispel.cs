@@ -28,10 +28,14 @@ namespace Hiragana.Battle.Skills
 			if (enemies.selected == null) enemies.SelectEnemy(0);
 			else enemies.SelectEnemy(enemies.selected); // reselect previous one
 
-			yield return new WaitForEndOfFrame();
+			yield return new WaitUntil(()
+				=> Input.GetKeyUp(KeyCode.Return)
+				|| Input.GetKeyUp(KeyCode.Escape)
+			);
 			yield return new WaitUntil(()
 				=> Input.GetKeyDown(KeyCode.Return)
-				|| Input.GetKeyDown(KeyCode.Escape));
+				|| Input.GetKeyDown(KeyCode.Escape)
+			);
 
 			if (Input.GetKeyDown(KeyCode.Return)) // ENTER
 			{
@@ -41,6 +45,7 @@ namespace Hiragana.Battle.Skills
 			}
 			else // ESCAPE
 			{
+				enemies.DisableSelection(keepState: false);
 				ReturnToSkillMenu();
 			}
 		}
@@ -54,10 +59,14 @@ namespace Hiragana.Battle.Skills
 			attackMenu.romajiText.interactable = true;
 			attackMenu.romajiText.text = "";
 			attackMenu.romajiText.Select();
-			yield return new WaitForEndOfFrame();
+			yield return new WaitUntil(()
+			=> Input.GetKeyUp(KeyCode.Return)
+			|| Input.GetKeyUp(KeyCode.Escape)
+			);
 			yield return new WaitUntil(()
 			=> Input.GetKeyDown(KeyCode.Return)
-			|| Input.GetKeyDown(KeyCode.Escape));
+			|| Input.GetKeyDown(KeyCode.Escape)
+			);
 
 			if (Input.GetKeyDown(KeyCode.Return)) // ENTER
 			{

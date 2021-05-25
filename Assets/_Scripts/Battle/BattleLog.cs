@@ -26,7 +26,7 @@ namespace Hiragana.Battle
 		{
 			if (!visible)
 			{
-				Debug.LogWarning("BattleLog was hiiden!");
+				Debug.LogWarning("BattleLog was hidden!");
 				SetVisibility(true);
 			}
 			text.text = message;

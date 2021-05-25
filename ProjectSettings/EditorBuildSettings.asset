@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/Battle.unity
-    guid: ba80a680434b1a34c9612179e4995942
+    path: Assets/_Scenes/World/House.unity
+    guid: f00c2f8f0a8e52646a9b62e102414c03
   - enabled: 1
     path: Assets/_Scenes/Puzzle.unity
     guid: 2cda990e2423bbf4892e6590ba056729
@@ -15,8 +15,8 @@ EditorBuildSettings:
     path: Assets/_Scenes/World/Basement.unity
     guid: fce58fab54c6efe408f5ee04e8810f54
   - enabled: 1
-    path: Assets/_Scenes/World/House.unity
-    guid: f00c2f8f0a8e52646a9b62e102414c03
+    path: Assets/_Scenes/Load.unity
+    guid: 080fd61d73066bc4e8cb6ac3fa149900
   - enabled: 1
     path: Assets/_Scenes/World/Island.unity
     guid: ab93a7c47c77fad4ca1c462fa1e41483
@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/World/Cave.unity
     guid: 577701f9c6ea24746887b01e47883954
+  - enabled: 1
+    path: Assets/_Scenes/Battle.unity
+    guid: ba80a680434b1a34c9612179e4995942
   m_configObjects: {}

@@ -29,7 +29,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6124089135434431437}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -155,9 +155,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40fa4ce7d2593124babd67104810d26d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openSprite: {fileID: 8410307828251299490, guid: 162f1be420658794b946dfdbe7419d39,
+  spriteRenderer: {fileID: 6124089135434431433}
+  openedSprite: {fileID: 8410307828251299490, guid: 162f1be420658794b946dfdbe7419d39,
     type: 3}
-  closeSprite: {fileID: -4456712446854294036, guid: 162f1be420658794b946dfdbe7419d39,
+  closedSprite: {fileID: -4456712446854294036, guid: 162f1be420658794b946dfdbe7419d39,
     type: 3}
   loot:
   - item: {fileID: 11400000, guid: af526cf2011ab4949b892716ad03fe1e, type: 2}
@@ -166,6 +167,8 @@ MonoBehaviour:
     quantity: 1
   - item: {fileID: 11400000, guid: 55970978429099d43b8dee61ddf98181, type: 2}
     quantity: 1
+  trigger: 0
+  opened: 0
 --- !u!114 &6124089135434431428
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,81 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
-using System;
-using Random = UnityEngine.Random;
-using Hiragana.Battle;
-using UnityEngine.SceneManagement;
+using BayatGames.SaveGameFree;
 using Hiragana.Other;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Hiragana.World
 {
-    public class Location : MonoBehaviour
-    {
-        public static Location location;
+	public class Location : SaveObject
+	{
+		public static Location instance;
 
-        private WorldPlayer player;
-        [SerializeField] private int encounterChance = 0;
-        [SerializeField] private float encounterClock = 0;
-        public List<EncounterChances> encounters;
+		protected static string saveID = "location"; 
 
-        private void Awake()
-        {
-            location = this;
-            player = FindObjectOfType<WorldPlayer>();
-            StartCoroutine(BattleEncounter());
-        }
+		protected override string ObjectID => saveID;
 
-        private void Update()
-        {
-            if (player.IsMoving)
-            {
-                encounterClock += Time.deltaTime;
-            }
-        }
+		public string locationName;
 
-        IEnumerator BattleEncounter()
-        {
-            while (true)
-            {
-                var encounterTreshold = encounterChance * Random.Range(0.80f, 1.20f);
-                yield return new WaitUntil(() => encounterClock > encounterTreshold);
+		private void Awake()
+		{
+			instance = this;
+		}
 
-                int chanceSum = encounters.Sum(e => e.chances);
+		public override void Save()
+		{
+			SaveGame.Save(SavePath, SceneManager.GetActiveScene().buildIndex);
+		}
 
-                int encounter = Random.Range(0, chanceSum + 1);
+		public override void Load()
+		{
+			var sceneID = SaveGame.Load<int>(SavePath);
+			SceneManager.LoadScene(sceneID);
+		}
 
-                int minChances = 0;
-                int maxChances;
-
-
-                for (int i = 0; i < encounters.Count; i++)
-                {
-                    maxChances = minChances + encounters[i].chances;
-
-                    if (encounter >= minChances && encounter <= maxChances)
-                    {
-                        LoadBattle(encounters[i].encounter);
-                        encounterClock = 0;
-                        yield break;
-                    }
-
-                    minChances = maxChances;
-                }
-            }
-        }
-
-        private void LoadBattle(Encounter encounter)
-        {
-            BattleScript.currentEncounter = encounter;
-            SceneManager.LoadScene("Battle");
-        }
-
-        [Serializable]
-        public class EncounterChances
-        {
-            public Encounter encounter;
-            public int chances;
-        }
-    }
+		public static void LoadLastLocation()
+		{
+			var sceneID = SaveGame.Load<int>(GetSavePath(saveID));
+			SceneManager.LoadScene(sceneID);
+		}
+	}
 }

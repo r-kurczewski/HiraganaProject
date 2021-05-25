@@ -14,7 +14,6 @@ namespace Hiragana.Battle.UI
 	public class ItemButton : Button
 	{
 		ScrollRect scroll;
-		new Camera camera;
 		GridManager grid;
 		ItemQuantity<BattleItem> item;
 
@@ -28,7 +27,6 @@ namespace Hiragana.Battle.UI
 			base.Awake();
 			grid = GetComponentInParent<GridManager>();
 			scroll = GetComponentInParent<ScrollRect>();
-			camera = FindObjectOfType<Camera>();
 		}
 
 		protected override void Start()

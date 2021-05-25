@@ -14,6 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Health Potion
   description: 
-  effects: []
+  effects:
+  - target: 1
+    effect:
+      id: 0
   references:
     version: 1
+    00000000:
+      type: {class: Heal, ns: Hiragana.Battle.Effects, asm: Assembly-CSharp}
+      data:
+        type: Heal
+        value: 50

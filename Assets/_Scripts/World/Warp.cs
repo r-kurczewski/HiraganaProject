@@ -45,8 +45,8 @@ namespace Hiragana.World
 
 		private void UseWarp()
 		{
-			FindObjectOfType<WorldPlayer>().save = false;
-			WorldPlayer.SetStartPosition(pos, direction.x, direction.y);
+			WorldPlayer.instance.autoSave = false;
+			WorldPlayer.instance.SaveStartPosition(pos, direction.x, direction.y);
 			SceneManager.LoadScene(sceneID);
 		}
 	}

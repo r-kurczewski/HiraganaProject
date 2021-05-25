@@ -70,8 +70,13 @@ namespace Hiragana.Battle
 		public bool RemoveStatus<T>() where T: Status 
 		{
 			var status = statuses.FirstOrDefault(x => x.GetType() == typeof(T));
-			status.Keep = false;
-			return statuses.Remove(status);
+			if (status != null)
+			{
+				status.Keep = false;
+				statuses.Remove(status);
+				return true;
+			}
+			else return false;
 		}
 
 		public void ApplyEffect(Effect effect)

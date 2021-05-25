@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - enemyType: {fileID: 11400000, guid: d5a4c66a9fa776c498969a46154e0631, type: 2}
-    pos: {x: -260, y: 20}
+    pos: {x: -200, y: 120}
   - enemyType: {fileID: 11400000, guid: d5a4c66a9fa776c498969a46154e0631, type: 2}
-    pos: {x: 160, y: 60}
+    pos: {x: 200, y: 60}

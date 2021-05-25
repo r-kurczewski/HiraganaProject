@@ -24,19 +24,25 @@ namespace Hiragana.Battle.UI
 
 		public void StartAttack()
 		{
+			Debug.Log("Before Show");
 			Show();
+			Debug.Log("After Show");
 			StartCoroutine(ChooseEnemy());
 		}
 
 		public IEnumerator ChooseEnemy()
 		{
+			Debug.Log("Before Coroutine");
 			keyListening = false;
 			enemies.EnableSelection();
 			if (enemies.selected == null)
 				enemies.SelectEnemy(0);
 			else
 				enemies.SelectEnemy(enemies.selected);
-			yield return new WaitForEndOfFrame();
+			yield return new WaitUntil(()
+				=> Input.GetKeyUp(KeyCode.Return)
+				|| Input.GetKeyUp(KeyCode.Escape)
+				);
 			yield return new WaitUntil(()
 				=> Input.GetKeyDown(KeyCode.Return)
 				|| Input.GetKeyDown(KeyCode.Escape)
@@ -48,20 +54,24 @@ namespace Hiragana.Battle.UI
 			}
 			else
 			{
-				enemies.selected = null;
 				enemies.DisableSelection(false);
 				OnEscape();
 			}
+			Debug.Log("After Coroutine");
 		}
 
 		public IEnumerator ChooseHiragana()
 		{
 			romajiText.interactable = true;
 			romajiText.Select();
-			yield return new WaitForEndOfFrame();
+			yield return new WaitUntil(() 
+				=> Input.GetKeyUp(KeyCode.Return) 
+				|| Input.GetKeyUp(KeyCode.Escape)
+				);
 			yield return new WaitUntil(()
-			=> Input.GetKeyDown(KeyCode.Return)
-			|| Input.GetKeyDown(KeyCode.Escape));
+				=> Input.GetKeyDown(KeyCode.Return)
+				|| Input.GetKeyDown(KeyCode.Escape)
+				);
 
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
@@ -84,4 +94,5 @@ namespace Hiragana.Battle.UI
 			}
 		}
 	}
+
 }

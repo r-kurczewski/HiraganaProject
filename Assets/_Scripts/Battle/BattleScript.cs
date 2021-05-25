@@ -8,11 +8,13 @@ using System;
 using UnityEngine.SceneManagement;
 using Hiragana.World;
 using BayatGames.SaveGameFree;
+using Hiragana.Other;
 
 public class BattleScript : MonoBehaviour
 {
 	public static Encounter currentEncounter;
 	public static BattleScript script;
+
 
 #pragma warning disable IDE0044, 0649
 	[SerializeField] private PlayerPanel playerGUI;
@@ -35,7 +37,7 @@ public class BattleScript : MonoBehaviour
 
 	public IEnumerator LoadBattle(Encounter encounter)
 	{
-		enemies = EnemyScreen.context.LoadEncounter(encounter);
+		enemies = EnemyScreen.instance.LoadEncounter(encounter);
 		yield return new WaitWhile(() => enemies is null);
 		var turns = TurnQueue(enemies).GetEnumerator();
 		UpdateGUI();
@@ -105,12 +107,19 @@ public class BattleScript : MonoBehaviour
 		{
 			StopCoroutine(coroutine);
 			script.log.Write("You win");
+			ReturnToWorld(2);
 		}
 	}
 
-	public void ReturnToWorld()
+	public void ReturnToWorld(float delay = 0)
+    {
+		StartCoroutine(IReturnToWorld(delay));
+	}
+
+	private IEnumerator IReturnToWorld(float delay)
 	{
-		SceneManager.LoadScene(SaveGame.Load<int>("currentLocation"));
+		yield return new WaitForSeconds(delay);
+		Location.LoadLastLocation();
 	}
 
 	private void UpdateGUI()

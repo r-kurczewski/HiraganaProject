@@ -13,18 +13,20 @@ namespace Hiragana.Battle.UI
 
 		new void OnEnable()
 		{
+			// create buttons for all usable items
 			foreach (var item in Inventory.inventory.battleItems)
 			{
 				ItemButton.Create(item, grid.transform);
 			}
 			int itemsInGrid = grid.gridSize.x * grid.gridSize.y;
 
-			while (grid.transform.childCount % itemsInGrid != 0) // fill to full grid
+			// fill to full grid
+			while (grid.transform.childCount % itemsInGrid != 0 || grid.transform.childCount == 0)
 			{
 				ItemButton.Create(null, grid.transform);
 			}
 
-			firstSelection = grid.transform.GetChild(0).GetComponent<Selectable>();
+			firstSelection = grid.transform.GetChild(0)?.GetComponent<Selectable>();
 		}
 
 		new void OnDisable()

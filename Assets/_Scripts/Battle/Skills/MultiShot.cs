@@ -2,8 +2,6 @@ using Hiragana.Battle.Effects;
 using Hiragana.Battle.UI;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using static Hiragana.Battle.Enemy;
 
@@ -19,16 +17,21 @@ namespace Hiragana.Battle.Skills
 		protected override IEnumerator Effect()
 		{
 			AttackMenu attackMenu = GameObject.FindObjectOfType<AttackMenu>(true);
+			EnemyScreen enemies = GameObject.FindObjectOfType<EnemyScreen>();
 
 			attackMenu.Show();
 			attackMenu.keyListening = false;
 			attackMenu.romajiText.interactable = true;
 			attackMenu.romajiText.Select();
 
-			yield return new WaitForEndOfFrame();
+			yield return new WaitUntil(()
+				=> Input.GetKeyUp(KeyCode.Return)
+				|| Input.GetKeyUp(KeyCode.Escape)
+			);
 			yield return new WaitUntil(() 
 				=> Input.GetKeyDown(KeyCode.Return) 
-				|| Input.GetKeyDown(KeyCode.Escape));
+				|| Input.GetKeyDown(KeyCode.Escape)
+			);
 
 			if (Input.GetKeyDown(KeyCode.Return)) // ENTER
 			{
@@ -44,6 +47,7 @@ namespace Hiragana.Battle.Skills
 			}
 			else // ESCAPE
 			{
+				enemies.DisableSelection(keepState: false);
 				ReturnToSkillMenu();
 			}
 		}
