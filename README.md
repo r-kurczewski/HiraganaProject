@@ -1,5 +1,5 @@
 # Hiragana Project
-Early stage demo of my 2D JRPG inspired game in Unity 2020.3.1f1
+Early stage demo of my 2D JRPG inspired game in Unity 2020.3
 <table>
       <tr>
         <td><img src = "Screenshots/gameplay (5).png"></img></td>
